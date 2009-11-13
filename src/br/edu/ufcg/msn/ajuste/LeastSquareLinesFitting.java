@@ -1,4 +1,4 @@
-package br.edu.ufcg.msnlab.ajuste;
+package br.edu.ufcg.msn.ajuste;
 
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
