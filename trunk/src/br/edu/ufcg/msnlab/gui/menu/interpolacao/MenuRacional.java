@@ -5,7 +5,7 @@ import javax.swing.JMenuItem;
 
 /**
  * Esta classe implementa um menu para a escolha de uma 
- * interpolaçao pelos metodos racionais, sao eles
+ * interpolaï¿½ao pelos metodos racionais, sao eles
  * Metodo de Bulirsch-Stoer, Metodo de Schneider-Werner, 
  * Metodo de Berrut-Baltensperger-Mittelmann e Floater-Hormann, 
  * @author Danilo
@@ -29,28 +29,28 @@ public class MenuRacional extends JMenu{
 
 	private JMenuItem getMenuItemStoer() {
 		if (menuItemStoer == null) {
-			menuItemStoer = new JMenuItem("Método de Bulirsch-Stoer");
+			menuItemStoer = new JMenuItem("MÃ©todo de Bulirsch-Stoer");
 		}
 		return menuItemStoer;
 	}
 
 	private JMenuItem getMenuItemWerner() {
 		if (menuItemWerner == null) {
-			menuItemWerner = new JMenuItem("Método de Schneider-Werner");
+			menuItemWerner = new JMenuItem("MÃ©todo de Schneider-Werner");
 		}
 		return menuItemWerner;
 	}
 
 	private JMenuItem getMenuItemBerrut() {
 		if (menuItemBerrut == null) {
-			menuItemBerrut = new JMenuItem("Método de Berrut-Baltensperger-Mittelmann");
+			menuItemBerrut = new JMenuItem("MÃ©todo de Berrut-Baltensperger-Mittelmann");
 		}
 		return menuItemBerrut;
 	}
 
 	private JMenuItem getMenuItemFloater() {
 		if (menuItemFloater == null) {
-			menuItemFloater = new JMenuItem("Método de Floater-Hormann");
+			menuItemFloater = new JMenuItem("MÃ©todo de Floater-Hormann");
 		}
 		return menuItemFloater;
 	}

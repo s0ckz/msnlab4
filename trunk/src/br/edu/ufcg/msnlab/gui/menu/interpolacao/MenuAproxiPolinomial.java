@@ -5,7 +5,7 @@ import javax.swing.JMenuItem;
 
 /**
  * Esta classe implementa um menu para a escolha de uma 
- * interpolaçao pelos metodos de aproximacao polinomial
+ * interpolaï¿½ao pelos metodos de aproximacao polinomial
  * Metodo de Lagrange, Metodo de Newton, Metodo de Hermite, 
  * Aproximacao de Chebyshev, Metodo de Bezier e 
  * interpolacao Baricentrica
@@ -24,7 +24,7 @@ public class MenuAproxiPolinomial extends JMenu{
 	}
 
 	private void initialize() {
-		this.setText("Aproximação Polinomial");
+		this.setText("AproximaÃ§Ã£o Polinomial");
 		this.add(getMenuItemLagrange());
 		this.add(getMenuItemNewton());
 		this.add(getMenuItemHermite());
@@ -36,42 +36,42 @@ public class MenuAproxiPolinomial extends JMenu{
 
 	private JMenuItem getMenuItemLagrange() {
 		if (menuItemLagrange == null) {
-			menuItemLagrange = new JMenuItem("Método de Lagrange");
+			menuItemLagrange = new JMenuItem("MÃ©todo de Lagrange");
 		}
 		return menuItemLagrange;
 	}
 
 	private JMenuItem getMenuItemNewton() {
 		if (menuItemNewton == null) {
-			menuItemNewton = new JMenuItem("Método de Newton");
+			menuItemNewton = new JMenuItem("MÃ©todo de Newton");
 		}
 		return menuItemNewton;
 	}
 
 	private JMenuItem getMenuItemHermite() {
 		if (menuItemHermite == null) {
-			menuItemHermite = new JMenuItem("Método de Hermite");
+			menuItemHermite = new JMenuItem("MÃ©todo de Hermite");
 		}
 		return menuItemHermite;
 	}
 
 	private JMenuItem getMenuItemChebyshev() {
 		if (menuItemChebyshev == null) {
-			menuItemChebyshev = new JMenuItem("Método de Chebyshev");
+			menuItemChebyshev = new JMenuItem("MÃ©todo de Chebyshev");
 		}
 		return menuItemChebyshev;
 	}
 
 	private JMenuItem getMenuItemBezier() {
 		if (menuItemBezier == null) {
-			menuItemBezier = new JMenuItem("Método de Bezier");
+			menuItemBezier = new JMenuItem("MÃ©todo de Bezier");
 		}
 		return menuItemBezier;
 	}
 
 	private JMenuItem getMenuItemIntBaricentrica() {
 		if (menuItemIntBaricentrica == null) {
-			menuItemIntBaricentrica = new JMenuItem("Interpolação Baricêntrica");
+			menuItemIntBaricentrica = new JMenuItem("InterpolaÃ§Ã£o BaricÃªntrica");
 		}
 		return menuItemIntBaricentrica;
 	}
