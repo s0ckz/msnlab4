@@ -35,7 +35,7 @@ public class MenuAjusteCurva extends JMenu{
 	
 	private JMenuItem getMenuItemNaoLinear() {
 		if (menuItemNaoLinear == null) {
-			menuItemNaoLinear = new JMenuItem("Não Linear");
+			menuItemNaoLinear = new JMenuItem("NÃ£o Linear");
 		}
 		return menuItemNaoLinear;
 	}

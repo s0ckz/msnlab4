@@ -15,7 +15,7 @@ public class MenuInterpolacao extends JMenu{
 	}
 
 	private void initialize() {
-		this.setText("Interpolação");
+		this.setText("InterpolaÃ§Ã£o");
 		this.add(getMenuAproxPol());
 		this.add(getMenuRacional());
 		this.add(getMenuMinQuadrado());
@@ -37,7 +37,7 @@ public class MenuInterpolacao extends JMenu{
 	}
 	private JMenuItem getMenuMinQuadrado() {
 		if (menuMinQuad == null) {
-			menuMinQuad = new JMenuItem("Método linear por Mínimos Quadrados"); 
+			menuMinQuad = new JMenuItem("MÃ©todo linear por MÃ­nimos Quadrados"); 
 		}
 		return menuMinQuad;
 	}

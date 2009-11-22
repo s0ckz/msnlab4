@@ -5,9 +5,9 @@ import javax.swing.JMenuItem;
 
 /**
  * Esta classe implementa um menu para a escolha de uma 
- * interpolaçao por splines, sao eles
- * Metodos: linear, quadratica, cúbica de Hermite 
- * cúbica de Akima, bilinear e bicúbica. 
+ * interpolaï¿½ao por splines, sao eles
+ * Metodos: linear, quadratica, cï¿½bica de Hermite 
+ * cï¿½bica de Akima, bilinear e bicï¿½bica. 
  * @author Danilo
  */
 public class MenuSpline extends JMenu{
@@ -39,21 +39,21 @@ public class MenuSpline extends JMenu{
 
 	private JMenuItem getMenuItemQuadratica() {
 		if (menuItemQuadratica == null) {
-			menuItemQuadratica = new JMenuItem("Spline Quadrática");
+			menuItemQuadratica = new JMenuItem("Spline QuadrÃ¡tica");
 		}
 		return menuItemQuadratica;
 	}
 
 	private JMenuItem getMenuItemCubicaHermite() {
 		if (menuItemCubicaHermite == null) {
-			menuItemCubicaHermite = new JMenuItem("Spline Cúbica de Hermite");
+			menuItemCubicaHermite = new JMenuItem("Spline CÃºbica de Hermite");
 		}
 		return menuItemCubicaHermite;
 	}
 
 	private JMenuItem getMenuItemCubicaAkima() {
 		if (menuItemCubicaAkima == null) {
-			menuItemCubicaAkima = new JMenuItem("Spline Cúbica de Akima");
+			menuItemCubicaAkima = new JMenuItem("Spline CÃºbica de Akima");
 		}
 		return menuItemCubicaAkima;
 	}
@@ -67,7 +67,7 @@ public class MenuSpline extends JMenu{
 
 	private JMenuItem getMenuItemBicubica() {
 		if (menuItemBicubica == null) {
-			menuItemBicubica = new JMenuItem("Spline Bicúbica");
+			menuItemBicubica = new JMenuItem("Spline BicÃºbica");
 		}
 		return menuItemBicubica;
 	}
