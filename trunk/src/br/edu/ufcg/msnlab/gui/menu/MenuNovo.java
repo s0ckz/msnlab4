@@ -25,6 +25,11 @@ public class MenuNovo extends JMenu{
 	private void setMenuAjusteCurva() {
 		menuAjCurva = new MenuAjusteCurva();
 		menuTrasRapFourier = new MenuTransfRapidaFourier();
+		menuTrasRapFourier.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+			}
+		});
 		menuInterp = new MenuInterpolacao();
 		this.add(menuInterp);
 		this.add(menuAjCurva);

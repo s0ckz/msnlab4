@@ -5,7 +5,7 @@ import javax.swing.JMenuItem;
 
 /**
  * Esta classe implementa um menu para a escolha de uma 
- * interpola�ao pelos metodos de aproximacao polinomial
+ * interpolaçao pelos metodos de aproximacao polinomial
  * Metodo de Lagrange, Metodo de Newton, Metodo de Hermite, 
  * Aproximacao de Chebyshev, Metodo de Bezier e 
  * interpolacao Baricentrica
@@ -37,6 +37,11 @@ public class MenuAproxiPolinomial extends JMenu{
 	private JMenuItem getMenuItemLagrange() {
 		if (menuItemLagrange == null) {
 			menuItemLagrange = new JMenuItem("Método de Lagrange");
+			menuItemLagrange.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemLagrange;
 	}
@@ -44,6 +49,11 @@ public class MenuAproxiPolinomial extends JMenu{
 	private JMenuItem getMenuItemNewton() {
 		if (menuItemNewton == null) {
 			menuItemNewton = new JMenuItem("Método de Newton");
+			menuItemNewton.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemNewton;
 	}
@@ -51,6 +61,11 @@ public class MenuAproxiPolinomial extends JMenu{
 	private JMenuItem getMenuItemHermite() {
 		if (menuItemHermite == null) {
 			menuItemHermite = new JMenuItem("Método de Hermite");
+			menuItemHermite.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemHermite;
 	}
@@ -58,6 +73,11 @@ public class MenuAproxiPolinomial extends JMenu{
 	private JMenuItem getMenuItemChebyshev() {
 		if (menuItemChebyshev == null) {
 			menuItemChebyshev = new JMenuItem("Método de Chebyshev");
+			menuItemChebyshev.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemChebyshev;
 	}
@@ -65,6 +85,11 @@ public class MenuAproxiPolinomial extends JMenu{
 	private JMenuItem getMenuItemBezier() {
 		if (menuItemBezier == null) {
 			menuItemBezier = new JMenuItem("Método de Bezier");
+			menuItemBezier.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemBezier;
 	}
@@ -72,6 +97,11 @@ public class MenuAproxiPolinomial extends JMenu{
 	private JMenuItem getMenuItemIntBaricentrica() {
 		if (menuItemIntBaricentrica == null) {
 			menuItemIntBaricentrica = new JMenuItem("Interpolação Baricêntrica");
+			menuItemIntBaricentrica.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemIntBaricentrica;
 	}

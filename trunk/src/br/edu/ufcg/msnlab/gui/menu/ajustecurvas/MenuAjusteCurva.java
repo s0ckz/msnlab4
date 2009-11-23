@@ -29,6 +29,11 @@ public class MenuAjusteCurva extends JMenu{
 	private JMenuItem getMenuItemLinear() {
 		if (menuItemLinear == null) {
 			menuItemLinear = new JMenuItem("Linear");
+			menuItemLinear.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemLinear;
 	}
@@ -36,6 +41,11 @@ public class MenuAjusteCurva extends JMenu{
 	private JMenuItem getMenuItemNaoLinear() {
 		if (menuItemNaoLinear == null) {
 			menuItemNaoLinear = new JMenuItem("Não Linear");
+			menuItemNaoLinear.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemNaoLinear;
 	}
