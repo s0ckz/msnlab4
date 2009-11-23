@@ -5,9 +5,9 @@ import javax.swing.JMenuItem;
 
 /**
  * Esta classe implementa um menu para a escolha de uma 
- * interpola�ao por splines, sao eles
- * Metodos: linear, quadratica, c�bica de Hermite 
- * c�bica de Akima, bilinear e bic�bica. 
+ * interpolaçao por splines, sao eles
+ * Metodos: linear, quadratica, cúbica de Hermite 
+ * cúbica de Akima, bilinear e bicúbica. 
  * @author Danilo
  */
 public class MenuSpline extends JMenu{
@@ -33,6 +33,11 @@ public class MenuSpline extends JMenu{
 	private JMenuItem getMenuItemLinear() {
 		if (menuItemLinear == null) {
 			menuItemLinear = new JMenuItem("Spline Linear");
+			menuItemLinear.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemLinear;
 	}
@@ -40,6 +45,11 @@ public class MenuSpline extends JMenu{
 	private JMenuItem getMenuItemQuadratica() {
 		if (menuItemQuadratica == null) {
 			menuItemQuadratica = new JMenuItem("Spline Quadrática");
+			menuItemQuadratica.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemQuadratica;
 	}
@@ -47,6 +57,11 @@ public class MenuSpline extends JMenu{
 	private JMenuItem getMenuItemCubicaHermite() {
 		if (menuItemCubicaHermite == null) {
 			menuItemCubicaHermite = new JMenuItem("Spline Cúbica de Hermite");
+			menuItemCubicaHermite.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemCubicaHermite;
 	}
@@ -54,6 +69,11 @@ public class MenuSpline extends JMenu{
 	private JMenuItem getMenuItemCubicaAkima() {
 		if (menuItemCubicaAkima == null) {
 			menuItemCubicaAkima = new JMenuItem("Spline Cúbica de Akima");
+			menuItemCubicaAkima.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemCubicaAkima;
 	}
@@ -61,6 +81,11 @@ public class MenuSpline extends JMenu{
 	private JMenuItem getMenuItemBilinear() {
 		if (menuItemBilinear == null) {
 			menuItemBilinear = new JMenuItem("Spline Bilinear");
+			menuItemBilinear.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemBilinear;
 	}
@@ -68,6 +93,11 @@ public class MenuSpline extends JMenu{
 	private JMenuItem getMenuItemBicubica() {
 		if (menuItemBicubica == null) {
 			menuItemBicubica = new JMenuItem("Spline Bicúbica");
+			menuItemBicubica.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuItemBicubica;
 	}

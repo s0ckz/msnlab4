@@ -38,6 +38,11 @@ public class MenuInterpolacao extends JMenu{
 	private JMenuItem getMenuMinQuadrado() {
 		if (menuMinQuad == null) {
 			menuMinQuad = new JMenuItem("Método linear por Mínimos Quadrados"); 
+			menuMinQuad.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return menuMinQuad;
 	}
