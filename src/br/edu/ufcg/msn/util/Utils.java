@@ -76,7 +76,7 @@ public class Utils {
 	
 	public static ChartPanel createChart(double minX, double minY, double maxX, double maxY, 
 			String chartLabel, double[] xs, double[] ys,
-			List<UnivariateRealFunction> functions, int discreteness,
+			List<UnivariateRealFunction> functions, double discreteness,
 			ChartMouseClickListener listener) throws FunctionEvaluationException {
 
 		XYSeriesCollection xyDataset = new XYSeriesCollection();
