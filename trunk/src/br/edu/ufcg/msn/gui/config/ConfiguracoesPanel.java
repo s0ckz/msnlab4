@@ -1,46 +1,111 @@
 package br.edu.ufcg.msn.gui.config;
 
-import java.util.Iterator;
+import java.io.EOFException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-
-import org.apache.commons.math.MathException;
 
 import br.edu.ufcg.msn.facade.Facade;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
-public class ConfiguracoesPanel extends JFrame{
+public class ConfiguracoesPanel extends JPanel{
 
 	private static ConfiguracoesPanel instance = null;
-	
+
 	public synchronized static ConfiguracoesPanel getInstance() {
-        if(instance == null)
-        	instance = new ConfiguracoesPanel();
-        return instance;  
+		if(instance == null)
+			instance = new ConfiguracoesPanel();
+		return instance;  
 	}
 
 	private Facade facade; 
-	
+
 	private ConfiguracoesPanel() {
 		initialize();
 	}
-	
+
 	private void initialize() {
 		this.setLayout(null);
 		this.setSize(638, 447);
 		this.setName("Configurações");
 		this.facade = Facade.getInstance();
-		facade.addPoint(0, 0);
-		facade.addPoint(1, 01);
-		facade.addPoint(02, 02);
+		initLabels();
+		initTextFields();
 		initPoints();
 		initUpdate();
 	}
-	
+
+	JTextField discretTextField;
+	JTextField minXTextField;
+	JTextField minYTextField;
+	JTextField maxXTextField;
+	JTextField maxYTextField;
+
+	private void initTextFields() {
+		discretTextField = new JTextField(facade.getDiscreteness()+"");
+		discretTextField.setSize(100, 20);
+		discretTextField.setLocation(380, 40);
+		this.add(discretTextField);
+
+		minXTextField = new JTextField(facade.getMinX()+"");
+		minXTextField.setSize(45, 20);
+		minXTextField.setLocation(380, 80);
+		this.add(minXTextField);
+
+		minYTextField = new JTextField(facade.getMinY()+"");
+		minYTextField.setSize(45, 20);
+		minYTextField.setLocation(435, 80);
+		this.add(minYTextField);
+
+		maxXTextField = new JTextField(facade.getMaxX()+"");
+		maxXTextField.setSize(45, 20);
+		maxXTextField.setLocation(380, 120);
+		this.add(maxXTextField);
+
+		maxYTextField = new JTextField(facade.getMaxY()+"");
+		maxYTextField.setSize(45, 20);
+		maxYTextField.setLocation(435, 120);
+		this.add(maxYTextField);
+
+	}
+
+	private void initLabels() {
+		JLabel lbl = new JLabel("Points:");
+		lbl.setLocation(5, 5);
+		lbl.setSize(80, 20);
+		this.add(lbl);
+
+		lbl = new JLabel("X");
+		lbl.setLocation(120, 5);
+		lbl.setSize(20, 20);
+		this.add(lbl);
+
+		lbl = new JLabel("Y");
+		lbl.setLocation(240, 5);
+		lbl.setSize(20, 20);
+		this.add(lbl);
+
+		lbl = new JLabel("Discretizacao");
+		lbl.setLocation(380, 20);
+		lbl.setSize(200, 20);
+		this.add(lbl);
+
+		lbl = new JLabel("Canto Inferior Esquerdo");
+		lbl.setLocation(380, 60);
+		lbl.setSize(200, 20);
+		this.add(lbl);
+
+		lbl = new JLabel("Canto Superior Direito");
+		lbl.setLocation(380, 100);
+		lbl.setSize(200, 20);
+		this.add(lbl);
+
+	}
+
 	private void initUpdate() {
 		JButton update = new JButton();
 		update.setText("Atualizar");
@@ -51,38 +116,70 @@ public class ConfiguracoesPanel extends JFrame{
 			}
 		});
 		update.setSize(100, 30);
-		update.setLocation(200, 200);
+		update.setLocation(380, 160);
 		update.setVisible(true);
 		this.add(update);
 	}
 
 	protected void updateFacade() {
-		System.out.println("TODO update facade");
+		try{
+			double d = Math.abs(Double.parseDouble(discretTextField.getText()));
+			double mx = Double.parseDouble(minXTextField.getText());
+			double my = Double.parseDouble(minYTextField.getText());
+			double Mx = Double.parseDouble(maxXTextField.getText());
+			double My = Double.parseDouble(maxYTextField.getText());
+			facade.updateConfigs(d, mx, my, Mx, My);
+		}catch(Exception e) {}
 	}
 
+	List<JTextField> xsText = new ArrayList<JTextField>();
+	List<JTextField> ysText = new ArrayList<JTextField>();
 	private void initPoints() {
-		java.util.List<Double> xs = facade.getXs();
-		java.util.List<Double> ys = facade.getYs();
-		
 		int height = 20;
-		int width = 80;
+		int width = 160;
 		int xoffset = 10;
 		int yoffset = 10;
 		int space = 10;
-		
-		for (int i = 0; i < xs.size(); i++) {
+
+		JScrollPane sp = new JScrollPane();
+		sp.setSize(2*width+2*xoffset+space, 450);
+		sp.setLocation(5, 30);
+		sp.setAutoscrolls(true);
+		add(sp);
+		List<Double> xs = facade.getXs();
+		List<Double> ys = facade.getYs();
+
+		int i = 0;
+		for (i = 0; i < xs.size(); i++) {
 			JTextField x = new JTextField(xs.get(i).toString());
 			x.setSize(width, height);
 			x.setLocation(xoffset, yoffset+(2*height*i));
-			this.add(x);
-			JTextField y = new JTextField(xs.get(i).toString());
+			x.setEditable(true);
+			xsText.add(x);
+			sp.add(x);
+			JTextField y = new JTextField(ys.get(i).toString());
 			y.setSize(width, height);
 			y.setLocation(xoffset+space+width, yoffset+(2*height*i));
-			this.add(y);
+			y.setEditable(true);
+			xsText.add(x);
+			sp.add(y);
 		}
+		JTextField x = new JTextField();
+		x.setSize(width, height);
+		x.setLocation(xoffset, yoffset+(2*height*i));
+		x.setEditable(true);
+		xsText.add(x);
+		sp.add(x);
+		JTextField y = new JTextField();
+		y.setSize(width, height);
+		y.setLocation(xoffset+space+width, yoffset+(2*height*i));
+		y.setEditable(true);
+		xsText.add(x);
+		sp.add(y);
 	}
 
-	public static void main(String[] args) {
-		ConfiguracoesPanel.getInstance().setVisible(true);
+	public void newPoints() {
+		initPoints();
 	}
+
 }
