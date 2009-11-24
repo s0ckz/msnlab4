@@ -5,10 +5,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JTabbedPane;
 
 import org.jfree.chart.ChartPanel;
 
 import br.edu.ufcg.msn.facade.Facade;
+import br.edu.ufcg.msn.gui.config.ConfiguracoesPanel;
 import br.edu.ufcg.msn.gui.menu.MenuNovo;
 
 public class TestMainFrame extends JFrame{
@@ -17,7 +19,8 @@ public class TestMainFrame extends JFrame{
 	private JMenuBar jMenuBar = null;
 	private MenuNovo menuNovo = null;
 	Facade facade = Facade.getInstance();
-	private ChartPanel panelInput;
+	private ChartPanel chartPanelInput;
+	private JTabbedPane painelAbas = null;
 	private JButton botaoLimpar = null; 
 	private JButton botaoConfig = null;
 	
@@ -34,13 +37,23 @@ public class TestMainFrame extends JFrame{
 	}
 	
 	private void initialize() {
-		this.setSize(638, 447);
+		this.setSize(750, 600);
 		this.setJMenuBar(getBarra());
 		this.setTitle("MSN LAB");
-		panelInput = facade.getChart();
-		this.getContentPane().add(panelInput);
+		//chartPanelInput = facade.getChart();
+		this.getContentPane().add(getAba());
 	}
-
+	
+	private JTabbedPane getAba(){
+		if (painelAbas == null) {
+			painelAbas = new JTabbedPane();
+			chartPanelInput = facade.getChart();
+			painelAbas.addTab("Grafico", chartPanelInput);
+			painelAbas.addTab("Configuracoes", ConfiguracoesPanel.getInstance());
+		}
+		return painelAbas;
+	}
+	
 	private JButton getJMenuItemLimpar() {
 		if (botaoLimpar == null) {
 			botaoLimpar = new JButton("Limpar");
@@ -52,7 +65,6 @@ public class TestMainFrame extends JFrame{
 		}
 		return botaoLimpar;
 	}
-	
 	
 	private JMenuBar getBarra() {
 		if (jMenuBar == null) {
@@ -73,27 +85,21 @@ public class TestMainFrame extends JFrame{
 
 	private JButton getJMenuConfig() {
 		if (botaoConfig == null) {
-			botaoConfig = new JButton("Configuracoes");
-			
-			
+			botaoConfig = new JButton("Configuracoes");			
 		}
 		return botaoConfig;
 	}
 	
 	public void adicionaGraficoResposta(ChartPanel createChart) {
-		panelInput.setVisible(false);
+		chartPanelInput.setVisible(false);
 		this.getContentPane().add(createChart);
-		System.out.println("Exibiu, só que ficou por tras");
-		
 	}
-
 	
 	public static void newChartAvailable() {
-		getInstance().panelInput.setVisible(false);
-		getInstance().panelInput.setEnabled(false);
-		getInstance().getContentPane().remove(getInstance().panelInput);
-		getInstance().panelInput = getInstance().facade.getChart();
-		getInstance().getContentPane().add(getInstance().panelInput);
+		getInstance().chartPanelInput.setVisible(false);
+		getInstance().chartPanelInput.setEnabled(false);
+		getInstance().painelAbas.remove(getInstance().chartPanelInput);
+		getInstance().chartPanelInput = getInstance().facade.getChart();
+		getInstance().painelAbas.add("Grafico",getInstance().chartPanelInput);
 	}
-
 } 
