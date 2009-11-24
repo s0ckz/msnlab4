@@ -144,6 +144,23 @@ public class Utils {
 		return createChartPanel(listener, chart);
 	}
 
+	public static ChartPanel createBlankChart(double minX, double maxX, double minY, double maxY, 
+			String chartLabel, final ChartMouseClickListener listener)  {
+		
+		XYSeries series = new XYSeries(chartLabel);
+		XYDataset xyDataset = new XYSeriesCollection(series);
+		
+		final JFreeChart chart = ChartFactory.createScatterPlot(chartLabel, "x", "y", 
+				xyDataset, PlotOrientation.VERTICAL, true, true, false);
+		
+		chart.getXYPlot().getDomainAxis().setUpperBound(maxX);
+		chart.getXYPlot().getDomainAxis().setLowerBound(minX);
+		chart.getXYPlot().getRangeAxis().setUpperBound(maxY);
+		chart.getXYPlot().getRangeAxis().setLowerBound(minY);
+		
+		return createChartPanel(listener, chart);
+	}
+	
 	private static ChartPanel createChartPanel(
 			final ChartMouseClickListener listener, final JFreeChart chart) {
 		
