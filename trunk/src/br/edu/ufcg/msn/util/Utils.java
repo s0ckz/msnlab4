@@ -68,47 +68,53 @@ public class Utils {
 		return createChart(function, maxX, minX, discreteness, chartLabel, null);
 	}
 
-	public static ChartPanel createChart(double[] x, double[] y, List<UnivariateRealFunction> functions, 
-			double maxX, double minX, double discreteness, String chartLabel) throws FunctionEvaluationException {
-		
-		return createChart(x, y, functions, maxX, minX, discreteness, chartLabel, null);
-	}
+//	public static ChartPanel createChart(double[] x, double[] y, List<UnivariateRealFunction> functions, 
+//			double maxX, double minX, double discreteness, String chartLabel) throws FunctionEvaluationException {
+//		
+//		return createChart(x, y, functions, maxX, minX, discreteness, chartLabel, null);
+//	}
 	
-	public static ChartPanel createChart(double[] x, double[] y, List<UnivariateRealFunction> functions, 
-			double maxX, double minX, double discreteness, String chartLabel, 
-			final ChartMouseClickListener listener) throws FunctionEvaluationException {
-		
+	public static ChartPanel createChart(double minX, double minY, double maxX, double maxY, 
+			String chartLabel, double[] xs, double[] ys,
+			List<UnivariateRealFunction> functions, int discreteness,
+			ChartMouseClickListener listener) throws FunctionEvaluationException {
+
 		XYSeriesCollection xyDataset = new XYSeriesCollection();
 		
 		XYSeries pointSeries = new XYSeries("Point series");
-		for (int i = 0; i < y.length; i++) {
-			pointSeries.add(x[i], y[i]);
+		for (int i = 0; i < ys.length; i++) {
+			pointSeries.add(xs[i], ys[i]);
 		}
 		
 		xyDataset.addSeries(pointSeries);
 		
 		for (UnivariateRealFunction function : functions) {
-			XYSeries series = createFunctionSeries(maxX, minX, discreteness, function);
+			XYSeries series = createFunctionSeries(minX, maxX, discreteness, function);
 			xyDataset.addSeries(series);
 		}
 		
 		JFreeChart chart = ChartFactory.createXYLineChart(chartLabel, 
 				"x", "y", xyDataset, PlotOrientation.VERTICAL, true, true, false);
-		
+
+		chart.getXYPlot().getDomainAxis().setUpperBound(maxX);
+		chart.getXYPlot().getDomainAxis().setLowerBound(minX);
+		chart.getXYPlot().getRangeAxis().setUpperBound(maxY);
+		chart.getXYPlot().getRangeAxis().setLowerBound(minY);
+
 		XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) chart.getXYPlot().getRenderer();
 		
 		renderer.setSeriesLinesVisible(0, false);
 		renderer.setSeriesShapesVisible(0, true);
 		
 		for (int i = 1; i <= functions.size(); i++) {
-			renderer.setSeriesShapesVisible(i, true);
+			renderer.setSeriesShapesVisible(i, false);
 			renderer.setSeriesLinesVisible(i, true);
 		}
 		
 		return createChartPanel(listener, chart);
 	}
 
-	private static XYSeries createFunctionSeries(double maxX, double minX,
+	private static XYSeries createFunctionSeries(double minX, double maxX,
 			double discreteness, UnivariateRealFunction function)
 			throws FunctionEvaluationException {
 		XYSeries series = new XYSeries(function.toString());
