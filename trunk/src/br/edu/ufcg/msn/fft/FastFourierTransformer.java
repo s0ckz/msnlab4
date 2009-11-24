@@ -10,10 +10,8 @@ import org.apache.commons.math.complex.Complex;
 
 public class FastFourierTransformer implements Serializable {
 
-    /** Serializable version identifier. */
-    static final long serialVersionUID = 5138259215438106000L;
-
-    /** roots of unity */
+	private static final long serialVersionUID = 8621967401371374263L;
+	/** roots of unity */
     private RootsOfUnity roots = new RootsOfUnity();
 
     /**
