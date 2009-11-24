@@ -59,7 +59,16 @@ public class MenuAjusteCurva extends JMenu{
 	private JMenuItem getMenuItemNaoLinearExponencial() {
 		if (menuItemNaoLinearExp == null) {
 			menuItemNaoLinearExp = new JMenuItem("Exponencial");
-			 //chamada evento
+			menuItemNaoLinearExp.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try {
+						System.out.println("exponencial");
+						Facade.getInstance().addMetodoAjusteNaoLinearExponencial();
+					} catch (Exception e1) {
+						
+					}
+				}
+			});
 		}
 		return menuItemNaoLinearExp;
 	}
@@ -67,7 +76,15 @@ public class MenuAjusteCurva extends JMenu{
 	private JMenuItem getMenuItemNaoLinearLogaritmico() {
 		if (menuItemNaoLinearLog == null) {
 			menuItemNaoLinearLog = new JMenuItem("Logaritmico");
-			 //chamada evento
+			menuItemNaoLinearLog.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try {
+						Facade.getInstance().addMetodoAjusteNaoLinearLogaritmico();
+					} catch (Exception e1) {
+						
+					}
+				}
+			});
 		}
 		return menuItemNaoLinearLog;
 	}
@@ -75,7 +92,15 @@ public class MenuAjusteCurva extends JMenu{
 	private JMenuItem getMenuItemNaoLinearBaixaPotencia() {
 		if (menuItemNaoLinearPot == null) {
 			menuItemNaoLinearPot = new JMenuItem("Potencia");
-			 //chamada evento
+			menuItemNaoLinearPot.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try {
+						Facade.getInstance().addMetodoAjusteNaoLinearPotencia();
+					} catch (Exception e1) {
+						
+					}
+				}
+			});
 		}
 		return menuItemNaoLinearPot;
 	}
