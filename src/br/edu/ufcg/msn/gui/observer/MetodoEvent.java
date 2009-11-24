@@ -28,7 +28,7 @@ public class MetodoEvent {
 		functions.add(f1);
 		functions.add(f2);
 		
-		ChartPanel createChart = Utils.createChart(x, y, functions, +5, -5, 1, "Gráfico", new ChartMouseClickListener () {
+		/*ChartPanel createChart = Utils.createChart(x, y, functions, +5, -5, 1, "Gráfico", new ChartMouseClickListener () {
 
 			@Override
 			public void mouseClicked(ChartPanel chartPanel, double x, double y) {
@@ -36,11 +36,11 @@ public class MetodoEvent {
 				System.out.println(Utils.getPointSeries(chartPanel));
 			}
 			
-		});
+		});*/
 		
 		
 		JDialog dialog = new JDialog();
-		dialog.setContentPane(createChart);
+		//dialog.setContentPane(createChart);
 		dialog.setVisible(true);
 		dialog.setSize(800, 600);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

@@ -1,4 +1,4 @@
-package br.edu.ufcg.msn.gui.input;
+package br.edu.ufcg.msn.gui.config;
 
 import java.awt.event.MouseEvent;
 
