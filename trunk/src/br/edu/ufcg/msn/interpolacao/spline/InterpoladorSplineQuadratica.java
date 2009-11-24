@@ -43,8 +43,8 @@ public class InterpoladorSplineQuadratica extends AbstractInterpoladorSpline {
 		double[] xval = { -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6 };
 		double[] yval = { 1, 2, 10, 5, 6, 9, 6, 3, 1, 4, 6, 7, 0 };
 		ChartPanel chartPanel = Utils.createChart(
-				new InterpoladorSplineQuadratica().interpolate(xval, yval), 6,
-				-6, 0.1, "Teste");
+				new InterpoladorSplineQuadratica().interpolate(xval, yval), -6,
+				6, 0.1, "Teste");
 		JFrame jFrame = new JFrame();
 		jFrame.add(chartPanel);
 		jFrame.setSize(800, 600);
