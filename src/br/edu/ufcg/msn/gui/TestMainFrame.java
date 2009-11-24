@@ -22,7 +22,6 @@ public class TestMainFrame extends JFrame{
 	private ChartPanel chartPanelInput;
 	private JTabbedPane painelAbas = null;
 	private JButton botaoLimpar = null; 
-	private JButton botaoConfig = null;
 	
 	private static TestMainFrame instance = null;
 	
@@ -70,8 +69,7 @@ public class TestMainFrame extends JFrame{
 		if (jMenuBar == null) {
 			jMenuBar = new JMenuBar();
 			jMenuBar.add(BorderLayout.WEST, getJMenuFile());
-			jMenuBar.add(BorderLayout.WEST, getJMenuConfig());
-			jMenuBar.add(BorderLayout.WEST, getJMenuItemLimpar());
+			jMenuBar.add(BorderLayout.EAST, getJMenuItemLimpar());
 		}
 		return jMenuBar;
 	}
@@ -83,13 +81,6 @@ public class TestMainFrame extends JFrame{
 		return menuNovo;
 	}
 
-	private JButton getJMenuConfig() {
-		if (botaoConfig == null) {
-			botaoConfig = new JButton("Configuracoes");			
-		}
-		return botaoConfig;
-	}
-	
 	public void adicionaGraficoResposta(ChartPanel createChart) {
 		chartPanelInput.setVisible(false);
 		this.getContentPane().add(createChart);
