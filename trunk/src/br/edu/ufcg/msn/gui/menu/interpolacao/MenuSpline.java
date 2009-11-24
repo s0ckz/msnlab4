@@ -3,6 +3,10 @@ package br.edu.ufcg.msn.gui.menu.interpolacao;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import org.apache.commons.math.MathException;
+
+import br.edu.ufcg.msn.facade.Facade;
+
 /**
  * Esta classe implementa um menu para a escolha de uma 
  * interpolaçao por splines, sao eles
@@ -35,7 +39,11 @@ public class MenuSpline extends JMenu{
 			menuItemLinear = new JMenuItem("Spline Linear");
 			menuItemLinear.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					try {
+						Facade.getInstance().addMetodoSplineLinar();
+					} catch (MathException e1) {
+						e1.printStackTrace();
+					}
 				}
 			});
 		}
@@ -47,7 +55,11 @@ public class MenuSpline extends JMenu{
 			menuItemQuadratica = new JMenuItem("Spline Quadrática");
 			menuItemQuadratica.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					try {
+						Facade.getInstance().addMetodoSplineQuadratica();
+					} catch (MathException e1) {
+						e1.printStackTrace();
+					}
 				}
 			});
 		}
@@ -59,7 +71,11 @@ public class MenuSpline extends JMenu{
 			menuItemCubicaHermite = new JMenuItem("Spline Cúbica de Hermite");
 			menuItemCubicaHermite.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					try {
+						Facade.getInstance().addMetodoSplineCubica();
+					} catch (MathException e1) {
+						e1.printStackTrace();
+					}
 				}
 			});
 		}
