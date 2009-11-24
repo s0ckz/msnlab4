@@ -3,6 +3,10 @@ package br.edu.ufcg.msn.gui.menu.ajustecurvas;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import org.apache.commons.math.MathException;
+
+import br.edu.ufcg.msn.facade.Facade;
+
 /**
  * Esta classe implementa um menu para a escolha de um 
  * ajuste de curva, linear e nao-linear
@@ -32,6 +36,12 @@ public class MenuAjusteCurva extends JMenu{
 			menuItemLinear.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					try {
+						Facade.getInstance().addMetodoAjusteLinear();
+					} catch (MathException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			});
 		}

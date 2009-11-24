@@ -13,6 +13,7 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.jfree.chart.ChartPanel;
 
 import br.edu.ufcg.msn.ajuste.LeastSquareLinesFitting;
+import br.edu.ufcg.msn.gui.TestMainFrame;
 import br.edu.ufcg.msn.interpolacao.InterpoladorLagrange;
 import br.edu.ufcg.msn.interpolacao.InterpoladorNeville;
 import br.edu.ufcg.msn.interpolacao.InterpoladorNewton;
@@ -49,15 +50,19 @@ public class Facade {
 
 	public void addMetodoAjusteLinear() throws MathException{
 		functions.add(ajustelinear.interpolate(getXs(), getYs()));
+		TestMainFrame.newChartAvailable();
 	}
 	public void addMetodoInterpolacaoLagrange() throws MathException {
 		functions.add(new InterpoladorLagrange().interpolate(getXs(), getYs()));
+		TestMainFrame.newChartAvailable();
 	}
 	public void addMetodoInterpolacaoNeville() throws MathException {
 		functions.add(new InterpoladorNeville().interpolate(getXs(), getYs()));
+		TestMainFrame.newChartAvailable();
 	}
 	public void addMetodoInterpolacaoNewton() throws MathException {
 		functions.add(new InterpoladorNewton().interpolate(getXs(), getYs()));
+		TestMainFrame.newChartAvailable();
 	}
 
 	public void addPoint(double x, double y) {
@@ -71,7 +76,8 @@ public class Facade {
 				@Override
 				public void mouseClicked(ChartPanel chartPanel, double x, double y) {
 					addPoint(x, y);
-					System.out.println(Utils.getPointSeries(chartPanel));
+					TestMainFrame.newChartAvailable();
+					System.out.println(xs.size());
 				}
 			});
 			return createChart;

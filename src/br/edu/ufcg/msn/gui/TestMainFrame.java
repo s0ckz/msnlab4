@@ -5,7 +5,7 @@ import javax.swing.JMenuBar;
 import org.jfree.chart.ChartPanel;
 
 import br.edu.ufcg.msn.gui.menu.MenuNovo;
-import br.edu.ufcg.msnlab.facade.Facade;
+import br.edu.ufcg.msn.facade.Facade;
 
 public class TestMainFrame extends JFrame{
 
@@ -56,6 +56,14 @@ public class TestMainFrame extends JFrame{
 		this.getContentPane().add(createChart);
 		System.out.println("Exibiu, só que ficou por tras");
 		
+	}
+
+	public static void newChartAvailable() {
+		getInstance().panelInput.setVisible(false);
+		getInstance().panelInput.setEnabled(false);
+		getInstance().getContentPane().remove(getInstance().panelInput);
+		getInstance().panelInput = getInstance().facade.getChart();
+		getInstance().getContentPane().add(getInstance().panelInput);
 	}
 
 } 
