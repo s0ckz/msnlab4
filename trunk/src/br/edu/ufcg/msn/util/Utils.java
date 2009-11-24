@@ -1,4 +1,6 @@
 package br.edu.ufcg.msn.util;
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
@@ -174,8 +176,20 @@ public class Utils {
 		chart.getXYPlot().setRangeCrosshairVisible(true);
 		chart.getXYPlot().setDomainCrosshairLockedOnData(false);
 		chart.getXYPlot().setRangeCrosshairLockedOnData(false);
+		
 		chart.getXYPlot().setDomainZeroBaselineVisible(true);
 		chart.getXYPlot().setRangeZeroBaselineVisible(true);
+		
+		BasicStroke baseLineStroke = new BasicStroke(2, 
+				BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL);
+		
+		chart.getXYPlot().setDomainZeroBaselinePaint(Color.WHITE);
+		chart.getXYPlot().setDomainZeroBaselineStroke(baseLineStroke);
+		
+		chart.getXYPlot().setRangeZeroBaselinePaint(Color.WHITE);
+		chart.getXYPlot().setRangeZeroBaselineStroke(baseLineStroke);
+		
+		chart.getXYPlot().setBackgroundPaint(Color.BLACK);
 		
 		final ChartPanel chartPanel = new ChartPanel(chart);
 		
