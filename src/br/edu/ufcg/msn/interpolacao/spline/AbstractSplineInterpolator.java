@@ -10,7 +10,7 @@ import org.apache.commons.math.analysis.interpolation.UnivariateRealInterpolator
  * @author Rodrigo Bruno
  * 
  */
-public abstract class AbstractInterpoladorSpline implements UnivariateRealInterpolator {
+public abstract class AbstractSplineInterpolator implements UnivariateRealInterpolator {
 	
 	protected void validate(double[] xval, double[] yval) throws MathException {
 		if (xval == null || yval == null) {

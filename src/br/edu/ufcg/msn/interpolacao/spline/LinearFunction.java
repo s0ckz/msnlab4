@@ -6,7 +6,7 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
 /**
  * This class represents a linear function.
  * 
- * @see InterpoladorSplineLinear
+ * @see SplineLinearInterpolator
  * 
  * @author Leandro Jose
  * @author Rodrigo Bruno
