@@ -8,10 +8,16 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.jfree.chart.ChartPanel;
 
 import br.edu.ufcg.msn.ajuste.LeastSquareLinesFitting;
+import br.edu.ufcg.msn.ajustenaolinear.LeastSquaresFittingExponential;
+import br.edu.ufcg.msn.ajustenaolinear.LeastSquaresFittingLogarithmic;
+import br.edu.ufcg.msn.ajustenaolinear.LeastSquaresFittingPowerLaw;
 import br.edu.ufcg.msn.gui.TestMainFrame;
 import br.edu.ufcg.msn.interpolacao.InterpoladorLagrange;
 import br.edu.ufcg.msn.interpolacao.InterpoladorNeville;
 import br.edu.ufcg.msn.interpolacao.InterpoladorNewton;
+import br.edu.ufcg.msn.interpolacao.spline.InterpoladorSplineCubica;
+import br.edu.ufcg.msn.interpolacao.spline.InterpoladorSplineLinear;
+import br.edu.ufcg.msn.interpolacao.spline.InterpoladorSplineQuadratica;
 import br.edu.ufcg.msn.util.ChartMouseClickListener;
 import br.edu.ufcg.msn.util.Utils;
 
@@ -42,12 +48,12 @@ public class Facade {
 	private Facade(){
 		initFacade();
 	}
-
+	//Ajuste linear
 	public void addMetodoAjusteLinear() throws MathException{
 		functions.add(new LeastSquareLinesFitting().interpolate(getXsArray(), getYsArray()));
 		TestMainFrame.newChartAvailable();
 	}
- 
+	//Interpolacao por aproximacao lagrange, neville, newton
 	public void addMetodoInterpolacaoLagrange() throws MathException {
 		functions.add(new InterpoladorLagrange().interpolate(getXsArray(), getYsArray()));
 		TestMainFrame.newChartAvailable();
@@ -62,7 +68,39 @@ public class Facade {
 		functions.add(new InterpoladorNewton().interpolate(getXsArray(), getYsArray()));
 		TestMainFrame.newChartAvailable();
 	}
-
+	
+	//Splines
+	public void addMetodoSplineLinar() throws MathException {
+		functions.add(new InterpoladorSplineLinear().interpolate(getXsArray() , getYsArray()));
+		TestMainFrame.newChartAvailable();
+	}
+	
+	public void addMetodoSplineQuadratica() throws MathException {
+		functions.add(new InterpoladorSplineQuadratica().interpolate(getXsArray(), getYsArray()));
+		TestMainFrame.newChartAvailable();
+	}
+	
+	public void addMetodoSplineCubica() throws MathException {
+		functions.add(new InterpoladorSplineCubica().interpolate(getXsArray(), getYsArray()));
+		TestMainFrame.newChartAvailable();
+	}
+	
+	//Ajuste de curva Nao Linear: Exponencial, logaritmico, potencia
+	public void addMetodoAjusteNaoLinearExponencial() throws MathException {
+		functions.add(new LeastSquaresFittingExponential().interpolate(getXsArray() , getYsArray()));
+		TestMainFrame.newChartAvailable();
+	}
+	
+	public void addMetodoAjusteNaoLinearLogaritmico() throws MathException {
+		functions.add(new LeastSquaresFittingLogarithmic().interpolate(getXsArray(), getYsArray()));
+		TestMainFrame.newChartAvailable();
+	}
+	
+	public void addMetodoAjusteNaoLinearPotencia() throws MathException {
+		functions.add(new LeastSquaresFittingPowerLaw().interpolate(getXsArray(), getYsArray()));
+		TestMainFrame.newChartAvailable();
+	}
+	
 	public void addPoint(double x, double y) {
 		System.out.println(x +", "+ y);
 		if (!xs.contains(x)){
