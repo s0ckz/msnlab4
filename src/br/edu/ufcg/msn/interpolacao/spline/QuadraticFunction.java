@@ -4,38 +4,41 @@ import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 
 /**
- * This class represents a linear function.
+ * This class represents a quadratic function.
  * 
- * @see InterpoladorSplineLinear
+ * @see InterpoladorSplineQuadratica
  * 
  * @author Leandro Jose
  * @author Rodrigo Bruno
  *
  */
-public class LinearFunction implements UnivariateRealFunction {
+public class QuadraticFunction implements UnivariateRealFunction {
 	
 	private final double x1;
 	private final double x2;
 	private final double y1;
-	private final double y2;
+	private final double z1;
+	private final double z2;
 
 	/**
-	 * Creates a new linear function.
+	 * Creates a new quadratic function.
 	 * @param x1 The x[i] constant.
 	 * @param x The x[i+1] constant.
 	 * @param y1 The y[i] constant.
-	 * @param y2 The y[i + 1] constant.
+	 * @param z1 The z[i] constant.
+	 * @param z2 The z[i + 1] constant.
 	 */
-	public LinearFunction(double x1, double x2, double y1, double y2) {
+	public QuadraticFunction(double x1, double x2, double y1, double z1, double z2) {
 		this.x1 = x1;
 		this.x2 = x2;
 		this.y1 = y1;
-		this.y2 = y2;
+		this.z1 = z1;
+		this.z2 = z2;
 		
 	}
 
 	public double value(double x) throws FunctionEvaluationException {
-		return y1 + ( (y2 - y1) / (x2 - x1) ) * (x - x1);
+		return y1 + z1 * (x - x1) + ( (z2 - z1) / (2 * (x2 - x1)) ) * (x - x1) * (x - x1);
 	}
 
 }

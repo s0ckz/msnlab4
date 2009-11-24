@@ -59,7 +59,7 @@ public class SplineFunction implements UnivariateRealFunction {
         if ( i >= functions.length ) {
             i--;
         }
-        return functions[i].value(x - knots[i]);
+        return functions[i].value(x);
 	}
 	
     private static boolean isStrictlyIncreasing(double[] x) {
@@ -77,10 +77,11 @@ public class SplineFunction implements UnivariateRealFunction {
     
     public static void main(String[] args) throws FunctionEvaluationException {
 		double[] x = {1, 2, 3};
-		UnivariateRealFunction[] functions = {new LinearFunction(1, 2, 3, 4), new LinearFunction(2, 3, 4, 4)};
-		System.out.println(new SplineFunction(x, functions).value(1.999));
-		System.out.println(new SplineFunction(x, functions).value(2));
-		System.out.println(new SplineFunction(x, functions).value(3.01));
+		UnivariateRealFunction[] functions = {new LinearFunction(1, 2, 3, 4), new LinearFunction(2, 3, 4, 8)};
+//		System.out.println(new SplineFunction(x, functions).value(1.999));
+//		System.out.println(new SplineFunction(x, functions).value(2));
+		System.out.println(new SplineFunction(x, functions).value(2.5));
+//		System.out.println(new SplineFunction(x, functions).value(3.0));
 	}
 
 }
