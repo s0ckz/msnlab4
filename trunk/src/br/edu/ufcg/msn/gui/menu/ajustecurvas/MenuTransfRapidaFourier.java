@@ -1,11 +1,11 @@
-package br.edu.ufcg.msnlab.gui.menu.ajustecurvas;
+package br.edu.ufcg.msn.gui.menu.ajustecurvas;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 /**
  * Esta classe implementa um menu para a
- * Trasformada Rápida de Fourier
+ * Trasformada Rï¿½pida de Fourier
  * @author Danilo
  *
  */

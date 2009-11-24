@@ -1,18 +1,19 @@
-package br.edu.ufcg.msnlab.interpolacao;
+package br.edu.ufcg.msn.interpolacao;
 
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
+import org.apache.commons.math.analysis.interpolation.NevilleInterpolator;
 import org.apache.commons.math.analysis.interpolation.UnivariateRealInterpolator;
 import org.apache.commons.math.analysis.polynomials.PolynomialFunction;
-import org.apache.commons.math.analysis.polynomials.PolynomialFunctionLagrangeForm;
 
 /**
- * Interpolacao polinomial usando metodo de Lagrange
+ * 
+ * Interpolacao polinomial usando metodo de Neville
  * 
  * @author Edmilson de Almeida Junior
  *
  */
-public class InterpoladorLagrange implements UnivariateRealInterpolator {
+public class InterpoladorNeville implements UnivariateRealInterpolator {
 
 	
 	/**
@@ -23,14 +24,11 @@ public class InterpoladorLagrange implements UnivariateRealInterpolator {
 	 * @throws MathException MathException
 	 */
 	@Override
-	public UnivariateRealFunction interpolate(double[] vetorX, double[] vetorFx)
+	public UnivariateRealFunction interpolate(double[] arg0, double[] arg1)
 			throws MathException {
-		
-		PolynomialFunctionLagrangeForm polinomioFormaLagrange =  new PolynomialFunctionLagrangeForm(vetorX, vetorFx);
-		double[] coeficientes = polinomioFormaLagrange.getCoefficients();
-		
-		PolynomialFunction polinomioLagrange = new PolynomialFunction(coeficientes);
-		return polinomioLagrange;
+		NevilleInterpolator interpoladorNeville = new NevilleInterpolator();
+		double[] coeficientes = interpoladorNeville.interpolate(arg0, arg1).getCoefficients();
+		PolynomialFunction funcaoPolinomial = new PolynomialFunction(coeficientes);
+		return funcaoPolinomial;
 	}
-
 }

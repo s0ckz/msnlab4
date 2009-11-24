@@ -1,4 +1,4 @@
-package br.edu.ufcg.msnlab.gui.observer;
+package br.edu.ufcg.msn.gui.observer;
 
 import java.util.ArrayList;
 import java.util.List;

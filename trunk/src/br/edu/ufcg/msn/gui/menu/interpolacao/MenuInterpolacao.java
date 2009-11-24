@@ -1,4 +1,4 @@
-package br.edu.ufcg.msnlab.gui.menu.interpolacao;
+package br.edu.ufcg.msn.gui.menu.interpolacao;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
