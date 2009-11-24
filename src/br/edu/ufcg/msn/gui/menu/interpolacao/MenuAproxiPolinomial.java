@@ -1,7 +1,10 @@
 package br.edu.ufcg.msn.gui.menu.interpolacao;
 
+import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 import org.apache.commons.math.MathException;
 
@@ -21,7 +24,7 @@ public class MenuAproxiPolinomial extends JMenu{
 	private JMenuItem menuItemLagrange, menuItemNewton,
 	menuItemHermite, menuItemChebyshev, menuItemBezier,
 	menuItemIntBaricentrica = null;
-
+	 
 
 	public MenuAproxiPolinomial() {
 		initialize();
@@ -43,12 +46,10 @@ public class MenuAproxiPolinomial extends JMenu{
 			menuItemLagrange = new JMenuItem("Método de Lagrange");
 			menuItemLagrange.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
 					try {
 						Facade.getInstance().addMetodoInterpolacaoLagrange();
-					} catch (MathException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						
 					}
 				}
 			});
@@ -61,11 +62,9 @@ public class MenuAproxiPolinomial extends JMenu{
 			menuItemNewton = new JMenuItem("Método de Newton");
 			menuItemNewton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
 					try {
 						Facade.getInstance().addMetodoInterpolacaoNewton();
 					} catch (MathException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 

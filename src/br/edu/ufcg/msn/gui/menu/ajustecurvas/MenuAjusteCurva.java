@@ -16,9 +16,9 @@ import br.edu.ufcg.msn.facade.Facade;
 @SuppressWarnings("serial")
 public class MenuAjusteCurva extends JMenu{
 	
-	private JMenuItem menuItemLinear = null;
-	private JMenuItem menuItemNaoLinear = null;
-	
+	private JMenuItem menuItemLinear,menuItemNaoLinearExp,
+	menuItemNaoLinearLog, menuItemNaoLinearPot= null;
+	private JMenu menuNaoLinear = null;
 	
 	public MenuAjusteCurva() {
 		initialize();
@@ -35,11 +35,9 @@ public class MenuAjusteCurva extends JMenu{
 			menuItemLinear = new JMenuItem("Linear");
 			menuItemLinear.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
 					try {
 						Facade.getInstance().addMetodoAjusteLinear();
 					} catch (MathException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -49,15 +47,37 @@ public class MenuAjusteCurva extends JMenu{
 	}
 	
 	private JMenuItem getMenuItemNaoLinear() {
-		if (menuItemNaoLinear == null) {
-			menuItemNaoLinear = new JMenuItem("Não Linear");
-			menuItemNaoLinear.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
-				}
-			});
+		if (menuNaoLinear == null) {
+			menuNaoLinear = new JMenu("Não Linear");
+			menuNaoLinear.add(getMenuItemNaoLinearExponencial());
+			menuNaoLinear.add(getMenuItemNaoLinearLogaritmico());
+			menuNaoLinear.add(getMenuItemNaoLinearBaixaPotencia());
 		}
-		return menuItemNaoLinear;
+		return menuNaoLinear;
+	}
+
+	private JMenuItem getMenuItemNaoLinearExponencial() {
+		if (menuItemNaoLinearExp == null) {
+			menuItemNaoLinearExp = new JMenuItem("Exponencial");
+			 //chamada evento
+		}
+		return menuItemNaoLinearExp;
+	}
+
+	private JMenuItem getMenuItemNaoLinearLogaritmico() {
+		if (menuItemNaoLinearLog == null) {
+			menuItemNaoLinearLog = new JMenuItem("Logaritmico");
+			 //chamada evento
+		}
+		return menuItemNaoLinearLog;
+	}
+
+	private JMenuItem getMenuItemNaoLinearBaixaPotencia() {
+		if (menuItemNaoLinearPot == null) {
+			menuItemNaoLinearPot = new JMenuItem("Potencia");
+			 //chamada evento
+		}
+		return menuItemNaoLinearPot;
 	}
 
 
