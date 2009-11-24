@@ -6,7 +6,7 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
 /**
  * This class represents a quadratic function.
  * 
- * @see InterpoladorSplineQuadratica
+ * @see SplineQuadraticInterpolator
  * 
  * @author Leandro Jose
  * @author Rodrigo Bruno
