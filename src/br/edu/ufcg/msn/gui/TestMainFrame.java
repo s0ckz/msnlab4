@@ -2,26 +2,37 @@ package br.edu.ufcg.msn.gui;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
+import org.jfree.chart.ChartPanel;
 
 import br.edu.ufcg.msn.gui.menu.MenuNovo;
+import br.edu.ufcg.msnlab.facade.Facade;
 
 public class TestMainFrame extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private JMenuBar jJMenuBar = null;
 	private MenuNovo menuNovo = null;
+	Facade facade = Facade.getInstance();
+	private ChartPanel panelInput;
 	
-	public TestMainFrame() {
-		super();
+	private static TestMainFrame instance = null;
+	
+	public synchronized static TestMainFrame getInstance() {
+        if(instance == null)
+        	instance = new TestMainFrame();
+        return instance;  
+	} 
+	
+	private TestMainFrame() {
 		initialize();
 	}
 	
 	private void initialize() {
 		this.setSize(638, 447);
 		this.setJMenuBar(getJJMenuBar());
-		
-		
 		this.setTitle("MSN LAB");
+		panelInput = facade.getChart();
+		this.getContentPane().add(panelInput);
 	}
 
 	private JMenuBar getJJMenuBar() {
@@ -38,6 +49,13 @@ public class TestMainFrame extends JFrame{
 			jJMenuBar.add(menuNovo);
 		}
 		return menuNovo;
+	}
+
+	public void adicionaGraficoResposta(ChartPanel createChart) {
+		panelInput.setVisible(false);
+		this.getContentPane().add(createChart);
+		System.out.println("Exibiu, só que ficou por tras");
+		
 	}
 
 } 

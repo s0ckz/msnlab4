@@ -9,7 +9,7 @@ public class DemoMain {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
-	        TestMainFrame t = new TestMainFrame();
+	        TestMainFrame t = TestMainFrame.getInstance();
 	        t.setVisible(true);
 	}
 }
