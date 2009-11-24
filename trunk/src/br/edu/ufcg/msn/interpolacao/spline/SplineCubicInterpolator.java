@@ -29,7 +29,9 @@ public class SplineCubicInterpolator extends AbstractSplineInterpolator {
 	public UnivariateRealFunction interpolate(double[] xval, double[] yval)
 			throws MathException {
 		validate(xval, yval);
-		return splineInterpolator.interpolate(xval, yval);
+		double[] knots = {xval[0], xval[xval.length - 1]};
+		UnivariateRealFunction[] functions = {splineInterpolator.interpolate(xval, yval)};
+		return new SplineFunction(knots, functions);
 	}
 
 	// a simple graphical test
