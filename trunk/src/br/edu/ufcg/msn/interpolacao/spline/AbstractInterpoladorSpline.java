@@ -22,6 +22,18 @@ public abstract class AbstractInterpoladorSpline implements UnivariateRealInterp
 		if (xval.length != yval.length) {
 			throw new MathException("The number of x differs from y");
 		}
+		if (!isStrictlyIncreasing(xval)) {
+			throw new MathException("The x values aren't increasing");
+		}
 	}
+	
+    private static boolean isStrictlyIncreasing(double[] x) {
+        for (int i = 1; i < x.length; ++i) {
+            if (x[i - 1] >= x[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
