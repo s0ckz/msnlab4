@@ -1,13 +1,8 @@
 package br.edu.ufcg.msn.facade;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.JDialog;
-import javax.swing.WindowConstants;
-
-import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.jfree.chart.ChartPanel;
@@ -31,32 +26,41 @@ public class Facade {
 		return facade;  
 	}
 
-	private LeastSquareLinesFitting ajustelinear = new LeastSquareLinesFitting();
+	private double discreteness;
 	private List<UnivariateRealFunction> functions;
-	private double maxX;
 
+	private double maxX;
 	private double maxY;
+
 	private double minX;
 
 	private double minY;
 
 	private List<Double> xs;
+	public void setXs(List<Double> xs) {
+		this.xs = xs;
+	}
+
+	public void setYs(List<Double> ys) {
+		this.ys = ys;
+	}
 
 	private List<Double> ys;
-	private double discreteness;
  
 	private Facade(){
 		initFacade();
 	}
 
 	public void addMetodoAjusteLinear() throws MathException{
-		functions.add(ajustelinear.interpolate(getXs(), getYs()));
+		functions.add(new LeastSquareLinesFitting().interpolate(getXs(), getYs()));
 		TestMainFrame.newChartAvailable();
 	}
+
 	public void addMetodoInterpolacaoLagrange() throws MathException {
 		functions.add(new InterpoladorLagrange().interpolate(getXs(), getYs()));
 		TestMainFrame.newChartAvailable();
 	}
+
 	public void addMetodoInterpolacaoNeville() throws MathException {
 		functions.add(new InterpoladorNeville().interpolate(getXs(), getYs()));
 		TestMainFrame.newChartAvailable();
@@ -65,12 +69,10 @@ public class Facade {
 		functions.add(new InterpoladorNewton().interpolate(getXs(), getYs()));
 		TestMainFrame.newChartAvailable();
 	}
-
 	public void addPoint(double x, double y) {
 		xs.add(x);
 		ys.add(y);
 	}
-
 	public ChartPanel getChart(){
 		try {
 			ChartPanel createChart = Utils.createChart(minX, minY, maxX, maxY, "Gráfico", getXs(), getYs(), functions, discreteness, new ChartMouseClickListener () {
@@ -87,20 +89,24 @@ public class Facade {
 		}
 		return null;
 	}
+
+	public double getDiscreteness() {
+		return discreteness;
+	}
+
 	public double getMaxX() {
 		return maxX;
 	}
 	public double getMaxY() {
 		return maxY;
 	}
-
 	public double getMinX() {
 		return minX;
-	}    
+	}
 
 	public double getMinY() {
 		return minY;
-	}
+	}    
 
 	private double[] getXs() {
 		double res[] = new double[xs.size()];
@@ -109,6 +115,7 @@ public class Facade {
 		}
 		return res;
 	}
+
 	private double[] getYs() {
 		double res[] = new double[ys.size()];
 		for (int i = 0; i < res.length; i++) {
@@ -126,9 +133,12 @@ public class Facade {
 		ys = new ArrayList<Double>();
 		functions = new ArrayList<UnivariateRealFunction>();
 	}
-
-	public void reset(){
+	public void clean(){
 		initFacade();
+	}
+
+	public void setDiscreteness(double discreteness) {
+		this.discreteness = discreteness;
 	}
 
 	public void setMaxX(double maxX) {
