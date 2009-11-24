@@ -49,7 +49,8 @@ public class HermiteCubicSplineInterpolator extends AbstractSplineInterpolator {
 	protected double[] findTangents(double[] yval) {
 		double[] mval = new double[yval.length];
 		mval[0] = yval[0];
-		for (int i = 1; i < mval.length; i++) {
+		mval[mval.length - 1] = yval[mval.length - 1];
+		for (int i = 1; i < mval.length-1; i++) {
 			mval[i] = (yval[i + 1] - yval[i - 1]) / 2;
 		}
 		return mval;
