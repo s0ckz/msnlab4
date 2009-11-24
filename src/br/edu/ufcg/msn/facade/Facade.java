@@ -43,6 +43,7 @@ public class Facade {
 	private List<Double> xs;
 
 	private List<Double> ys;
+	private double discreteness;
  
 	private Facade(){
 		initFacade();
@@ -72,7 +73,7 @@ public class Facade {
 
 	public ChartPanel getChart(){
 		try {
-			ChartPanel createChart = Utils.createChart(minX, minY, maxX, maxY, "Gráfico", getXs(), getYs(), functions, 1, new ChartMouseClickListener () {
+			ChartPanel createChart = Utils.createChart(minX, minY, maxX, maxY, "Gráfico", getXs(), getYs(), functions, discreteness, new ChartMouseClickListener () {
 				@Override
 				public void mouseClicked(ChartPanel chartPanel, double x, double y) {
 					addPoint(x, y);
@@ -120,6 +121,7 @@ public class Facade {
 		minY = -5;
 		maxX = 5;
 		maxY = 5;
+		discreteness = 0.1;
 		xs = new ArrayList<Double>();
 		ys = new ArrayList<Double>();
 		functions = new ArrayList<UnivariateRealFunction>();
