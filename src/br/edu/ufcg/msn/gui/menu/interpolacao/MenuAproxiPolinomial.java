@@ -21,7 +21,7 @@ import br.edu.ufcg.msn.facade.Facade;
  */
 public class MenuAproxiPolinomial extends JMenu{
 
-	private JMenuItem menuItemLagrange, menuItemNewton,
+	private JMenuItem menuItemLagrange, menuItemNewton, menuItemNeville,
 	menuItemHermite, menuItemChebyshev, menuItemBezier,
 	menuItemIntBaricentrica = null;
 	 
@@ -34,6 +34,7 @@ public class MenuAproxiPolinomial extends JMenu{
 		this.setText("Aproximação Polinomial");
 		this.add(getMenuItemLagrange());
 		this.add(getMenuItemNewton());
+		this.add(getMenuItemNeville());
 		this.add(getMenuItemHermite());
 		this.add(getMenuItemChebyshev());
 		this.add(getMenuItemBezier());
@@ -73,7 +74,24 @@ public class MenuAproxiPolinomial extends JMenu{
 		}
 		return menuItemNewton;
 	}
+	
+	private JMenuItem getMenuItemNeville() {
+		if (menuItemNeville == null) {
+			menuItemNeville = new JMenuItem("Método de Neville");
+			menuItemNeville.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try {
+						Facade.getInstance().addMetodoInterpolacaoNeville();
+					} catch (MathException e1) {
+						e1.printStackTrace();
+					}
 
+				}
+			});
+		}
+		return menuItemNeville;
+	}
+	
 	private JMenuItem getMenuItemHermite() {
 		if (menuItemHermite == null) {
 			menuItemHermite = new JMenuItem("Método de Hermite");
