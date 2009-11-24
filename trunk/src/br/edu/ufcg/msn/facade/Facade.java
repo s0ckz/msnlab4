@@ -107,7 +107,10 @@ public class Facade {
 	public double getMinY() {
 		return minY;
 	}
-
+	public List<Double> getXs() {
+		return this.xs;
+	}
+	
 	private double[] getXsArray() {
 		double res[] = new double[xs.size()];
 		for (int i = 0; i < res.length; i++) {
@@ -115,6 +118,10 @@ public class Facade {
 		}
 		return res;
 	}    
+
+	public List<Double> getYs() {
+		return this.ys;
+	}
 
 	private double[] getYsArray() {
 		double res[] = new double[ys.size()];
