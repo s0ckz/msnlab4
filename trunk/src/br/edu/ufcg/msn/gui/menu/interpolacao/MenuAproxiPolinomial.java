@@ -3,6 +3,10 @@ package br.edu.ufcg.msn.gui.menu.interpolacao;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import org.apache.commons.math.MathException;
+
+import br.edu.ufcg.msn.facade.Facade;
+
 /**
  * Esta classe implementa um menu para a escolha de uma 
  * interpolaçao pelos metodos de aproximacao polinomial
@@ -13,12 +17,12 @@ import javax.swing.JMenuItem;
  *
  */
 public class MenuAproxiPolinomial extends JMenu{
-	
+
 	private JMenuItem menuItemLagrange, menuItemNewton,
-			menuItemHermite, menuItemChebyshev, menuItemBezier,
-			menuItemIntBaricentrica = null;
-	
-	
+	menuItemHermite, menuItemChebyshev, menuItemBezier,
+	menuItemIntBaricentrica = null;
+
+
 	public MenuAproxiPolinomial() {
 		initialize();
 	}
@@ -31,7 +35,7 @@ public class MenuAproxiPolinomial extends JMenu{
 		this.add(getMenuItemChebyshev());
 		this.add(getMenuItemBezier());
 		this.add(getMenuItemIntBaricentrica());
-		
+
 	}
 
 	private JMenuItem getMenuItemLagrange() {
@@ -40,6 +44,12 @@ public class MenuAproxiPolinomial extends JMenu{
 			menuItemLagrange.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					try {
+						Facade.getInstance().addMetodoInterpolacaoLagrange();
+					} catch (MathException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			});
 		}
@@ -52,6 +62,13 @@ public class MenuAproxiPolinomial extends JMenu{
 			menuItemNewton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					try {
+						Facade.getInstance().addMetodoInterpolacaoNewton();
+					} catch (MathException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
 				}
 			});
 		}
@@ -64,6 +81,7 @@ public class MenuAproxiPolinomial extends JMenu{
 			menuItemHermite.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					
 				}
 			});
 		}
