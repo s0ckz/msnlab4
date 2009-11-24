@@ -12,6 +12,7 @@ import br.edu.ufcg.msn.ajustenaolinear.LeastSquaresFittingExponential;
 import br.edu.ufcg.msn.ajustenaolinear.LeastSquaresFittingLogarithmic;
 import br.edu.ufcg.msn.ajustenaolinear.LeastSquaresFittingPowerLaw;
 import br.edu.ufcg.msn.gui.TestMainFrame;
+import br.edu.ufcg.msn.gui.config.ConfiguracoesPanel;
 import br.edu.ufcg.msn.interpolacao.InterpoladorLagrange;
 import br.edu.ufcg.msn.interpolacao.InterpoladorNeville;
 import br.edu.ufcg.msn.interpolacao.InterpoladorNewton;
@@ -32,14 +33,13 @@ public class Facade {
 		return facade;  
 	}
 
-	private double discreteness;
 	private List<UnivariateRealFunction> functions;
+
+	private double discreteness;
 
 	private double maxX;
 	private double maxY;
-
 	private double minX;
-
 	private double minY;
 
 	private List<Double> xs;
@@ -107,6 +107,7 @@ public class Facade {
 			xs.add(x);
 			ys.add(y);
 		}
+		ConfiguracoesPanel.getInstance().newPoints();
 	}
 	public void cleanUp(){
 		initFacade();
@@ -179,34 +180,23 @@ public class Facade {
 		ys = new ArrayList<Double>();
 		functions = new ArrayList<UnivariateRealFunction>();
 	}
-	public void setDiscreteness(double discreteness) {
-		this.discreteness = discreteness;
-	}
-	public void setMaxX(double maxX) {
-		this.maxX = maxX;
-	}
-
-	public void setMaxY(double maxY) {
-		this.maxY = maxY;
-	}
-
-	public void setMinX(double minX) {
-		this.minX = minX;
-	}
-
-	public void setMinY(double minY) {
-		this.minY = minY;
-	}
-
 
 	public void setXs(List<Double> xs) {
 		this.xs = xs;
 	}
 	
-	public void setYs(List<Double> ys) {
+	private void setYs(List<Double> ys) {
 		this.ys = ys;
 	}
 
+	public void updateConfigs(double d, double mx, double my, double Mx, double My) {
+		discreteness = d;
+		minX = mx<Mx?mx:Mx;
+		maxX = mx>Mx?mx:Mx;
+		minY = my<My?my:My;
+		maxY = my>My?my:My;
+		TestMainFrame.newChartAvailable();		
+	}
 }
 
 
