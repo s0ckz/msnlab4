@@ -65,8 +65,10 @@ public class Facade {
 
 	public void addPoint(double x, double y) {
 		System.out.println(x +", "+ y);
-		xs.add(x);
-		ys.add(y);
+		if (!xs.contains(x)){
+			xs.add(x);
+			ys.add(y);
+		}
 	}
 	public void cleanUp(){
 		initFacade();
