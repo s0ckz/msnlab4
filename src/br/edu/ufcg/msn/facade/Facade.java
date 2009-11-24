@@ -16,9 +16,9 @@ import br.edu.ufcg.msn.gui.config.ConfiguracoesPanel;
 import br.edu.ufcg.msn.interpolacao.InterpoladorLagrange;
 import br.edu.ufcg.msn.interpolacao.InterpoladorNeville;
 import br.edu.ufcg.msn.interpolacao.InterpoladorNewton;
-import br.edu.ufcg.msn.interpolacao.spline.InterpoladorSplineCubica;
-import br.edu.ufcg.msn.interpolacao.spline.InterpoladorSplineLinear;
-import br.edu.ufcg.msn.interpolacao.spline.InterpoladorSplineQuadratica;
+import br.edu.ufcg.msn.interpolacao.spline.SplineCubicInterpolator;
+import br.edu.ufcg.msn.interpolacao.spline.SplineLinearInterpolator;
+import br.edu.ufcg.msn.interpolacao.spline.SplineQuadraticInterpolator;
 import br.edu.ufcg.msn.util.ChartMouseClickListener;
 import br.edu.ufcg.msn.util.Utils;
 
@@ -71,17 +71,17 @@ public class Facade {
 	
 	//Splines
 	public void addMetodoSplineLinar() throws MathException {
-		functions.add(new InterpoladorSplineLinear().interpolate(getXsArray() , getYsArray()));
+		functions.add(new SplineLinearInterpolator().interpolate(getXsArray() , getYsArray()));
 		TestMainFrame.newChartAvailable();
 	}
 	
 	public void addMetodoSplineQuadratica() throws MathException {
-		functions.add(new InterpoladorSplineQuadratica().interpolate(getXsArray(), getYsArray()));
+		functions.add(new SplineQuadraticInterpolator().interpolate(getXsArray(), getYsArray()));
 		TestMainFrame.newChartAvailable();
 	}
 	
 	public void addMetodoSplineCubica() throws MathException {
-		functions.add(new InterpoladorSplineCubica().interpolate(getXsArray(), getYsArray()));
+		functions.add(new SplineCubicInterpolator().interpolate(getXsArray(), getYsArray()));
 		TestMainFrame.newChartAvailable();
 	}
 	
