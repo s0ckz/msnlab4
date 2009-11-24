@@ -24,8 +24,7 @@ public class Demo {
 		
 		functions.add(f1);
 		functions.add(f2);
-		
-		ChartPanel createChart = Utils.createChart(x, y, functions, +5, -5, 1, "Gráfico", new ChartMouseClickListener () {
+		ChartPanel createChart = Utils.createChart(-5, -5, 5, 5, "Gráfico", x, y, functions, 0.1, new ChartMouseClickListener () {
 
 			@Override
 			public void mouseClicked(ChartPanel chartPanel, double x, double y) {
