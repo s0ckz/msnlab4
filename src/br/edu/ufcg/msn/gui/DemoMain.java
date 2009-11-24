@@ -1,4 +1,4 @@
-package br.edu.ufcg.msnlab.gui;
+package br.edu.ufcg.msn.gui;
 
 import javax.swing.UIManager;
 

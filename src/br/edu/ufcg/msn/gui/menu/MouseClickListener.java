@@ -1,4 +1,4 @@
-package br.edu.ufcg.msnlab.gui.menu;
+package br.edu.ufcg.msn.gui.menu;
 
 public interface MouseClickListener {
 

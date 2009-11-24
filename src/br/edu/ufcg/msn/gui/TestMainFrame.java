@@ -1,9 +1,9 @@
-package br.edu.ufcg.msnlab.gui;
+package br.edu.ufcg.msn.gui;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 
-import br.edu.ufcg.msnlab.gui.menu.MenuNovo;
+import br.edu.ufcg.msn.gui.menu.MenuNovo;
 
 public class TestMainFrame extends JFrame{
 

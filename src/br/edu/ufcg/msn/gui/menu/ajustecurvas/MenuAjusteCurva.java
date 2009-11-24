@@ -1,4 +1,4 @@
-package br.edu.ufcg.msnlab.gui.menu.ajustecurvas;
+package br.edu.ufcg.msn.gui.menu.ajustecurvas;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;

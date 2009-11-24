@@ -1,4 +1,4 @@
-package br.edu.ufcg.msnlab.interpolacao;
+package br.edu.ufcg.msn.interpolacao;
 
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
@@ -28,7 +28,7 @@ public class InterpoladorNewton implements UnivariateRealInterpolator {
 	public UnivariateRealFunction interpolate(double[] vetorX, double[] vetorFx)
 			throws MathException {
 		
-		//Cria um interpolador de divisão de diferenças
+		//Cria um interpolador de divisï¿½o de diferenï¿½as
 		DividedDifferenceInterpolator interpoladorDifeDivididas = new DividedDifferenceInterpolator();
 		
 		//Cria um polinomio na forma de Newton, a partir da 

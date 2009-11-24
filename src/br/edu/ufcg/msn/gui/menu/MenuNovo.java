@@ -1,10 +1,10 @@
-package br.edu.ufcg.msnlab.gui.menu;
+package br.edu.ufcg.msn.gui.menu;
 
 import javax.swing.JMenu;
 
-import br.edu.ufcg.msnlab.gui.menu.ajustecurvas.MenuAjusteCurva;
-import br.edu.ufcg.msnlab.gui.menu.ajustecurvas.MenuTransfRapidaFourier;
-import br.edu.ufcg.msnlab.gui.menu.interpolacao.MenuInterpolacao;
+import br.edu.ufcg.msn.gui.menu.ajustecurvas.MenuAjusteCurva;
+import br.edu.ufcg.msn.gui.menu.ajustecurvas.MenuTransfRapidaFourier;
+import br.edu.ufcg.msn.gui.menu.interpolacao.MenuInterpolacao;
 
 @SuppressWarnings("serial")
 public class MenuNovo extends JMenu{

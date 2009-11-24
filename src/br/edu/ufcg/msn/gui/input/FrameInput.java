@@ -1,10 +1,11 @@
-package br.edu.ufcg.msnlab.gui.input;
+package br.edu.ufcg.msn.gui.input;
 
 import java.awt.event.MouseEvent;
 
 import org.apache.commons.math.FunctionEvaluationException;
-import br.edu.ufcg.msnlab.gui.observer.BotaoListener;
-import br.edu.ufcg.msnlab.gui.observer.MetodoEvent;
+
+import br.edu.ufcg.msn.gui.observer.BotaoListener;
+import br.edu.ufcg.msn.gui.observer.MetodoEvent;
 
 public class FrameInput implements BotaoListener{
 	
