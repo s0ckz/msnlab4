@@ -37,45 +37,44 @@ public class Facade {
 	private double minY;
 
 	private List<Double> xs;
-	public void setXs(List<Double> xs) {
-		this.xs = xs;
-	}
-
-	public void setYs(List<Double> ys) {
-		this.ys = ys;
-	}
-
 	private List<Double> ys;
- 
+
 	private Facade(){
 		initFacade();
 	}
 
 	public void addMetodoAjusteLinear() throws MathException{
-		functions.add(new LeastSquareLinesFitting().interpolate(getXs(), getYs()));
+		functions.add(new LeastSquareLinesFitting().interpolate(getXsArray(), getYsArray()));
 		TestMainFrame.newChartAvailable();
 	}
-
+ 
 	public void addMetodoInterpolacaoLagrange() throws MathException {
-		functions.add(new InterpoladorLagrange().interpolate(getXs(), getYs()));
+		functions.add(new InterpoladorLagrange().interpolate(getXsArray(), getYsArray()));
 		TestMainFrame.newChartAvailable();
 	}
 
 	public void addMetodoInterpolacaoNeville() throws MathException {
-		functions.add(new InterpoladorNeville().interpolate(getXs(), getYs()));
+		functions.add(new InterpoladorNeville().interpolate(getXsArray(), getYsArray()));
 		TestMainFrame.newChartAvailable();
 	}
+
 	public void addMetodoInterpolacaoNewton() throws MathException {
-		functions.add(new InterpoladorNewton().interpolate(getXs(), getYs()));
+		functions.add(new InterpoladorNewton().interpolate(getXsArray(), getYsArray()));
 		TestMainFrame.newChartAvailable();
 	}
+
 	public void addPoint(double x, double y) {
+		System.out.println(x +", "+ y);
 		xs.add(x);
 		ys.add(y);
 	}
+	public void cleanUp(){
+		initFacade();
+		TestMainFrame.newChartAvailable();
+	}
 	public ChartPanel getChart(){
 		try {
-			ChartPanel createChart = Utils.createChart(minX, minY, maxX, maxY, "", getXs(), getYs(), functions, discreteness, new ChartMouseClickListener () {
+			ChartPanel createChart = Utils.createChart(minX, minY, maxX, maxY, "", getXsArray(), getYsArray(), functions, discreteness, new ChartMouseClickListener () {
 				@Override
 				public void mouseClicked(ChartPanel chartPanel, double x, double y) {
 					addPoint(x, y);
@@ -89,7 +88,6 @@ public class Facade {
 		}
 		return null;
 	}
-
 	public double getDiscreteness() {
 		return discreteness;
 	}
@@ -97,32 +95,33 @@ public class Facade {
 	public double getMaxX() {
 		return maxX;
 	}
+
 	public double getMaxY() {
 		return maxY;
 	}
 	public double getMinX() {
 		return minX;
 	}
-
 	public double getMinY() {
 		return minY;
-	}    
+	}
 
-	private double[] getXs() {
+	private double[] getXsArray() {
 		double res[] = new double[xs.size()];
 		for (int i = 0; i < res.length; i++) {
 			res[i] = xs.get(i);
 		}
 		return res;
-	}
+	}    
 
-	private double[] getYs() {
+	private double[] getYsArray() {
 		double res[] = new double[ys.size()];
 		for (int i = 0; i < res.length; i++) {
 			res[i] = ys.get(i);
 		}
 		return res;
 	}
+
 	private void initFacade() {
 		minX = -5;
 		minY = -5;
@@ -133,15 +132,9 @@ public class Facade {
 		ys = new ArrayList<Double>();
 		functions = new ArrayList<UnivariateRealFunction>();
 	}
-	public void cleanUp(){
-		initFacade();
-		TestMainFrame.newChartAvailable();
-	}
-
 	public void setDiscreteness(double discreteness) {
 		this.discreteness = discreteness;
 	}
-
 	public void setMaxX(double maxX) {
 		this.maxX = maxX;
 	}
@@ -150,13 +143,21 @@ public class Facade {
 		this.maxY = maxY;
 	}
 
-
 	public void setMinX(double minX) {
 		this.minX = minX;
 	}
-	
+
 	public void setMinY(double minY) {
 		this.minY = minY;
+	}
+
+
+	public void setXs(List<Double> xs) {
+		this.xs = xs;
+	}
+	
+	public void setYs(List<Double> ys) {
+		this.ys = ys;
 	}
 
 }
