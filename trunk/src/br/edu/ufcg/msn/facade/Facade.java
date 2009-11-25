@@ -19,6 +19,7 @@ import br.edu.ufcg.msn.interpolacao.InterpoladorNeville;
 import br.edu.ufcg.msn.interpolacao.InterpoladorNewton;
 import br.edu.ufcg.msn.interpolacao.spline.AkimaCubicSplineInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.HermiteCubicSplineInterpolator;
+import br.edu.ufcg.msn.interpolacao.spline.SplineCubicInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineLinearInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineQuadraticInterpolator;
 import br.edu.ufcg.msn.minimosQuadrados.AjusteExponencial;
@@ -84,6 +85,11 @@ public class Facade {
 	
 	public void addMetodoSplineQuadratica() throws MathException {
 		functions.add(new SplineQuadraticInterpolator().interpolate(getXsArray(), getYsArray()));
+		MainFrame.newChartAvailable();
+	}
+	
+	public void addMetodoSplineCubica() throws MathException {
+		functions.add(new SplineCubicInterpolator().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
 	

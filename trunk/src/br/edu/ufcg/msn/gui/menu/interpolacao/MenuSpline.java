@@ -18,7 +18,7 @@ import br.edu.ufcg.msn.facade.Facade;
 public class MenuSpline extends JMenu{
 	
 	private JMenuItem menuItemLinear, menuItemQuadratica,
-	menuItemCubicaHermite, menuItemCubicaAkima, menuItemBilinear,
+	menuItemCubica, menuItemCubicaHermite, menuItemCubicaAkima, menuItemBilinear,
 	menuItemBicubica = null;
 
 	public MenuSpline() {
@@ -29,6 +29,7 @@ public class MenuSpline extends JMenu{
 		this.setText("Spline");
 		this.add(getMenuItemLinear());
 		this.add(getMenuItemQuadratica());
+		this.add(getMenuItemCubica());
 		this.add(getMenuItemCubicaHermite());
 		this.add(getMenuItemCubicaAkima());
 		this.add(getMenuItemBilinear());
@@ -65,6 +66,22 @@ public class MenuSpline extends JMenu{
 			});
 		}
 		return menuItemQuadratica;
+	}
+
+	private JMenuItem getMenuItemCubica() {
+		if (menuItemCubica == null) {
+			menuItemCubica = new JMenuItem("Spline Cúbica");
+			menuItemCubica.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try {
+						Facade.getInstance().addMetodoSplineCubica();
+					} catch (MathException e1) {
+						e1.printStackTrace();
+					}
+				}
+			});
+		}
+		return menuItemCubica;
 	}
 
 	private JMenuItem getMenuItemCubicaHermite() {
