@@ -11,11 +11,11 @@ import org.jfree.chart.ChartPanel;
 import br.edu.ufcg.msn.util.Utils;
 
 /**
- * For a data set {xi} of n+1 points, we can construct a cubic spline with n
+ * Cubic_spline_interpolation
+ * For a data set {xi} of n+1 points, we can construct a cubic Hermite spline with n
  * piecewise cubic polynomials between the data points.<br>
  * <br>
  * Explanation: http://en.wikipedia.org/wiki/Spline_interpolation#
- * Cubic_spline_interpolation
  * 
  * @author Leandro Jose
  * @author Rodrigo Bruno
