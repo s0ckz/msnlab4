@@ -24,8 +24,16 @@ public class AkimaCubicSplineInterpolator extends HermiteCubicSplineInterpolator
 	public UnivariateRealFunction interpolate(double[] xval, double[] yval)
 			throws MathException {
 		validate(xval, yval);
+		
+		if (xval.length <= 4 || yval.length <= 4) {
+			throw new MathException("At least five points must be given");
+		}
 
-		int n = xval.length - 1;
+		int n = xval.length;
+		
+		xval = xval.clone();
+		yval = yval.clone();
+		
 		double[] d = new double[n];
 		// Weights array
 		double[] w = new double[n - 1];
@@ -69,14 +77,6 @@ public class AkimaCubicSplineInterpolator extends HermiteCubicSplineInterpolator
         //
 		//....
 		
-		UnivariateRealFunction[] functions = new UnivariateRealFunction[n];
-		double[] tangents = findTangents(yval);
-		for (int i = 1; i <= n; i++) {
-			functions[i - 1] = new HermiteFunction(xval[i - 1], xval[i],
-					yval[i - 1], yval[i], tangents[i - 1], tangents[i]);
-
-		}
-
 		return interpolate(xval, yval, d);
 	}
 
@@ -89,8 +89,8 @@ public class AkimaCubicSplineInterpolator extends HermiteCubicSplineInterpolator
 		t = t - x0;
 		x1 = x1 - x0;
 		x2 = x2 - x0;
-		a = (f2 - f0 - x2 / x1 * (f1 - f0)) / (Math.sqrt(x2) - x1 * x2);
-		b = (f1 - f0 - a * Math.sqrt(x1)) / x1;
+		a = (f2 - f0 - x2 / x1 * (f1 - f0)) / (Math.pow(x2, 2) - x1 * x2);
+		b = (f1 - f0 - a * Math.pow(x1, 2)) / x1;
 		result = 2 * a * t + b;
 		return result;
 	}
