@@ -347,6 +347,9 @@ public class Facade {
 			return 0;
 		}
 	}
+	public boolean containsPointsKey(String key){
+		return xs.containsKey(key);
+	}
 }
 
 
