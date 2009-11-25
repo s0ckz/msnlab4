@@ -38,7 +38,7 @@ public class ConfiguracoesPanel extends JPanel{
 	private void initialize() {
 		this.setLayout(null);
 		this.setSize(638, 447);
-		this.setName("Configurações");
+		this.setName("Configuracoes");
 		this.facade = Facade.getInstance();
 		initLabels();
 		initTextFields();
