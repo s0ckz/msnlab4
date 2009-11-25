@@ -1,4 +1,4 @@
-package br.edu.ufcg.msn.minimosQuadrados;
+package br.edu.ufcg.msn.util;
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 

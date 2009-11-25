@@ -1,7 +1,6 @@
-package br.edu.ufcg.msn.minimosQuadrados;
-
-import org.apache.commons.math.FunctionEvaluationException;
+package br.edu.ufcg.msn.util;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
+
 /**
  * <br>
  * UNIVERSIDADE FEDERAL DE CAMPINA GRANDE - UFCG <br>
@@ -20,40 +19,41 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
  * @version 1.0
  * @since 20/11/2009
  *        <p>
- *        Classe que Classe que implementa a classe UnivariateRealFunction , sobre-escrevendo o método value
+ *        Classe que implementa a classe UnivariateRealFunction , sobre-escrevendo o método value para o método exponencial.
  *        </p>
  */
-public class LogaritmoFunction implements UnivariateRealFunction {
+public class ExponencialFunction implements UnivariateRealFunction {
 
 	private double[] coef;
 	/**
-	 * Método que recebe os coeficientes do MMQ logaritmo para adequar a saída para os outros módulos do projeto   
-	 * @param coeficientes recebe os parâmetros dos coeficientes do MMQ logaritmo
+	 * Método que recebe os coeficientes do MMQ exponencial para adequar a saída para os outros módulos do projeto   
+	 * @param coeficientes recebe os parâmetros dos coeficientes do MMQ exponencial
 	 */
-	public LogaritmoFunction(double[] coeficientes) {
+	public ExponencialFunction(double[] coeficientes) {
 		this.coef = coeficientes;
 	}
+	
 	/**
-	 * Método que retorna a saída esperada do MMQ logaritmo	
+	 * Método que retorna a saída esperada do MMQ exponencial	
 	 * @Override
 	 * @return a funcao de saida formatada para os outros módulos
 	 */
-	public double value(double x) throws FunctionEvaluationException {
-
-		return coef[0]+coef[1]*Math.log(x);
+	public double value(double x)  {
+		return Math.exp(coef[0])*Math.exp(coef[1]*x);
 	}
+	
 	/**
-	 * Retorna os coeficientes da funcao da reta do MMQ logaritmo
+	 * Retorna os coeficientes da funcao da reta do MMQ exponencial
 	 * @return coef coeficientes da reta
 	 */
 	public double[] getCoefficients(){
 		return coef;
 	}
 	/**
-	 * Método para imprimir a funcao do MMQ logaritmo
+	 * Método para imprimir a funcao do MMQ exponencial
 	 */
 	public String toString(){
-		return (Double.toString(Math.floor(coef[0]*1000)/1000))+" + "+Double.toString(Math.floor(coef[1]*1000)/1000)+" * ln(x)";
+		return (Double.toString(Math.floor((Math.exp(coef[0]))*1000)/1000))+" * exp("+Double.toString(Math.floor(coef[1]*1000)/1000)+" * x)";
 	}
 
 }
