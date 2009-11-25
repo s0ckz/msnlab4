@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
@@ -21,7 +22,7 @@ public class MainFrame extends JFrame{
 	Facade facade = Facade.getInstance();
 	private ChartPanel chartPanelInput;
 	private JTabbedPane painelAbas = null;
-	private JButton botaoLimpar = null; 
+	private JMenu menuLimpar = null; 
 	
 	private static MainFrame instance = null;
 	
@@ -54,17 +55,19 @@ public class MainFrame extends JFrame{
 		return painelAbas;
 	}
 	
-	private JButton getJMenuItemLimpar() {
-		if (botaoLimpar == null) {
-			botaoLimpar = new JButton("Limpar");
-			botaoLimpar.addActionListener(new java.awt.event.ActionListener() {
+	private JMenu getJMenuItemLimpar() {
+		if (menuLimpar == null) {
+			menuLimpar = new JMenu("Limpar");
+			JMenuItem menuItemLimparGrafico = new JMenuItem("Grafico");
+			menuItemLimparGrafico.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					Facade.getInstance().cleanUp();
 					ConfiguracoesPanel.getInstance().refresh();
 				}
 			});
+			menuLimpar.add(menuItemLimparGrafico);
 		}
-		return botaoLimpar;
+		return menuLimpar;
 	}
 	
 	private JMenuBar getBarra() {
