@@ -10,9 +10,8 @@ import org.jfree.chart.ChartPanel;
 import br.edu.ufcg.msn.util.Utils;
 
 /**
- * This interpolator uses quadratic splines<br>
+ * This interpolator uses Akima cubic Splines<br>
  * <br>
- * Explanation: http://en.wikipedia.org/wiki/Cubic_Hermite_spline
  * 
  * @author Leandro Jose
  * @author Rodrigo Bruno
@@ -75,7 +74,6 @@ public class AkimaCubicSplineInterpolator extends HermiteCubicSplineInterpolator
 		//
         // Build Akima spline using Hermite interpolation scheme
         //
-		//....
 		
 		return interpolate(xval, yval, d);
 	}
