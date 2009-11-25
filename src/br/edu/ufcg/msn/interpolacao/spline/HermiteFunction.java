@@ -64,7 +64,7 @@ public class HermiteFunction implements UnivariateRealFunction {
 	 * @param t
 	 * @return the double value of the function
 	 */
-	public double h01(double t) {
+	public double h10(double t) {
 		return t * Math.pow(1 - t, 2);
 	}
 
@@ -74,7 +74,7 @@ public class HermiteFunction implements UnivariateRealFunction {
 	 * @param t
 	 * @return the double value of the function
 	 */
-	public double h10(double t) {
+	public double h01(double t) {
 		return Math.pow(t, 2) * (3 - 2 * t);
 	}
 
@@ -85,7 +85,7 @@ public class HermiteFunction implements UnivariateRealFunction {
 	 * @return the double value of the function
 	 */
 	public double h11(double t) {
-		return t - 1 * Math.pow(t, 2);
+		return Math.pow(t, 2) * (t - 1);
 	}
 
 	/**
