@@ -2,6 +2,7 @@ package br.edu.ufcg.msn.gui.menu.interpolacao;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import org.apache.commons.math.MathException;
 
@@ -72,7 +73,7 @@ public class MenuSpline extends JMenu{
 			menuItemCubicaHermite.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
-						Facade.getInstance().addMetodoSplineCubica();
+						Facade.getInstance().addMetodoSplineCubicaHermite();
 					} catch (MathException e1) {
 						e1.printStackTrace();
 					}
@@ -87,7 +88,12 @@ public class MenuSpline extends JMenu{
 			menuItemCubicaAkima = new JMenuItem("Spline Cúbica de Akima");
 			menuItemCubicaAkima.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					try {
+						Facade.getInstance().addMetodoSplineCubicaAkima();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(menuItemCubicaAkima, 
+								"Para usar interpolacao por spline pelo método de Akima é necessário no mínimo 5 pontos", "Atenção", JOptionPane.WARNING_MESSAGE);
+					}
 				}
 			});
 		}
