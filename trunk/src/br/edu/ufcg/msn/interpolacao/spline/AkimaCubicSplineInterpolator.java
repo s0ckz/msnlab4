@@ -116,11 +116,11 @@ public class AkimaCubicSplineInterpolator extends HermiteCubicSplineInterpolator
 	// a simple graphical test
 	public static void main(String[] args) throws FunctionEvaluationException,
 			MathException {
-		double[] xval = { -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6 };
-		double[] yval = { 1, 2, 10, 5, 6, 9, 6, 3, 1, 4, 6, 7, 0 };
+		double[] xval = { -1, -.75, -.5, -.25, 0, .25, .5, .75, 1 };
+		double[] yval = { 0, 0.4, 0.6, 3, 1, 0.8, 0.6, 0.4, 0 };
 		ChartPanel chartPanel = Utils.createChart(
-				new AkimaCubicSplineInterpolator().interpolate(xval, yval), -6,
-				6, 0.1, "Teste");
+				new AkimaCubicSplineInterpolator().interpolate(xval, yval), -1,
+				1, 0.01, "Teste");
 		JFrame jFrame = new JFrame();
 		jFrame.add(chartPanel);
 		jFrame.setSize(800, 600);
