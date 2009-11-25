@@ -56,7 +56,7 @@ public class Facade {
 	private Map<String, List<Double>> xs;
 	private Map<String, List<Double>> ys;
 
-	String listKey = "";
+	String listKey = "Conjunto 1";
 
 	public String getFocusPointSetKey() {
 		return listKey;
@@ -277,9 +277,7 @@ public class Facade {
 		maxY = 5;
 		discreteness = 0.1;
 		xs = new TreeMap<String, List<Double>>();
-		xs.put("", new ArrayList<Double>());
 		ys = new TreeMap<String, List<Double>>();
-		ys.put("", new ArrayList<Double>());
 		functions = new ArrayList<UnivariateRealFunction>();
 	}
 

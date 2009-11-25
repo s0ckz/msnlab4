@@ -30,6 +30,10 @@ public class MenuNovo extends JMenu{
 		itemSetConjuntoPonto.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				String listKey =  (String)JOptionPane.showInputDialog(itemSetConjuntoPonto, "Digite o nome do novo conjunto");
+				if (Facade.getInstance().containsPointsKey(listKey)) {
+					JOptionPane.showMessageDialog(itemSetConjuntoPonto, "Os pontos serao adicionados ao conjunto de pontos existente");
+				}
+				else JOptionPane.showMessageDialog(itemSetConjuntoPonto, "Novo conjunto de pontos criados");
 				Facade.getInstance().setFocusPoint(listKey);
 			}
 		});
