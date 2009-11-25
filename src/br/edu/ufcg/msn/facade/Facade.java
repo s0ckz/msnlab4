@@ -192,8 +192,8 @@ public class Facade {
 		MainFrame.newChartAvailable();
 	}
 	
-	public String[] getPointsKeySet(){
-		return (String[])xs.keySet().toArray();
+	public Object[] getPointsKeySet(){
+		return xs.keySet().toArray();
 	}
 
 	public void cleanUpAllFunctions(){

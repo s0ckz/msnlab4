@@ -1,10 +1,7 @@
 package br.edu.ufcg.msn.gui.menu.interpolacao;
 
-import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 
 import org.apache.commons.math.MathException;
 
@@ -22,8 +19,7 @@ import br.edu.ufcg.msn.facade.Facade;
 public class MenuAproxiPolinomial extends JMenu{
 
 	private JMenuItem menuItemLagrange, menuItemNewton, menuItemNeville,
-	menuItemHermite, menuItemChebyshev, menuItemBezier,
-	menuItemIntBaricentrica = null;
+	menuItemHermite, menuItemAitken = null;
 	 
 
 	public MenuAproxiPolinomial() {
@@ -36,10 +32,7 @@ public class MenuAproxiPolinomial extends JMenu{
 		this.add(getMenuItemNewton());
 		this.add(getMenuItemNeville());
 		this.add(getMenuItemHermite());
-		this.add(getMenuItemChebyshev());
-		this.add(getMenuItemBezier());
-		this.add(getMenuItemIntBaricentrica());
-
+		this.add(getMenuItemAitken());
 	}
 
 	private JMenuItem getMenuItemLagrange() {
@@ -105,39 +98,15 @@ public class MenuAproxiPolinomial extends JMenu{
 		return menuItemHermite;
 	}
 
-	private JMenuItem getMenuItemChebyshev() {
-		if (menuItemChebyshev == null) {
-			menuItemChebyshev = new JMenuItem("Método de Chebyshev");
-			menuItemChebyshev.addActionListener(new java.awt.event.ActionListener() {
+	private JMenuItem getMenuItemAitken() {
+		if (menuItemAitken == null) {
+			menuItemAitken = new JMenuItem("Método de Aitken");
+			menuItemAitken.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
 				}
 			});
 		}
-		return menuItemChebyshev;
-	}
-
-	private JMenuItem getMenuItemBezier() {
-		if (menuItemBezier == null) {
-			menuItemBezier = new JMenuItem("Método de Bezier");
-			menuItemBezier.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
-				}
-			});
-		}
-		return menuItemBezier;
-	}
-
-	private JMenuItem getMenuItemIntBaricentrica() {
-		if (menuItemIntBaricentrica == null) {
-			menuItemIntBaricentrica = new JMenuItem("Interpolação Baricêntrica");
-			menuItemIntBaricentrica.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
-				}
-			});
-		}
-		return menuItemIntBaricentrica;
+		return menuItemAitken;
 	}
 }
