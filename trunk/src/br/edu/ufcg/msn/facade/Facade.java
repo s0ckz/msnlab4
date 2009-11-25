@@ -198,6 +198,7 @@ public class Facade {
 
 	public void cleanUpAllFunctions(){
 		functions = new ArrayList<UnivariateRealFunction>();
+		MainFrame.newChartAvailable();
 	}
 	
 	public ChartPanel getChart(){
