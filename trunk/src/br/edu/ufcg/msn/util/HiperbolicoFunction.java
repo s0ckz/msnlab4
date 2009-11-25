@@ -1,6 +1,7 @@
-package br.edu.ufcg.msn.minimosQuadrados;
-import org.apache.commons.math.analysis.UnivariateRealFunction;
+package br.edu.ufcg.msn.util;
 
+import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.UnivariateRealFunction;
 /**
  * <br>
  * UNIVERSIDADE FEDERAL DE CAMPINA GRANDE - UFCG <br>
@@ -19,41 +20,39 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
  * @version 1.0
  * @since 20/11/2009
  *        <p>
- *        Classe que implementa a classe UnivariateRealFunction , sobre-escrevendo o método value para o método exponencial.
+ *        Classe que Classe que implementa a classe UnivariateRealFunction , sobre-escrevendo o método value
  *        </p>
  */
-public class ExponencialFunction implements UnivariateRealFunction {
+public class HiperbolicoFunction implements UnivariateRealFunction {
 
 	private double[] coef;
 	/**
-	 * Método que recebe os coeficientes do MMQ exponencial para adequar a saída para os outros módulos do projeto   
-	 * @param coeficientes recebe os parâmetros dos coeficientes do MMQ exponencial
+	 * Método que recebe os coeficientes do MMQ hiperbólica para adequar a saída para os outros módulos do projeto   
+	 * @param coeficientes recebe os parâmetros dos coeficientes do MMQ hiperbólica
 	 */
-	public ExponencialFunction(double[] coeficientes) {
+	public HiperbolicoFunction(double[] coeficientes) {
 		this.coef = coeficientes;
 	}
-	
 	/**
-	 * Método que retorna a saída esperada do MMQ exponencial	
+	 * Método que retorna a saída esperada do MMQ hiperbólica	
 	 * @Override
 	 * @return a funcao de saida formatada para os outros módulos
 	 */
-	public double value(double x)  {
-		return Math.exp(coef[0])*Math.exp(coef[1]*x);
+	public double value(double x) throws FunctionEvaluationException {
+		return coef[0]+coef[1]/x;
 	}
-	
 	/**
-	 * Retorna os coeficientes da funcao da reta do MMQ exponencial
+	 * Retorna os coeficientes da funcao da reta do MMQ hiperbólica
 	 * @return coef coeficientes da reta
 	 */
 	public double[] getCoefficients(){
 		return coef;
 	}
 	/**
-	 * Método para imprimir a funcao do MMQ exponencial
+	 * Método para imprimir a funcao do MMQ hiperbólica
 	 */
 	public String toString(){
-		return (Double.toString(Math.floor((Math.exp(coef[0]))*1000)/1000))+" * exp("+Double.toString(Math.floor(coef[1]*1000)/1000)+" * x)";
+		return Math.floor(coef[0]*1000)/1000+" + "+Math.floor(coef[1]*1000)/1000+" / x";
 	}
 
 }

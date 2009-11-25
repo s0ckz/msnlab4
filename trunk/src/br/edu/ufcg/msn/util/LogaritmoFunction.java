@@ -1,4 +1,4 @@
-package br.edu.ufcg.msn.minimosQuadrados;
+package br.edu.ufcg.msn.util;
 
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
@@ -23,36 +23,37 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
  *        Classe que Classe que implementa a classe UnivariateRealFunction , sobre-escrevendo o método value
  *        </p>
  */
-public class HiperbolicoFunction implements UnivariateRealFunction {
+public class LogaritmoFunction implements UnivariateRealFunction {
 
 	private double[] coef;
 	/**
-	 * Método que recebe os coeficientes do MMQ hiperbólica para adequar a saída para os outros módulos do projeto   
-	 * @param coeficientes recebe os parâmetros dos coeficientes do MMQ hiperbólica
+	 * Método que recebe os coeficientes do MMQ logaritmo para adequar a saída para os outros módulos do projeto   
+	 * @param coeficientes recebe os parâmetros dos coeficientes do MMQ logaritmo
 	 */
-	public HiperbolicoFunction(double[] coeficientes) {
+	public LogaritmoFunction(double[] coeficientes) {
 		this.coef = coeficientes;
 	}
 	/**
-	 * Método que retorna a saída esperada do MMQ hiperbólica	
+	 * Método que retorna a saída esperada do MMQ logaritmo	
 	 * @Override
 	 * @return a funcao de saida formatada para os outros módulos
 	 */
 	public double value(double x) throws FunctionEvaluationException {
-		return coef[0]+coef[1]/x;
+
+		return coef[0]+coef[1]*Math.log(x);
 	}
 	/**
-	 * Retorna os coeficientes da funcao da reta do MMQ hiperbólica
+	 * Retorna os coeficientes da funcao da reta do MMQ logaritmo
 	 * @return coef coeficientes da reta
 	 */
 	public double[] getCoefficients(){
 		return coef;
 	}
 	/**
-	 * Método para imprimir a funcao do MMQ hiperbólica
+	 * Método para imprimir a funcao do MMQ logaritmo
 	 */
 	public String toString(){
-		return Math.floor(coef[0]*1000)/1000+" + "+Math.floor(coef[1]*1000)/1000+" / x";
+		return (Double.toString(Math.floor(coef[0]*1000)/1000))+" + "+Double.toString(Math.floor(coef[1]*1000)/1000)+" * ln(x)";
 	}
 
 }
