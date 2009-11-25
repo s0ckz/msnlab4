@@ -15,7 +15,7 @@ import br.edu.ufcg.msn.ajuste.LeastSquareLinesFitting;
 import br.edu.ufcg.msn.ajustenaolinear.LeastSquaresFittingExponential;
 import br.edu.ufcg.msn.ajustenaolinear.LeastSquaresFittingLogarithmic;
 import br.edu.ufcg.msn.ajustenaolinear.LeastSquaresFittingPowerLaw;
-import br.edu.ufcg.msn.gui.TestMainFrame;
+import br.edu.ufcg.msn.gui.MainFrame;
 import br.edu.ufcg.msn.gui.config.ConfiguracoesPanel;
 import br.edu.ufcg.msn.interpolacao.InterpoladorLagrange;
 import br.edu.ufcg.msn.interpolacao.InterpoladorNeville;
@@ -55,54 +55,54 @@ public class Facade {
 	//Ajuste linear
 	public void addMetodoAjusteLinear() throws MathException{
 		functions.add(new LeastSquareLinesFitting().interpolate(getXsArray(), getYsArray()));
-		TestMainFrame.newChartAvailable();
+		MainFrame.newChartAvailable();
 	}
 	//Interpolacao por aproximacao lagrange, neville, newton
 	public void addMetodoInterpolacaoLagrange() throws MathException {
 		functions.add(new InterpoladorLagrange().interpolate(getXsArray(), getYsArray()));
-		TestMainFrame.newChartAvailable();
+		MainFrame.newChartAvailable();
 	}
 
 	public void addMetodoInterpolacaoNeville() throws MathException {
 		functions.add(new InterpoladorNeville().interpolate(getXsArray(), getYsArray()));
-		TestMainFrame.newChartAvailable();
+		MainFrame.newChartAvailable();
 	}
 
 	public void addMetodoInterpolacaoNewton() throws MathException {
 		functions.add(new InterpoladorNewton().interpolate(getXsArray(), getYsArray()));
-		TestMainFrame.newChartAvailable();
+		MainFrame.newChartAvailable();
 	}
 	
 	//Splines
 	public void addMetodoSplineLinar() throws MathException {
 		functions.add(new SplineLinearInterpolator().interpolate(getXsArray() , getYsArray()));
-		TestMainFrame.newChartAvailable();
+		MainFrame.newChartAvailable();
 	}
 	
 	public void addMetodoSplineQuadratica() throws MathException {
 		functions.add(new SplineQuadraticInterpolator().interpolate(getXsArray(), getYsArray()));
-		TestMainFrame.newChartAvailable();
+		MainFrame.newChartAvailable();
 	}
 	
 	public void addMetodoSplineCubica() throws MathException {
 		functions.add(new SplineCubicInterpolator().interpolate(getXsArray(), getYsArray()));
-		TestMainFrame.newChartAvailable();
+		MainFrame.newChartAvailable();
 	}
 	
 	//Ajuste de curva Nao Linear: Exponencial, logaritmico, potencia
 	public void addMetodoAjusteNaoLinearExponencial() throws MathException {
 		functions.add(new LeastSquaresFittingExponential().interpolate(getXsArray() , getYsArray()));
-		TestMainFrame.newChartAvailable();
+		MainFrame.newChartAvailable();
 	}
 	
 	public void addMetodoAjusteNaoLinearLogaritmico() throws MathException {
 		functions.add(new LeastSquaresFittingLogarithmic().interpolate(getXsArray(), getYsArray()));
-		TestMainFrame.newChartAvailable();
+		MainFrame.newChartAvailable();
 	}
 	
 	public void addMetodoAjusteNaoLinearPotencia() throws MathException {
 		functions.add(new LeastSquaresFittingPowerLaw().interpolate(getXsArray(), getYsArray()));
-		TestMainFrame.newChartAvailable();
+		MainFrame.newChartAvailable();
 	}
 	
 	public void addPoint(double x, double y) {
@@ -116,7 +116,7 @@ public class Facade {
 	}
 	public void cleanUp(){
 		initFacade();
-		TestMainFrame.newChartAvailable();
+		MainFrame.newChartAvailable();
 	}
 	public ChartPanel getChart(){
 		try {
@@ -124,7 +124,7 @@ public class Facade {
 				@Override
 				public void mouseClicked(ChartPanel chartPanel, double x, double y) {
 					addPoint(x, y);
-					TestMainFrame.newChartAvailable();
+					MainFrame.newChartAvailable();
 					System.out.println(xs.size());
 				}
 			});
@@ -190,7 +190,7 @@ public class Facade {
 		this.xs = xs;
 		this.ys = ys;
 		sortPoints();
-		TestMainFrame.newChartAvailable();
+		MainFrame.newChartAvailable();
 	}
 
 	private void sortPoints() {
@@ -204,7 +204,7 @@ public class Facade {
 		maxX = mx>Mx?mx:Mx;
 		minY = my<My?my:My;
 		maxY = my>My?my:My;
-		TestMainFrame.newChartAvailable();		
+		MainFrame.newChartAvailable();		
 	}
 	
 	private List<Point> createList() {
