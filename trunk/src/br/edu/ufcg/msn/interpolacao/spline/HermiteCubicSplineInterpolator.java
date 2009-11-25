@@ -27,13 +27,11 @@ public class HermiteCubicSplineInterpolator extends AbstractSplineInterpolator {
 
 		int n = xval.length - 1;
 		UnivariateRealFunction[] functions = new UnivariateRealFunction[n];
-		double z1 = xval[0];
+		double[] tangents = findTangents(yval);
 		for (int i = 1; i <= n; i++) {
-			double z2 = -z1 + 2
-					* ((yval[i] - yval[i - 1]) / (xval[i] - xval[i - 1]));
-			functions[i - 1] = new QuadraticFunction(xval[i - 1], xval[i],
-					yval[i - 1], z1, z2);
-			z1 = z2;
+			functions[i - 1] = new HermiteFunction(xval[i], xval[i + 1],
+					yval[i], yval[i + 1], tangents[i], tangents[i + 1]);
+
 		}
 
 		return new SplineFunction(xval, functions);
@@ -50,7 +48,7 @@ public class HermiteCubicSplineInterpolator extends AbstractSplineInterpolator {
 		double[] mval = new double[yval.length];
 		mval[0] = yval[0];
 		mval[mval.length - 1] = yval[mval.length - 1];
-		for (int i = 1; i < mval.length-1; i++) {
+		for (int i = 1; i < mval.length - 1; i++) {
 			mval[i] = (yval[i + 1] - yval[i - 1]) / 2;
 		}
 		return mval;
