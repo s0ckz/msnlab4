@@ -16,6 +16,7 @@ import br.edu.ufcg.msn.ajuste.naolinear.LeastSquaresFittingLogarithmic;
 import br.edu.ufcg.msn.ajuste.naolinear.LeastSquaresFittingPowerLaw;
 import br.edu.ufcg.msn.gui.MainFrame;
 import br.edu.ufcg.msn.gui.config.ConfiguracoesPanel;
+import br.edu.ufcg.msn.gui.menu.MenuLimpar;
 import br.edu.ufcg.msn.interpolacao.aproximacaoPolinomial.InterpoladorLagrange;
 import br.edu.ufcg.msn.interpolacao.aproximacaoPolinomial.InterpoladorNeville;
 import br.edu.ufcg.msn.interpolacao.aproximacaoPolinomial.InterpoladorNewton;
@@ -60,7 +61,7 @@ public class Facade {
 	public String getFocusPointSetKey() {
 		return listKey;
 	}
-	public void FocusPointSetKey(String listKey) {
+	public void setFocusPoint(String listKey) {
 		this.listKey = listKey;
 	}
 	private Facade(){
@@ -168,11 +169,13 @@ public class Facade {
 		}
 		sortPoints();
 		ConfiguracoesPanel.getInstance().refresh();
+		MenuLimpar.getInstance().initialize();
 	}
 
 	public void cleanUpAllConfigurations(){
 		initFacade();
-		MainFrame.newChartAvailable();		
+		MainFrame.newChartAvailable();
+		MenuLimpar.getInstance().initialize();
 	}
 	
 	public void cleanUpAllPointsAndFunctions(){
@@ -184,12 +187,16 @@ public class Facade {
 		xs = new TreeMap<String, List<Double>>();
 		ys = new TreeMap<String, List<Double>>();
 		MainFrame.newChartAvailable();
+		ConfiguracoesPanel.getInstance().refresh();
+		MenuLimpar.getInstance().initialize();
 	}
 
 	public void cleanUpSpecificPoints(String key){
 		xs.remove(key);
 		ys.remove(key);
 		MainFrame.newChartAvailable();
+		ConfiguracoesPanel.getInstance().refresh();
+		MenuLimpar.getInstance().initialize();
 	}
 	
 	public Object[] getPointsKeySet(){
@@ -281,6 +288,7 @@ public class Facade {
 		this.ys = ys;
 		sortPoints();
 		MainFrame.newChartAvailable();
+		MenuLimpar.getInstance().initialize();
 	}
 
 	private void sortPoints() {
