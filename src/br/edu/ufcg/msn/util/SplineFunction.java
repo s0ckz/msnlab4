@@ -1,4 +1,4 @@
-package br.edu.ufcg.msn.interpolacao.spline;
+package br.edu.ufcg.msn.util;
 
 import java.util.Arrays;
 

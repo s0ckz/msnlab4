@@ -1,7 +1,9 @@
-package br.edu.ufcg.msn.interpolacao.spline;
+package br.edu.ufcg.msn.util;
 
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
+
+import br.edu.ufcg.msn.interpolacao.spline.SplineLinearInterpolator;
 
 /**
  * This class represents a Hermite function.
