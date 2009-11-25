@@ -98,4 +98,8 @@ public class MainFrame extends JFrame{
 		getInstance().painelAbas.setComponentAt(0, getInstance().chartPanelInput);
 		getInstance().painelAbas.add((ConfiguracoesPanel)o);
 	}
+
+	public void setToolTipText(String toolTipText) {
+		System.out.println(toolTipText);
+	}
 } 

@@ -1,15 +1,12 @@
 package br.edu.ufcg.msn.facade;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.jfree.chart.ChartPanel;
-
-import com.sun.org.apache.bcel.internal.generic.NEWARRAY;
 
 import br.edu.ufcg.msn.ajuste.LeastSquareLinesFitting;
 import br.edu.ufcg.msn.ajustenaolinear.LeastSquaresFittingExponential;
@@ -122,10 +119,16 @@ public class Facade {
 		try {
 			ChartPanel createChart = Utils.createChart(minX, minY, maxX, maxY, "", getXsArray(), getYsArray(), functions, discreteness, new ChartMouseClickListener () {
 				@Override
-				public void mouseClicked(ChartPanel chartPanel, double x, double y) {
+				public void mouseClicked(double x, double y) {
 					addPoint(x, y);
 					MainFrame.newChartAvailable();
 					System.out.println(xs.size());
+				}
+
+				@Override
+				public void mouseOver(double x, double y) {
+					MainFrame.getInstance().setToolTipText("(" + x + ", "  + y + ")");
+					System.out.println(x + " " +y);
 				}
 			});
 			return createChart;
