@@ -103,7 +103,6 @@ public class Facade {
 	}
 	
 	public void addPoint(double x, double y) {
-		System.out.println(x +", "+ y);
 		if (!xs.contains(x)){
 			xs.add(x);
 			ys.add(y);
@@ -122,13 +121,11 @@ public class Facade {
 				public void mouseClicked(double x, double y) {
 					addPoint(x, y);
 					MainFrame.newChartAvailable();
-					System.out.println(xs.size());
 				}
 
 				@Override
 				public void mouseOver(double x, double y) {
 					MainFrame.getInstance().setToolTipText("(" + x + ", "  + y + ")");
-					System.out.println(x + " " +y);
 				}
 			});
 			return createChart;
