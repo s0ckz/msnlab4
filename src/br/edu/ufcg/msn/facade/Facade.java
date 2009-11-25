@@ -3,6 +3,8 @@ package br.edu.ufcg.msn.facade;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
@@ -50,8 +52,10 @@ public class Facade {
 	private double minX;
 	private double minY;
 
-	private List<Double> xs;
-	private List<Double> ys;
+	private Map<String, List<Double>> xs;
+	private Map<String, List<Double>> ys;
+
+	String listKey = "";
 
 	private Facade(){
 		initFacade();
@@ -62,95 +66,99 @@ public class Facade {
 		MainFrame.newChartAvailable();
 	}
 	//Interpolacao por aproximacao lagrange, neville, newton
-	public void addMetodoInterpolacaoLagrange() throws MathException {
+	public void addMetodoInterpolacaoLagrange( ) throws MathException {
 		functions.add(new InterpoladorLagrange().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
 
-	public void addMetodoInterpolacaoNeville() throws MathException {
+	public void addMetodoInterpolacaoNeville( ) throws MathException {
 		functions.add(new InterpoladorNeville().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
 
-	public void addMetodoInterpolacaoNewton() throws MathException {
+	public void addMetodoInterpolacaoNewton( ) throws MathException {
 		functions.add(new InterpoladorNewton().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
+
 	//Splines
-	public void addMetodoSplineLinar() throws MathException {
+	public void addMetodoSplineLinar( ) throws MathException {
 		functions.add(new SplineLinearInterpolator().interpolate(getXsArray() , getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
-	public void addMetodoSplineQuadratica() throws MathException {
+
+	public void addMetodoSplineQuadratica( ) throws MathException {
 		functions.add(new SplineQuadraticInterpolator().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
-	public void addMetodoSplineCubica() throws MathException {
+
+	public void addMetodoSplineCubica( ) throws MathException {
 		functions.add(new SplineCubicInterpolator().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
-	public void addMetodoSplineCubicaAkima() throws MathException {
+
+	public void addMetodoSplineCubicaAkima( ) throws MathException {
 		functions.add(new AkimaCubicSplineInterpolator().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
-	public void addMetodoSplineCubicaHermite() throws MathException {
+
+	public void addMetodoSplineCubicaHermite( ) throws MathException {
 		functions.add(new HermiteCubicSplineInterpolator().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
 	//Interpolacao por Minimos Quadrados por Ajuste exponencial, 
 	//hiperbolico, ajuste linear, logaritmico e potencial
-	public void addMetodoIntMinQuadAjusteExponencial() throws MathException {
+	public void addMetodoIntMinQuadAjusteExponencial( ) throws MathException {
 		functions.add(new AjusteExponencial().interpolate(getXsArray() , getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
-	public void addMetodoIntMinQuadAjusteHiperbolico() throws MathException {
+
+	public void addMetodoIntMinQuadAjusteHiperbolico( ) throws MathException {
 		functions.add(new AjusteHiperbolico().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
-	public void addMetodoIntMinQuadAjusteLinear() throws MathException {
+
+	public void addMetodoIntMinQuadAjusteLinear( ) throws MathException {
 		functions.add(new AjusteLinear().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
-	public void addMetodoIntMinQuadAjusteLogaritmico() throws MathException {
+
+	public void addMetodoIntMinQuadAjusteLogaritmico( ) throws MathException {
 		functions.add(new AjusteLogaritmo().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
-	public void addMetodoIntMinQuadAjustePotencial() throws MathException {
+
+	public void addMetodoIntMinQuadAjustePotencial( ) throws MathException {
 		functions.add(new AjustePotencial().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
+
 	//Ajuste de curva Nao Linear: Exponencial, logaritmico, potencia
-	public void addMetodoAjusteNaoLinearExponencial() throws MathException {
+	public void addMetodoAjusteNaoLinearExponencial( ) throws MathException {
 		functions.add(new LeastSquaresFittingExponential().interpolate(getXsArray() , getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
-	public void addMetodoAjusteNaoLinearLogaritmico() throws MathException {
+
+	public void addMetodoAjusteNaoLinearLogaritmico( ) throws MathException {
 		functions.add(new LeastSquaresFittingLogarithmic().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
-	public void addMetodoAjusteNaoLinearPotencia() throws MathException {
+
+	public void addMetodoAjusteNaoLinearPotencia( ) throws MathException {
 		functions.add(new LeastSquaresFittingPowerLaw().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-	
-	
-	
-	public void addPoint(double x, double y) {
-		if (!xs.contains(x)){
-			xs.add(x);
-			ys.add(y);
+
+
+
+	public void addPoint(String key, double x, double y) {
+		if(!xs.containsKey(key)){
+			xs.put(key, new ArrayList<Double>());
+			ys.put(key, new ArrayList<Double>());
+		}
+		if (!xs.get(listKey).contains(x)){
+			xs.get(listKey).add(x);
+			ys.get(listKey).add(y);
 		}
 		sortPoints();
 		ConfiguracoesPanel.getInstance().refresh();
@@ -161,10 +169,10 @@ public class Facade {
 	}
 	public ChartPanel getChart(){
 		try {
-			ChartPanel createChart = Utils.createChart(minX, minY, maxX, maxY, "", getXsArray(), getYsArray(), functions, discreteness, new ChartMouseClickListener () {
+			ChartPanel createChart = Utils.createChart(minX, minY, maxX, maxY, "", xs, ys, functions, discreteness, new ChartMouseClickListener () {
 				@Override
 				public void mouseClicked(double x, double y) {
-					addPoint(x, y);
+					addPoint("", x, y);
 					MainFrame.newChartAvailable();
 				}
 
@@ -179,6 +187,7 @@ public class Facade {
 		}
 		return null;
 	}
+
 	public double getDiscreteness() {
 		return discreteness;
 	}
@@ -196,26 +205,26 @@ public class Facade {
 	public double getMinY() {
 		return minY;
 	}
-	public List<Double> getXs() {
+	public Map<String, List<Double>> getXs() {
 		return this.xs;
 	}
-	
+
 	private double[] getXsArray() {
-		double res[] = new double[xs.size()];
+		double res[] = new double[xs.get(listKey).size()];
 		for (int i = 0; i < res.length; i++) {
-			res[i] = xs.get(i);
+			res[i] = xs.get(listKey).get(i);
 		}
 		return res;
 	}    
 
-	public List<Double> getYs() {
+	public Map<String, List<Double>> getYs() {
 		return this.ys;
 	}
 
 	private double[] getYsArray() {
-		double res[] = new double[ys.size()];
+		double res[] = new double[ys.get(listKey).size()];
 		for (int i = 0; i < res.length; i++) {
-			res[i] = ys.get(i);
+			res[i] = ys.get(listKey).get(i);
 		}
 		return res;
 	}
@@ -226,12 +235,14 @@ public class Facade {
 		maxX = 5;
 		maxY = 5;
 		discreteness = 0.1;
-		xs = new ArrayList<Double>();
-		ys = new ArrayList<Double>();
+		xs = new TreeMap<String, List<Double>>();
+		xs.put("", new ArrayList<Double>());
+		ys = new TreeMap<String, List<Double>>();
+		ys.put("", new ArrayList<Double>());
 		functions = new ArrayList<UnivariateRealFunction>();
 	}
 
-	public void setXYs(List<Double> xs, List<Double> ys) {
+	public void setXYs(Map<String, List<Double>> xs, Map<String, List<Double>> ys) {
 		this.xs = xs;
 		this.ys = ys;
 		sortPoints();
@@ -239,9 +250,12 @@ public class Facade {
 	}
 
 	private void sortPoints() {
-		List<Point> lp = createList();
-		Collections.sort(lp);
-		putBack(lp);
+		Object[] keyset = xs.keySet().toArray();
+		for (Object key : keyset) {
+			List<Point> lp = createList(xs.get(key), ys.get(key));
+			Collections.sort(lp);
+			putBack((String)key, lp);
+		}
 	}
 	public void updateConfigs(double d, double mx, double my, double Mx, double My) {
 		discreteness = d;
@@ -251,30 +265,34 @@ public class Facade {
 		maxY = my>My?my:My;
 		MainFrame.newChartAvailable();		
 	}
-	
-	private List<Point> createList() {
+
+	private List<Point> createList(List<Double> xsList, List<Double> ysList) {
 		List<Point> res = new ArrayList<Point>();
-		for (int i = 0; i < xs.size(); i++) {
-			res.add(new Point(xs.get(i), ys.get(i)));
+		for (int i = 0; i < xsList.size(); i++) {
+			res.add(new Point(xsList.get(i), ysList.get(i)));
 		}
 		return res;
 	}
-	
-	private void putBack(List<Point> lp){
-		xs = new ArrayList<Double>();
-		ys = new ArrayList<Double>();
+
+	private void putBack(String key, List<Point> lp){
+		xs.remove(key);
+		ys.remove(key);
+		List<Double> xsList = new ArrayList<Double>();
+		List<Double> ysList = new ArrayList<Double>();
 		for (Point p : lp) {
-			if (!xs.contains(p.x)){
-				xs.add(p.x);
-				ys.add(p.y);
+			if (!xsList.contains(p.x)){
+				xsList.add(p.x);
+				ysList.add(p.y);
 			}
 		}
+		xs.put(key, xsList);
+		ys.put(key, ysList);
 	}
 
 	private class Point implements Comparable<Point>{
 		double x;
 		double y;
-		
+
 		public Point(double x, double y){
 			this.x = x;
 			this.y = y;

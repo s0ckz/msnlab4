@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.math.ConvergenceException;
 import org.apache.commons.math.FunctionEvaluationException;
@@ -35,10 +36,10 @@ import org.jfree.data.xy.XYSeriesCollection;
  */
 public class Utils {
 
-	
+
 	private static final UnivariateRealIntegrator INTEGRATOR = new TrapezoidIntegrator();
-	
-	
+
+
 	/**
 	 * Creates a panel containing a chart defined by a given function.
 	 * @param function
@@ -52,16 +53,16 @@ public class Utils {
 	public static ChartPanel createChart(UnivariateRealFunction function, 
 			double maxX, double minX, double discreteness, String chartLabel, 
 			final ChartMouseClickListener listener) throws FunctionEvaluationException {
-		
+
 		XYSeries series = createFunctionSeries(maxX, minX, discreteness, function);
 		XYDataset xyDataset = new XYSeriesCollection(series);
-		
+
 		JFreeChart chart = ChartFactory.createXYLineChart(chartLabel, 
 				"x", "y", xyDataset, PlotOrientation.VERTICAL, true, true, false);
-		
+
 		XYItemRenderer renderer = chart.getXYPlot().getRenderer();
 		((XYLineAndShapeRenderer) renderer).setSeriesShapesVisible(0, true);
-		
+
 		return createChartPanel(listener, chart);
 	}
 
@@ -70,31 +71,30 @@ public class Utils {
 		return createChart(function, maxX, minX, discreteness, chartLabel, null);
 	}
 
-//	public static ChartPanel createChart(double[] x, double[] y, List<UnivariateRealFunction> functions, 
-//			double maxX, double minX, double discreteness, String chartLabel) throws FunctionEvaluationException {
-//		
-//		return createChart(x, y, functions, maxX, minX, discreteness, chartLabel, null);
-//	}
-	
+	//	public static ChartPanel createChart(double[] x, double[] y, List<UnivariateRealFunction> functions, 
+	//			double maxX, double minX, double discreteness, String chartLabel) throws FunctionEvaluationException {
+	//		
+	//		return createChart(x, y, functions, maxX, minX, discreteness, chartLabel, null);
+	//	}
+
 	public static ChartPanel createChart(double minX, double minY, double maxX, double maxY, 
-			String chartLabel, double[] xs, double[] ys,
+			String chartLabel, Map<String, List<Double>> xs, Map<String, List<Double>> ys,
 			List<UnivariateRealFunction> functions, double discreteness,
 			ChartMouseClickListener listener) throws FunctionEvaluationException {
 
 		XYSeriesCollection xyDataset = new XYSeriesCollection();
-		
-		XYSeries pointSeries = new XYSeries("Point series");
-		for (int i = 0; i < ys.length; i++) {
-			pointSeries.add(xs[i], ys[i]);
+		for (String key : xs.keySet()) {
+			XYSeries pointSeries = new XYSeries(key);
+			for (int j = 0; j < xs.get(key).size(); j++) {
+				pointSeries.add(xs.get(key).get(j), ys.get(key).get(j));
+			}		
+			xyDataset.addSeries(pointSeries);
 		}
-		
-		xyDataset.addSeries(pointSeries);
-		
 		for (UnivariateRealFunction function : functions) {
 			XYSeries series = createFunctionSeries(minX, maxX, discreteness, function);
 			xyDataset.addSeries(series);
 		}
-		
+
 		JFreeChart chart = ChartFactory.createXYLineChart(chartLabel, 
 				"x", "y", xyDataset, PlotOrientation.VERTICAL, true, true, false);
 
@@ -104,30 +104,33 @@ public class Utils {
 		chart.getXYPlot().getRangeAxis().setLowerBound(minY);
 
 		XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) chart.getXYPlot().getRenderer();
-		
-		renderer.setSeriesLinesVisible(0, false);
-		renderer.setSeriesShapesVisible(0, true);
-		
-		for (int i = 1; i <= functions.size(); i++) {
+		int i;
+		int points = xs.size();
+		int total = points+functions.size();
+		for (i = 0; i < points; i++) {
+			renderer.setSeriesLinesVisible(i, false);
+			renderer.setSeriesShapesVisible(i, true);
+		}
+		for ( i = points; i < total; i++) {
 			renderer.setSeriesShapesVisible(i, false);
 			renderer.setSeriesLinesVisible(i, true);
 		}
-		
+
 		return createChartPanel(listener, chart);
 	}
 
 	private static XYSeries createFunctionSeries(double minX, double maxX,
 			double discreteness, UnivariateRealFunction function)
-			throws FunctionEvaluationException {
+	throws FunctionEvaluationException {
 		XYSeries series = new XYSeries(function.toString());
-		
+
 		for (double i = minX; i <= maxX; i+= discreteness) {
 			series.add(i, function.value(i));
 		}
 		return series;
 	}
 
-	
+
 	/**
 	 * Creates a panel containing a chart defined by a given set of points
 	 * @param x
@@ -138,93 +141,93 @@ public class Utils {
 	 */
 	public static ChartPanel createChart(double[] x, double[] y, String chartLabel, 
 			final ChartMouseClickListener listener)  {
-		
+
 		XYSeries series = new XYSeries(chartLabel);
 		XYDataset xyDataset = new XYSeriesCollection(series);
-		
+
 		for (int i = 0; i < y.length; i++) {
 			series.add(x[i], y[i]);
 		}
-		
+
 		final JFreeChart chart = ChartFactory.createScatterPlot(chartLabel, "x", "y", 
 				xyDataset, PlotOrientation.VERTICAL, true, true, false);
-		
+
 		return createChartPanel(listener, chart);
 	}
 
 	public static ChartPanel createBlankChart(double minX, double maxX, double minY, double maxY, 
 			String chartLabel, final ChartMouseClickListener listener)  {
-		
+
 		XYSeries series = new XYSeries(chartLabel);
 		XYDataset xyDataset = new XYSeriesCollection(series);
-		
+
 		final JFreeChart chart = ChartFactory.createScatterPlot(chartLabel, "x", "y", 
 				xyDataset, PlotOrientation.VERTICAL, true, true, false);
-		
+
 		chart.getXYPlot().getDomainAxis().setUpperBound(maxX);
 		chart.getXYPlot().getDomainAxis().setLowerBound(minX);
 		chart.getXYPlot().getRangeAxis().setUpperBound(maxY);
 		chart.getXYPlot().getRangeAxis().setLowerBound(minY);
-		
+
 		return createChartPanel(listener, chart);
 	}
-	
+
 	private static ChartPanel createChartPanel(
 			final ChartMouseClickListener listener, final JFreeChart chart) {
-		
+
 		chart.getXYPlot().setDomainCrosshairVisible(true);
 		chart.getXYPlot().setRangeCrosshairVisible(true);
 		chart.getXYPlot().setDomainCrosshairLockedOnData(false);
 		chart.getXYPlot().setRangeCrosshairLockedOnData(false);
-		
+
 		chart.getXYPlot().setDomainZeroBaselineVisible(true);
 		chart.getXYPlot().setRangeZeroBaselineVisible(true);
-		
+
 		BasicStroke baseLineStroke = new BasicStroke(2, 
 				BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL);
-		
+
 		chart.getXYPlot().setDomainZeroBaselinePaint(Color.WHITE);
 		chart.getXYPlot().setDomainZeroBaselineStroke(baseLineStroke);
-		
+
 		chart.getXYPlot().setRangeZeroBaselinePaint(Color.WHITE);
 		chart.getXYPlot().setRangeZeroBaselineStroke(baseLineStroke);
-		
+
 		chart.getXYPlot().setBackgroundPaint(Color.BLACK);
-		
+
 		final ChartPanel chartPanel = new ChartPanel(chart);
-		
+
 		if (listener != null) {
-			
+
 			chartPanel.addChartMouseListener(new ChartMouseListener() {
-				
+
 				@Override
 				public void chartMouseClicked(ChartMouseEvent event) {
 					Point anchor = event.getTrigger().getPoint();
 					XYPlot plot = chartPanel.getChart().getXYPlot();
 					Rectangle2D plotArea = chartPanel.getScreenDataArea();
-					
+
 					double x = plot.getDomainAxis().java2DToValue(anchor.getX(), plotArea , plot.getDomainAxisEdge());
 					double y = plot.getRangeAxis().java2DToValue(anchor.getY(), plotArea , plot.getRangeAxisEdge());
-					
+
 					listener.mouseClicked(x, y);
 				}
-				
+
 				@Override
 				public void chartMouseMoved(ChartMouseEvent event) {
 					Point anchor = event.getTrigger().getPoint();
 					XYPlot plot = chartPanel.getChart().getXYPlot();
 					Rectangle2D plotArea = chartPanel.getScreenDataArea();
-					
+
 					double x = plot.getDomainAxis().java2DToValue(anchor.getX(), plotArea , plot.getDomainAxisEdge());
 					double y = plot.getRangeAxis().java2DToValue(anchor.getY(), plotArea , plot.getRangeAxisEdge());
-					
+
 					listener.mouseOver(x, y);		
 				}
-				
+
 			});
-			
+
 		}
-		
+
 		return chartPanel;
 	}
 
@@ -238,7 +241,7 @@ public class Utils {
 	public static ChartPanel createChart(double[] x, double[] y, String chartLabel)  {
 		return createChart(x, y, chartLabel, null);
 	}
-	
+
 	/**
 	 * Adds a point to a chart
 	 * 
@@ -249,10 +252,10 @@ public class Utils {
 	public static void addPoint(ChartPanel chartPanel, double x, double y) {
 		XYSeriesCollection dataset = (XYSeriesCollection) chartPanel.getChart().getXYPlot().getDataset();
 		XYSeries pointSeries = dataset.getSeries(0);
-		
+
 		pointSeries.add(x, y);
 	}
-	
+
 	/**
 	 * Returns the point series of a chart
 	 * 
@@ -264,10 +267,10 @@ public class Utils {
 	public static List<XYDataItem> getPointSeries(ChartPanel chartPanel) {
 		XYSeriesCollection dataset = (XYSeriesCollection) chartPanel.getChart().getXYPlot().getDataset();
 		XYSeries pointSeries = dataset.getSeries(0);
-		
+
 		return pointSeries.getItems();
 	}
-	
+
 	/**
 	 * Returns the derivative of the function
 	 * @param function the function to be differentiate
@@ -276,7 +279,7 @@ public class Utils {
 	public static UnivariateRealFunction derivative(DifferentiableUnivariateRealFunction function) {
 		return function.derivative();
 	}
-	
+
 	/**
 	 * Integrate the function in the given interval. 
 	 * 
@@ -289,9 +292,9 @@ public class Utils {
 	 * @throws IllegalArgumentException
 	 */
 	public static double integrate(UnivariateRealFunction function, double min, double max) throws ConvergenceException, 
-		FunctionEvaluationException, IllegalArgumentException {
-		
+	FunctionEvaluationException, IllegalArgumentException {
+
 		return INTEGRATOR.integrate(function, min, max);
 	}
-	
+
 }

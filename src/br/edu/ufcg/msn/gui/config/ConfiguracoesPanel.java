@@ -3,6 +3,8 @@ package br.edu.ufcg.msn.gui.config;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -86,13 +88,18 @@ public class ConfiguracoesPanel extends JPanel{
 		lbl.setSize(80, 20);
 		this.add(lbl);
 
+		lbl = new JLabel("conjunto");
+		lbl.setLocation(50, 5);
+		lbl.setSize(200, 20);
+		this.add(lbl);
+
 		lbl = new JLabel("X");
-		lbl.setLocation(120, 5);
+		lbl.setLocation(180, 5);
 		lbl.setSize(20, 20);
 		this.add(lbl);
 
 		lbl = new JLabel("Y");
-		lbl.setLocation(240, 5);
+		lbl.setLocation(300, 5);
 		lbl.setSize(20, 20);
 		this.add(lbl);
 
@@ -137,26 +144,37 @@ public class ConfiguracoesPanel extends JPanel{
 			double My = Double.parseDouble(maxYTextField.getText());
 			facade.updateConfigs(d, mx, my, Mx, My);
 		}catch(Exception e) {}
-		List<Double> xs = new ArrayList<Double>();
-		List<Double> ys = new ArrayList<Double>();
-		
+
+		Map<String, List<Double>> xs = new TreeMap<String, List<Double>>();
+		Map<String, List<Double>> ys = new TreeMap<String, List<Double>>();
+
 		for (int i = 0; i < xsText.size(); i++) {
 			try{
+				String set = pointSetText.get(i).getText();
 				double x = Double.parseDouble(xsText.get(i).getText());
 				double y = Double.parseDouble(ysText.get(i).getText());
-				xs.add(x);
-				ys.add(y);
+				try{
+					xs.get(set).add(x);
+					ys.get(set).add(y);
+				}catch (Exception e) {
+					xs.put(set, new ArrayList<Double>());
+					ys.put(set, new ArrayList<Double>());
+					xs.get(set).add(x);
+					ys.get(set).add(y);
+				}
 			}catch (Exception e) { }
-			facade.setXYs(xs, ys);
 		}
+		facade.setXYs(xs, ys);
 		refresh();
 	}
 
+	List<JTextField> pointSetText;
 	List<JTextField> xsText;
 	List<JTextField> ysText;
 	private void initPoints() {
 		xsText = new ArrayList<JTextField>();
 		ysText = new ArrayList<JTextField>();
+		pointSetText = new ArrayList<JTextField>();
 		int height = 20;
 		int width = 160;
 		int xoffset = 10;
@@ -164,37 +182,44 @@ public class ConfiguracoesPanel extends JPanel{
 		int space = 10;
 
 		JPanel p = new JPanel();
-		List<Double> xs = facade.getXs();
-		List<Double> ys = facade.getYs();
+		Map<String, List<Double>> xs = facade.getXs();
+		Map<String, List<Double>> ys = facade.getYs();
 		p.setLayout(new VerticalLayout());
-		int i = 0;
+		int list = 0;
 		JPanel point;
-		for (i = 0; i < xs.size(); i++) {
-			point = new JPanel();
-			point.setLayout(new GridLayout(0,2));
+		for (String key : xs.keySet()) {
+			for (list = 0; list < xs.get(key).size(); list++) {
+				point = new JPanel();
+				point.setLayout(new GridLayout(0,3));
 
-			JTextField x = new JTextField(xs.get(i).toString());
-//			x.setSize(width, height);
-			//x.setLocation(xoffset, yoffset+(2*height*i));
-			x.setEditable(true);
-			xsText.add(x);
-			point.add(x);
+				JTextField pointSet = new JTextField(key+"");
+				pointSet.setEditable(true);
+				pointSetText.add(pointSet);
+				point.add(pointSet);
 
-			JTextField y = new JTextField(ys.get(i).toString());
-	//		y.setSize(width, height);
-			//y.setLocation(xoffset+space+width, yoffset+(2*height*i));
-			y.setEditable(true);
-			ysText.add(y);
-			point.add(y);
-			point.setSize(2*width, height);
-			p.add(point);
+
+				JTextField x = new JTextField(xs.get(key).get(list).toString());
+				x.setEditable(true);
+				xsText.add(x);
+				point.add(x);
+
+				JTextField y = new JTextField(ys.get(key).get(list).toString());
+				y.setEditable(true);
+				ysText.add(y);
+				point.add(y);
+				point.setSize(2*width, height);
+				p.add(point);
+			}
 		}
 		point = new JPanel();
-		point.setLayout(new GridLayout(0,2));
-		
+		point.setLayout(new GridLayout(0,3));
+
+		JTextField pointSet = new JTextField();
+		pointSet.setEditable(true);
+		pointSetText.add(pointSet);
+		point.add(pointSet);
+
 		JTextField x = new JTextField();
-//		x.setSize(width, height);
-		//x.setLocation(xoffset, yoffset+(2*height*i));
 		x.setEditable(true);
 		xsText.add(x);
 		point.add(x);
@@ -202,17 +227,17 @@ public class ConfiguracoesPanel extends JPanel{
 		JTextField y = new JTextField();
 		y.setSize(width, height);
 		//y.setLocation(xoffset+space+width, yoffset+(2*height*i));
-//		y.setEditable(true);
+		//		y.setEditable(true);
 		ysText.add(y);
 		point.add(y);
 		point.setSize(2*width, height);
-		
+
 		p.add(point);
-		
-		p.setSize(2*width+2*xoffset+space, (i+1)*(yoffset+(2*height)));
+
+		p.setSize(2*width+2*xoffset+space, (xs.size()+1)*(yoffset+(2*height)));
 		add(p);
 		JScrollPane sp = new JScrollPane(p);
-		
+
 		sp.setSize(2*width+2*xoffset+space+20, 450);
 		sp.setLocation(5, 25);
 		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
