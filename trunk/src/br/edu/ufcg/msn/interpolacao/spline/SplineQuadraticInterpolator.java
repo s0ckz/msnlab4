@@ -10,9 +10,9 @@ import org.jfree.chart.ChartPanel;
 import br.edu.ufcg.msn.util.Utils;
 
 /**
- * This interpolator uses quadratic splines<br>
+ * This interpolator uses Hermite cubic splines<br>
  * <br>
- * Explanation: http://en.wikipedia.org/wiki/Spline_interpolation#Quadratic_spline_interpolation
+ * Explanation: http://en.wikipedia.org/wiki/Spline_interpolation#
  * 
  * @author Leandro Jose
  * @author Rodrigo Bruno
