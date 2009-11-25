@@ -29,8 +29,8 @@ public class HermiteCubicSplineInterpolator extends AbstractSplineInterpolator {
 		UnivariateRealFunction[] functions = new UnivariateRealFunction[n];
 		double[] tangents = findTangents(yval);
 		for (int i = 1; i <= n; i++) {
-			functions[i - 1] = new HermiteFunction(xval[i], xval[i + 1],
-					yval[i], yval[i + 1], tangents[i], tangents[i + 1]);
+			functions[i - 1] = new HermiteFunction(xval[i - 1], xval[i],
+					yval[i - 1], yval[i], tangents[i - 1], tangents[i]);
 
 		}
 
@@ -62,7 +62,7 @@ public class HermiteCubicSplineInterpolator extends AbstractSplineInterpolator {
 		double[] yval = { 1, 2, 10, 5, 6, 9, 6, 3, 1, 4, 6, 7, 0 };
 		ChartPanel chartPanel = Utils.createChart(
 				new HermiteCubicSplineInterpolator().interpolate(xval, yval),
-				6, -6, 0.1, "Teste");
+				-6, 6, 0.1, "Teste");
 		JFrame jFrame = new JFrame();
 		jFrame.add(chartPanel);
 		jFrame.setSize(800, 600);
