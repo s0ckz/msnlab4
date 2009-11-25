@@ -2,7 +2,6 @@ package br.edu.ufcg.msn.interpolacao.spline;
 
 import java.util.Arrays;
 
-import org.apache.commons.math.ArgumentOutsideDomainException;
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathRuntimeException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
@@ -47,7 +46,7 @@ public class SplineFunction implements UnivariateRealFunction {
 
 	public double value(double x) throws FunctionEvaluationException {
         if (x < knots[0] || x > knots[n]) {
-            throw new ArgumentOutsideDomainException(x, knots[0], knots[n]);
+            return Double.NaN;
         }
         int i = Arrays.binarySearch(knots, x);
         if (i < 0) {
