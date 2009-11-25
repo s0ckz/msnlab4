@@ -14,16 +14,28 @@ public class MenuLimpar extends JMenu{
 	private JMenu menuPontos, funcoes = null;
 	private Object[] listaChavePontos;
 	
-	public MenuLimpar() {
+	private static MenuLimpar instance = null;
+	
+	public synchronized static MenuLimpar getInstance() {
+		if(instance == null)
+			instance = new MenuLimpar();
+		return instance;  
+	}
+
+	
+	private MenuLimpar() {
 		initialize();
 	}
 
-	private void initialize() {
+	public void initialize() {
+		this.removeAll();
 		this.setText("Limpar");
 		this.add(getJMenuItemLimparTudo());
 		this.add(getJMenuLimparTodosPontos());
 		this.add(getJMenuLimparTodasFuncoes());
 		this.add(getJMenuLimpaConjuntoPontos());
+		this.setVisible(false);
+		this.setVisible(true);
 	}
 
 	
@@ -67,7 +79,7 @@ public class MenuLimpar extends JMenu{
 	}
 	
 	private JMenu getJMenuLimpaConjuntoPontos() {
-		if (menuPontos == null) {
+//		if (menuPontos == null) {
 			menuPontos = new JMenu("Pontos");
 			listaChavePontos = Facade.getInstance().getPointsKeySet();
 			for (final Object s : listaChavePontos) {
@@ -78,7 +90,7 @@ public class MenuLimpar extends JMenu{
 					}
 				});
 				menuPontos.add(conjPontos);
-			}
+	//		}
 		
 			
 		}

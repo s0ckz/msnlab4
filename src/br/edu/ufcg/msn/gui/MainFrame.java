@@ -74,7 +74,7 @@ public class MainFrame extends JFrame{
 	
 	private MenuLimpar getJMenuItemLimpar(){
 		if (menuLimpar == null) {
-			menuLimpar = new MenuLimpar();
+			menuLimpar = MenuLimpar.getInstance();
 		}
 		return menuLimpar;
 	}
