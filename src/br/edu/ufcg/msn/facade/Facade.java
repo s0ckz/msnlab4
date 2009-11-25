@@ -224,7 +224,7 @@ public class Facade {
 		}
 	}
 
-	private class Point implements Comparable{
+	private class Point implements Comparable<Point>{
 		double x;
 		double y;
 		
@@ -232,7 +232,7 @@ public class Facade {
 			this.x = x;
 			this.y = y;
 		}
-		public int compareTo(Object arg0) {
+		public int compareTo(Point arg0) {
 			if(arg0 instanceof Point){
 				Point p = (Point)arg0;
 				return (this.x - p.x)<0?(-1):((this.x - p.x)>0?1:0);
