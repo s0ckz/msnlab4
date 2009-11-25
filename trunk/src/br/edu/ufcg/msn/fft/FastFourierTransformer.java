@@ -5,6 +5,12 @@ import java.io.Serializable;
 import org.apache.commons.math.MathRuntimeException;
 import org.apache.commons.math.complex.Complex; 
 
+/**
+ * 
+ * @author Artur Farias
+ * @author Mikaela Maia
+ *
+ */
 public class FastFourierTransformer implements Serializable {
 
 	private static final long serialVersionUID = 8621967401371374263L;
@@ -36,13 +42,13 @@ public class FastFourierTransformer implements Serializable {
 	}
 
     /**
-     * Transform the given complex data set.
-     * The formula is $ y_n = \Sigma_{k=0}^{N-1} e^{-2 \pi i nk/N} x_k $
-     * </p>
+     * Transforma o vetor de numeros complexos pela formula:
+     * $ y_n = \Sigma_{k=0}^{N-1} e^{-2 \pi i nk/N} x_k $
+     * 
      *
-     * @param f the complex data array to be transformed
-     * @return the complex transformed array
-     * @throws IllegalArgumentException if any parameters are invalid
+     * @param vetor de numeros complexos
+     * @return o vetor transformado
+     * @throws IllegalArgumentException se os paramentros forem invalidos
      */
     public Complex[] transform(Complex f[])
         throws IllegalArgumentException {
@@ -52,14 +58,12 @@ public class FastFourierTransformer implements Serializable {
 
 
     /**
-     * Transform the given complex data set.
-     * <p>
-     * The formula is $y_n = (1/\sqrt{N}) \Sigma_{k=0}^{N-1} e^{-2 \pi i nk/N} x_k$
-     * </p>
+     * Transforma o vetor de numeros complexos pela formula:
+     *  $y_n = (1/\sqrt{N}) \Sigma_{k=0}^{N-1} e^{-2 \pi i nk/N} x_k$
      *
-     * @param f the complex data array to be transformed
-     * @return the complex transformed array
-     * @throws IllegalArgumentException if any parameters are invalid
+     * @param vetor de numeros complexos
+     * @return o vetor transformado
+     * @throws IllegalArgumentException se os paramentros forem invalidos
      */
     public Complex[] transform2(Complex f[])
         throws IllegalArgumentException {
@@ -118,7 +122,7 @@ public class FastFourierTransformer implements Serializable {
     protected Complex[] fft(double f[], boolean isInverse)
         throws IllegalArgumentException {
 
-        verifyDataSet(f);
+        verificaTamPotencia(f);
         Complex F[] = new Complex[f.length];
         if (f.length == 1) {
             F[0] = new Complex(f[0], 0.0);
@@ -167,7 +171,7 @@ public class FastFourierTransformer implements Serializable {
         final Complex f[] = new Complex[n];
 
         // initial simple cases
-        verifyDataSet(data);
+        verificaTamPotencia(data);
         if (n == 1) {
             f[0] = data[0];
             return f;
@@ -250,7 +254,7 @@ public class FastFourierTransformer implements Serializable {
      * @param n the number to test
      * @return true if the argument is power of 2
      */
-    public static boolean isPowerOf2(long n) {
+    public static boolean ehPotenciaDeDois(long n) {
         return (n > 0) && ((n & (n - 1)) == 0);
     }
 
@@ -260,8 +264,8 @@ public class FastFourierTransformer implements Serializable {
      * @param d the data array
      * @throws IllegalArgumentException if array length is not power of 2
      */
-    public static void verifyDataSet(double d[]) throws IllegalArgumentException {
-        if (!isPowerOf2(d.length)) {
+    public static void verificaTamPotencia(double d[]) throws IllegalArgumentException {
+        if (!ehPotenciaDeDois(d.length)) {
             throw MathRuntimeException.createIllegalArgumentException(
                     "{0} is not a power of 2, consider padding for fix",
                     d.length);
@@ -274,8 +278,8 @@ public class FastFourierTransformer implements Serializable {
      * @param o the data array
      * @throws IllegalArgumentException if array length is not power of 2
      */
-    public static void verifyDataSet(Object o[]) throws IllegalArgumentException {
-        if (!isPowerOf2(o.length)) {
+    public static void verificaTamPotencia(Object o[]) throws IllegalArgumentException {
+        if (!ehPotenciaDeDois(o.length)) {
             throw MathRuntimeException.createIllegalArgumentException(
                     "{0} is not a power of 2, consider padding for fix",
                     o.length);
