@@ -1,66 +1,42 @@
 package br.edu.ufcg.msn.fft;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 
-import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathRuntimeException;
-import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.complex.Complex; 
 
 public class FastFourierTransformer implements Serializable {
 
 	private static final long serialVersionUID = 8621967401371374263L;
-	/** roots of unity */
     private RootsOfUnity roots = new RootsOfUnity();
 
     /**
-     * Construct a default transformer.
+     * Construtor da Transformada Rapida de Fourier
      */
     public FastFourierTransformer() {
         super();
     }
 
-    /**
-     * Transform the given real data set.
-     * <p>
-     * The formula is $ y_n = \Sigma_{k=0}^{N-1} e^{-2 \pi i nk/N} x_k $
-     * </p>
-     *
-     * @param f the real data array to be transformed
-     * @return the complex transformed array
-     * @throws IllegalArgumentException if any parameters are invalid
-     */
-    public Complex[] transform(double f[])
-        throws IllegalArgumentException {
-        return fft(f, false);
-    }
-
-    /**
-     * Transform the given real function, sampled on the given interval.
-     * <p>
-     * The formula is $ y_n = \Sigma_{k=0}^{N-1} e^{-2 \pi i nk/N} x_k $
-     * </p>
-     *
-     * @param f the function to be sampled and transformed
-     * @param min the lower bound for the interval
-     * @param max the upper bound for the interval
-     * @param n the number of sample points
-     * @return the complex transformed array
-     * @throws FunctionEvaluationException if function cannot be evaluated
-     * at some point
-     * @throws IllegalArgumentException if any parameters are invalid
-     */
-    public Complex[] transform(UnivariateRealFunction f,
-                               double min, double max, int n)
-        throws FunctionEvaluationException, IllegalArgumentException {
-        double data[] = sample(f, min, max, n);
-        return fft(data, false);
-    }
+    public static void main(String[] args) {
+    	FastFourierTransformer fft = new FastFourierTransformer();
+    	double[] real = {0.5, 0.2, 0.3, 0.5};
+    	double[] imaginario = {0.3, 0.2, 0.4, 0.1};
+    	
+    	Complex[] comp = new Complex[real.length];
+    	
+    	for(int i = 0; i < real.length; i++) {
+    		comp[i] = new Complex(real[i], imaginario[i]);
+    	}
+    	
+    	comp = fft.transform(comp);
+    	
+    	for(int i = 0; i < comp.length; i++) {
+    		System.out.println(comp[i].getReal() + " " + comp[i].getImaginary() + "i");
+    	}
+	}
 
     /**
      * Transform the given complex data set.
-     * <p>
      * The formula is $ y_n = \Sigma_{k=0}^{N-1} e^{-2 \pi i nk/N} x_k $
      * </p>
      *
@@ -74,46 +50,6 @@ public class FastFourierTransformer implements Serializable {
         return fft(f);
     }
 
-    /**
-     * Transform the given real data set.
-     * <p>
-     * The formula is $y_n = (1/\sqrt{N}) \Sigma_{k=0}^{N-1} e^{-2 \pi i nk/N} x_k$
-     * </p>
-     *
-     * @param f the real data array to be transformed
-     * @return the complex transformed array
-     * @throws IllegalArgumentException if any parameters are invalid
-     */
-    public Complex[] transform2(double f[])
-        throws IllegalArgumentException {
-
-        double scaling_coefficient = 1.0 / Math.sqrt(f.length);
-        return scaleArray(fft(f, false), scaling_coefficient);
-    }
-
-    /**
-     * Transform the given real function, sampled on the given interval.
-     * <p>
-     * The formula is $y_n = (1/\sqrt{N}) \Sigma_{k=0}^{N-1} e^{-2 \pi i nk/N} x_k$
-     * </p>
-     *
-     * @param f the function to be sampled and transformed
-     * @param min the lower bound for the interval
-     * @param max the upper bound for the interval
-     * @param n the number of sample points
-     * @return the complex transformed array
-     * @throws FunctionEvaluationException if function cannot be evaluated
-     * at some point
-     * @throws IllegalArgumentException if any parameters are invalid
-     */
-    public Complex[] transform2(UnivariateRealFunction f,
-                                double min, double max, int n)
-        throws FunctionEvaluationException, IllegalArgumentException {
-
-        double data[] = sample(f, min, max, n);
-        double scaling_coefficient = 1.0 / Math.sqrt(n);
-        return scaleArray(fft(data, false), scaling_coefficient);
-    }
 
     /**
      * Transform the given complex data set.
@@ -133,47 +69,7 @@ public class FastFourierTransformer implements Serializable {
         return scaleArray(fft(f), scaling_coefficient);
     }
 
-    /**
-     * Inversely transform the given real data set.
-     * <p>
-     * The formula is $ x_k = (1/N) \Sigma_{n=0}^{N-1} e^{2 \pi i nk/N} y_n $
-     * </p>
-     *
-     * @param f the real data array to be inversely transformed
-     * @return the complex inversely transformed array
-     * @throws IllegalArgumentException if any parameters are invalid
-     */
-    public Complex[] inversetransform(double f[])
-        throws IllegalArgumentException {
-
-        double scaling_coefficient = 1.0 / f.length;
-        return scaleArray(fft(f, true), scaling_coefficient);
-    }
-
-    /**
-     * Inversely transform the given real function, sampled on the given interval.
-     * <p>
-     * The formula is $ x_k = (1/N) \Sigma_{n=0}^{N-1} e^{2 \pi i nk/N} y_n $
-     * </p>
-     *
-     * @param f the function to be sampled and inversely transformed
-     * @param min the lower bound for the interval
-     * @param max the upper bound for the interval
-     * @param n the number of sample points
-     * @return the complex inversely transformed array
-     * @throws FunctionEvaluationException if function cannot be evaluated
-     * at some point
-     * @throws IllegalArgumentException if any parameters are invalid
-     */
-    public Complex[] inversetransform(UnivariateRealFunction f,
-                                      double min, double max, int n)
-        throws FunctionEvaluationException, IllegalArgumentException {
-
-        double data[] = sample(f, min, max, n);
-        double scaling_coefficient = 1.0 / n;
-        return scaleArray(fft(data, true), scaling_coefficient);
-    }
-
+ 
     /**
      * Inversely transform the given complex data set.
      * <p>
@@ -192,46 +88,6 @@ public class FastFourierTransformer implements Serializable {
         return scaleArray(fft(f), scaling_coefficient);
     }
 
-    /**
-     * Inversely transform the given real data set.
-     * <p>
-     * The formula is $x_k = (1/\sqrt{N}) \Sigma_{n=0}^{N-1} e^{2 \pi i nk/N} y_n$
-     * </p>
-     *
-     * @param f the real data array to be inversely transformed
-     * @return the complex inversely transformed array
-     * @throws IllegalArgumentException if any parameters are invalid
-     */
-    public Complex[] inversetransform2(double f[])
-        throws IllegalArgumentException {
-
-        double scaling_coefficient = 1.0 / Math.sqrt(f.length);
-        return scaleArray(fft(f, true), scaling_coefficient);
-    }
-
-    /**
-     * Inversely transform the given real function, sampled on the given interval.
-     * <p>
-     * The formula is $x_k = (1/\sqrt{N}) \Sigma_{n=0}^{N-1} e^{2 \pi i nk/N} y_n$
-     * </p>
-     *
-     * @param f the function to be sampled and inversely transformed
-     * @param min the lower bound for the interval
-     * @param max the upper bound for the interval
-     * @param n the number of sample points
-     * @return the complex inversely transformed array
-     * @throws FunctionEvaluationException if function cannot be evaluated
-     * at some point
-     * @throws IllegalArgumentException if any parameters are invalid
-     */
-    public Complex[] inversetransform2(UnivariateRealFunction f,
-                                       double min, double max, int n)
-        throws FunctionEvaluationException, IllegalArgumentException {
-
-        double data[] = sample(f, min, max, n);
-        double scaling_coefficient = 1.0 / Math.sqrt(n);
-        return scaleArray(fft(data, true), scaling_coefficient);
-    }
 
     /**
      * Inversely transform the given complex data set.
@@ -372,56 +228,6 @@ public class FastFourierTransformer implements Serializable {
         return f;
     }
 
-    /**
-     * Sample the given univariate real function on the given interval.
-     * <p>
-     * The interval is divided equally into N sections and sample points
-     * are taken from min to max-(max-min)/N. Usually f(x) is periodic
-     * such that f(min) = f(max) (note max is not sampled), but we don't
-     * require that.</p>
-     *
-     * @param f the function to be sampled
-     * @param min the lower bound for the interval
-     * @param max the upper bound for the interval
-     * @param n the number of sample points
-     * @return the samples array
-     * @throws FunctionEvaluationException if function cannot be evaluated
-     * at some point
-     * @throws IllegalArgumentException if any parameters are invalid
-     */
-    public static double[] sample(UnivariateRealFunction f,
-                                  double min, double max, int n)
-        throws FunctionEvaluationException, IllegalArgumentException {
-
-        if (n <= 0) {
-            throw MathRuntimeException.createIllegalArgumentException(
-                    "number of sample is not positive: {0}",
-                    n);
-        }
-        verifyInterval(min, max);
-
-        double s[] = new double[n];
-        double h = (max - min) / n;
-        for (int i = 0; i < n; i++) {
-            s[i] = f.value(min + i * h);
-        }
-        return s;
-    }
-
-    /**
-     * Multiply every component in the given real array by the
-     * given real number. The change is made in place.
-     *
-     * @param f the real array to be scaled
-     * @param d the real scaling coefficient
-     * @return a reference to the scaled array
-     */
-    public static double[] scaleArray(double f[], double d) {
-        for (int i = 0; i < f.length; i++) {
-            f[i] *= d;
-        }
-        return f;
-    }
 
     /**
      * Multiply every component in the given complex array by the
@@ -475,266 +281,6 @@ public class FastFourierTransformer implements Serializable {
                     o.length);
         }
     }
-
-    /**
-     * Verifies that the endpoints specify an interval.
-     *
-     * @param lower lower endpoint
-     * @param upper upper endpoint
-     * @throws IllegalArgumentException if not interval
-     */
-    public static void verifyInterval(double lower, double upper)
-        throws IllegalArgumentException {
-
-        if (lower >= upper) {
-            throw MathRuntimeException.createIllegalArgumentException(
-                    "endpoints do not specify an interval: [{0}, {1}]",
-                    lower, upper);
-        }
-    }
-
-    /**
-     * Performs a multi-dimensional Fourier transform on a given array.
-     * Use {@link #inversetransform2(Complex[])} and
-     * {@link #transform2(Complex[])} in a row-column implementation
-     * in any number of dimensions with O(N&times;log(N)) complexity with
-     * N=n<sub>1</sub>&times;n<sub>2</sub>&times;n<sub>3</sub>&times;...&times;n<sub>d</sub>,
-     * n<sub>x</sub>=number of elements in dimension x,
-     * and d=total number of dimensions.
-     *
-     * @param mdca Multi-Dimensional Complex Array id est Complex[][][][]
-     * @param forward inverseTransform2 is preformed if this is false
-     * @return transform of mdca as a Multi-Dimensional Complex Array id est Complex[][][][]
-     * @throws IllegalArgumentException if any dimension is not a power of two
-     */
-    public Object mdfft(Object mdca, boolean forward)
-        throws IllegalArgumentException {
-        MultiDimensionalComplexMatrix mdcm = (MultiDimensionalComplexMatrix)
-                new MultiDimensionalComplexMatrix(mdca).clone();
-        int[] dimensionSize = mdcm.getDimensionSizes();
-        //cycle through each dimension
-        for (int i = 0; i < dimensionSize.length; i++) {
-            mdfft(mdcm, forward, i, new int[0]);
-        }
-        return mdcm.getArray();
-    }
-
-    /**
-     * Performs one dimension of a multi-dimensional Fourier transform.
-     *
-     * @param mdcm input matrix
-     * @param forward inverseTransform2 is preformed if this is false
-     * @param d index of the dimension to process
-     * @param subVector recursion subvector
-     * @throws IllegalArgumentException if any dimension is not a power of two
-     */
-    private void mdfft(MultiDimensionalComplexMatrix mdcm, boolean forward,
-                       int d, int[] subVector)
-        throws IllegalArgumentException {
-        int[] dimensionSize = mdcm.getDimensionSizes();
-        //if done
-        if (subVector.length == dimensionSize.length) {
-            Complex[] temp = new Complex[dimensionSize[d]];
-            for (int i = 0; i < dimensionSize[d]; i++) {
-                //fft along dimension d
-                subVector[d] = i;
-                temp[i] = mdcm.get(subVector);
-            }
-
-            if (forward)
-                temp = transform2(temp);
-            else
-                temp = inversetransform2(temp);
-
-            for (int i = 0; i < dimensionSize[d]; i++) {
-                subVector[d] = i;
-                mdcm.set(temp[i], subVector);
-            }
-        } else {
-            int[] vector = new int[subVector.length + 1];
-            System.arraycopy(subVector, 0, vector, 0, subVector.length);
-            if (subVector.length == d) {
-                //value is not important once the recursion is done.
-                //then an fft will be applied along the dimension d.
-                vector[d] = 0;
-                mdfft(mdcm, forward, d, vector);
-            } else {
-                for (int i = 0; i < dimensionSize[subVector.length]; i++) {
-                    vector[subVector.length] = i;
-                    //further split along the next dimension
-                    mdfft(mdcm, forward, d, vector);
-                }
-            }
-        }
-        return;
-    }
-
-    /**
-     * Complex matrix implementation.
-     * Not designed for synchronized access
-     * may eventually be replaced by jsr-83 of the java community process
-     * http://jcp.org/en/jsr/detail?id=83
-     * may require additional exception throws for other basic requirements.
-     */
-    private static class MultiDimensionalComplexMatrix
-        implements Cloneable {
-
-        /** Size in all dimensions. */
-        protected int[] dimensionSize;
-
-        /** Storage array. */
-        protected Object multiDimensionalComplexArray;
-
-        /** Simple constructor.
-         * @param multiDimensionalComplexArray array containing the matrix elements
-         */
-        public MultiDimensionalComplexMatrix(Object multiDimensionalComplexArray) {
-
-            this.multiDimensionalComplexArray = multiDimensionalComplexArray;
-
-            // count dimensions
-            int numOfDimensions = 0;
-            for (Object lastDimension = multiDimensionalComplexArray;
-                 lastDimension instanceof Object[];) {
-                final Object[] array = (Object[]) lastDimension;
-                numOfDimensions++;
-                lastDimension = array[0];
-            }
-
-            // allocate array with exact count
-            dimensionSize = new int[numOfDimensions];
-
-            // fill array
-            numOfDimensions = 0;
-            for (Object lastDimension = multiDimensionalComplexArray;
-                 lastDimension instanceof Object[];) {
-                final Object[] array = (Object[]) lastDimension;
-                dimensionSize[numOfDimensions++] = array.length;
-                lastDimension = array[0];
-            }
-
-        }
-
-        /**
-         * Get a matrix element.
-         * @param vector indices of the element
-         * @return matrix element
-         * @exception IllegalArgumentException if dimensions do not match
-         */
-        public Complex get(int... vector)
-            throws IllegalArgumentException {
-            if (vector == null) {
-                if (dimensionSize.length > 0) {
-                    throw MathRuntimeException.createIllegalArgumentException(
-                            "some dimensions don't match: {0} != {1}",
-                            0, dimensionSize.length);
-                }
-                return null;
-            }
-            if (vector.length != dimensionSize.length) {
-                throw MathRuntimeException.createIllegalArgumentException(
-                        "some dimensions don't match: {0} != {1}",
-                        vector.length, dimensionSize.length);
-            }
-
-            Object lastDimension = multiDimensionalComplexArray;
-
-            for (int i = 0; i < dimensionSize.length; i++) {
-                lastDimension = ((Object[]) lastDimension)[vector[i]];
-            }
-            return (Complex) lastDimension;
-        }
-
-        /**
-         * Set a matrix element.
-         * @param magnitude magnitude of the element
-         * @param vector indices of the element
-         * @return the previous value
-         * @exception IllegalArgumentException if dimensions do not match
-         */
-        public Complex set(Complex magnitude, int... vector)
-            throws IllegalArgumentException {
-            if (vector == null) {
-                if (dimensionSize.length > 0) {
-                    throw MathRuntimeException.createIllegalArgumentException(
-                            "some dimensions don't match: {0} != {1}",
-                            0, dimensionSize.length);
-                }
-                return null;
-            }
-            if (vector.length != dimensionSize.length) {
-                throw MathRuntimeException.createIllegalArgumentException(
-                        "some dimensions don't match: {0} != {1}",
-                        vector.length,dimensionSize.length);
-            }
-
-            Object[] lastDimension = (Object[]) multiDimensionalComplexArray;
-            for (int i = 0; i < dimensionSize.length - 1; i++) {
-                lastDimension = (Object[]) lastDimension[vector[i]];
-            }
-
-            Complex lastValue = (Complex) lastDimension[vector[dimensionSize.length - 1]];
-            lastDimension[vector[dimensionSize.length - 1]] = magnitude;
-
-            return lastValue;
-        }
-
-        /**
-         * Get the size in all dimensions.
-         * @return size in all dimensions
-         */
-        public int[] getDimensionSizes() {
-            return dimensionSize.clone();
-        }
-
-        /**
-         * Get the underlying storage array
-         * @return underlying storage array
-         */
-        public Object getArray() {
-            return multiDimensionalComplexArray;
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public Object clone() {
-            MultiDimensionalComplexMatrix mdcm =
-                    new MultiDimensionalComplexMatrix(Array.newInstance(
-                    Complex.class, dimensionSize));
-            clone(mdcm);
-            return mdcm;
-        }
-
-        /**
-         * Copy contents of current array into mdcm.
-         * @param mdcm array where to copy data
-         */
-        private void clone(MultiDimensionalComplexMatrix mdcm) {
-            int[] vector = new int[dimensionSize.length];
-            int size = 1;
-            for (int i = 0; i < dimensionSize.length; i++) {
-                size *= dimensionSize[i];
-            }
-            int[][] vectorList = new int[size][dimensionSize.length];
-            for (int[] nextVector: vectorList) {
-                System.arraycopy(vector, 0, nextVector, 0,
-                                 dimensionSize.length);
-                for (int i = 0; i < dimensionSize.length; i++) {
-                    vector[i]++;
-                    if (vector[i] < dimensionSize[i]) {
-                        break;
-                    } else {
-                        vector[i] = 0;
-                    }
-                }
-            }
-
-            for (int[] nextVector: vectorList) {
-                mdcm.set(get(nextVector), nextVector);
-            }
-        }
-    }
-
 
     /** Computes the n<sup>th</sup> roots of unity.
      * A cache of already computed values is maintained.
