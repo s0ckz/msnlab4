@@ -61,7 +61,7 @@ public class MainFrame extends JFrame{
 			JMenuItem menuItemLimparGrafico = new JMenuItem("Grafico");
 			menuItemLimparGrafico.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					Facade.getInstance().cleanUp();
+					Facade.getInstance().cleanUpAllConfigurations();
 					ConfiguracoesPanel.getInstance().refresh();
 				}
 			});

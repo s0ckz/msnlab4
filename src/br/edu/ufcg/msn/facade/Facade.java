@@ -170,7 +170,7 @@ public class Facade {
 		ConfiguracoesPanel.getInstance().refresh();
 	}
 
-	public void claenUpAllConfigurations(){
+	public void cleanUpAllConfigurations(){
 		initFacade();
 		MainFrame.newChartAvailable();		
 	}
@@ -184,6 +184,16 @@ public class Facade {
 		xs = new TreeMap<String, List<Double>>();
 		ys = new TreeMap<String, List<Double>>();
 		MainFrame.newChartAvailable();
+	}
+
+	public void cleanUpSpecificPoints(String key){
+		xs.remove(key);
+		ys.remove(key);
+		MainFrame.newChartAvailable();
+	}
+	
+	public String[] getPointsKeySet(){
+		return (String[])xs.keySet().toArray();
 	}
 
 	public void cleanUpAllFunctions(){
