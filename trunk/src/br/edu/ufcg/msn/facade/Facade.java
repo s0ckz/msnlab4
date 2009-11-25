@@ -158,10 +158,10 @@ public class Facade {
 
 
 
-	public void addPoint(String key, double x, double y) {
-		if(!xs.containsKey(key)){
-			xs.put(key, new ArrayList<Double>());
-			ys.put(key, new ArrayList<Double>());
+	public void addPoint(double x, double y) {
+		if(!xs.containsKey(listKey)){
+			xs.put(listKey, new ArrayList<Double>());
+			ys.put(listKey, new ArrayList<Double>());
 		}
 		if (!xs.get(listKey).contains(x)){
 			xs.get(listKey).add(x);
@@ -213,7 +213,7 @@ public class Facade {
 			ChartPanel createChart = Utils.createChart(minX, minY, maxX, maxY, "", xs, ys, functions, discreteness, new ChartMouseClickListener () {
 				@Override
 				public void mouseClicked(double x, double y) {
-					addPoint("", x, y);
+					addPoint(x, y);
 					MainFrame.newChartAvailable();
 				}
 
