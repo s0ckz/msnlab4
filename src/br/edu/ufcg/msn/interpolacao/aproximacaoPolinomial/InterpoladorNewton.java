@@ -1,4 +1,4 @@
-package br.edu.ufcg.msn.interpolacao;
+package br.edu.ufcg.msn.interpolacao.aproximacaoPolinomial;
 
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;

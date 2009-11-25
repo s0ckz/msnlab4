@@ -1,10 +1,10 @@
-package br.edu.ufcg.msn.minimosQuadrados;
-
+package br.edu.ufcg.msn.interpolacao.minimosQuadrados;
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.interpolation.UnivariateRealInterpolator;
 
-import br.edu.ufcg.msn.util.PotencialFunction;
+import br.edu.ufcg.msn.util.LogaritmoFunction;
+
 
 /**
  * <br>
@@ -24,11 +24,10 @@ import br.edu.ufcg.msn.util.PotencialFunction;
  * @version 1.0
  * @since 20/11/2009
  *        <p>
- *        Classe que realiza o ajuste potencial.
+ *        Classe que realiza o ajuste logaritmo pelo MMQ.
  *        </p>
  */
-public class AjustePotencial implements UnivariateRealInterpolator {
-
+public class AjusteLogaritmo implements UnivariateRealInterpolator {
 
 	/**
 	 * Metodo que interpola os pontos recebidos utilizando o metodo de MMQ por ajuste linear
@@ -36,49 +35,51 @@ public class AjustePotencial implements UnivariateRealInterpolator {
 	 * @Override
 	 */
 	public UnivariateRealFunction interpolate(double[] xval, double[] yval)
-	throws MathException {
-		double xlnsom=0.0, ylnsom=0.0, xlnquad=0.0, ylnquad=0.0, xlnyln=0.0, a0=0, a1=0;
+			throws MathException {
+		
+		double xlnsom=0.0,ysom=0.0, xlnquad=0.0, yquad=0.0, xlny=0.0, a0=0, a1=0; 
 
 		//recebe a quantidade de elementos passados
 		int numElementos = xval.length;
-		int c = numElementos; 
-
-		for (int i=0; i<c; i++){ 
-			xlnsom += Math.log(xval[i]);//soamtorio do ln x
-			ylnsom += Math.log(yval[i]);//somatorio do ln y  
-			xlnquad += Math.log(xval[i])*Math.log(xval[i]);//somatorio de ln de x ao quadrado  
-			ylnquad +=Math.log(yval[i])*Math.log(yval[i]);//somatorio de ln de y ao quadrado
-			xlnyln += Math.log(xval[i])*Math.log(yval[i]);//ln de x vezes ln de y
+		int c=numElementos; 
+		                
+		for (int i=0; i<numElementos; i++){ 
+			xlnsom += Math.log(xval[i]);//somatorio do ln de x
+			ysom += yval[i];//somatorio de y  
+			xlnquad += Math.log(xval[i])*Math.log(xval[i]);//somatorio do ln de x ao quadrado  
+			yquad += yval[i]*yval[i];//somatorio do y ao quadrado
+			xlny += Math.log(xval[i])*yval[i];//ln de x vezes y
 		}
-
-		a0= (xlnquad*ylnsom - xlnsom*xlnyln)/ (c*xlnquad-xlnsom*xlnsom);//calculo de a0
-		a1= (c*xlnyln-xlnsom*ylnsom)/(c*xlnquad-xlnsom*xlnsom);//calculo de a1
-
+	            
+		a0= (xlnquad*ysom - xlnsom*xlny)/ (c*xlnquad-xlnsom*xlnsom);//calculo de a0
+		a1= (c*xlny-xlnsom*ysom)/(c*xlnquad-xlnsom*xlnsom);//calculo de a1
+		
 		double[] coeficientes = {a0, a1};
-
-		PotencialFunction funcao = new PotencialFunction(coeficientes);// passa como parâmetro os coeficientes calculados 
-
+		
+		LogaritmoFunction funcao = new LogaritmoFunction(coeficientes);// passa como parâmetro os coeficientes calculados 
+		
 		return funcao;//retorna a funcao já formatada para os outros módulos do programa utilizarem
-
+		
 	}
-
+	
 	/**
 	 * Método principal para executar a classe
 	 * @param args 
 	 * @throws MathException 
 	 */	
 	public static void main(String[] args) throws MathException {
-		final double[] xVal1 = { 1.0, 2.0, 3.0, 4.0, 5.0, 7.0 };
+		final double[] xVal1 = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
 		final double[] yVal1 = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
-
-		AjustePotencial ajustePotencial = new AjustePotencial();
-		PotencialFunction function = (PotencialFunction) ajustePotencial.interpolate(xVal1, yVal1);
+		
+		AjusteLogaritmo ajusteLogaritmo = new AjusteLogaritmo();
+		LogaritmoFunction function = (LogaritmoFunction) ajusteLogaritmo.interpolate(xVal1, yVal1);
 
 		double[] coefficients = function.getCoefficients();
-
-		System.out.println("Function: " + coefficients[0] + " * x ^ " + coefficients[1]);
-
 		
+		System.out.println("Function: " + coefficients[0] + " + " + coefficients[1]+" * ln(x)");
+	
+				
 	}
+
 
 }
