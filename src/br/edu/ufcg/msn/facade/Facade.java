@@ -20,6 +20,11 @@ import br.edu.ufcg.msn.interpolacao.InterpoladorNewton;
 import br.edu.ufcg.msn.interpolacao.spline.SplineCubicInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineLinearInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineQuadraticInterpolator;
+import br.edu.ufcg.msn.minimosQuadrados.AjusteExponencial;
+import br.edu.ufcg.msn.minimosQuadrados.AjusteHiperbolico;
+import br.edu.ufcg.msn.minimosQuadrados.AjusteLinear;
+import br.edu.ufcg.msn.minimosQuadrados.AjusteLogaritmo;
+import br.edu.ufcg.msn.minimosQuadrados.AjustePotencial;
 import br.edu.ufcg.msn.util.ChartMouseClickListener;
 import br.edu.ufcg.msn.util.Utils;
 
@@ -86,6 +91,33 @@ public class Facade {
 		MainFrame.newChartAvailable();
 	}
 	
+	//Interpolacao por Minimos Quadrados por Ajuste exponencial, 
+	//hiperbolico, ajuste linear, logaritmico e potencial
+	public void addMetodoIntMinQuadAjusteExponencial() throws MathException {
+		functions.add(new AjusteExponencial().interpolate(getXsArray() , getYsArray()));
+		MainFrame.newChartAvailable();
+	}
+	
+	public void addMetodoIntMinQuadAjusteHiperbolico() throws MathException {
+		functions.add(new AjusteHiperbolico().interpolate(getXsArray(), getYsArray()));
+		MainFrame.newChartAvailable();
+	}
+	
+	public void addMetodoIntMinQuadAjusteLinear() throws MathException {
+		functions.add(new AjusteLinear().interpolate(getXsArray(), getYsArray()));
+		MainFrame.newChartAvailable();
+	}
+	
+	public void addMetodoIntMinQuadAjusteLogaritmico() throws MathException {
+		functions.add(new AjusteLogaritmo().interpolate(getXsArray(), getYsArray()));
+		MainFrame.newChartAvailable();
+	}
+	
+	public void addMetodoIntMinQuadAjustePotencial() throws MathException {
+		functions.add(new AjustePotencial().interpolate(getXsArray(), getYsArray()));
+		MainFrame.newChartAvailable();
+	}
+	
 	//Ajuste de curva Nao Linear: Exponencial, logaritmico, potencia
 	public void addMetodoAjusteNaoLinearExponencial() throws MathException {
 		functions.add(new LeastSquaresFittingExponential().interpolate(getXsArray() , getYsArray()));
@@ -101,6 +133,8 @@ public class Facade {
 		functions.add(new LeastSquaresFittingPowerLaw().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
+	
+	
 	
 	public void addPoint(double x, double y) {
 		if (!xs.contains(x)){
