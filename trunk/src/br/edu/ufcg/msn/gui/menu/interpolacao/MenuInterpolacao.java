@@ -7,7 +7,7 @@ public class MenuInterpolacao extends JMenu{
 	
 	private MenuAproxiPolinomial menuAprPol = null;
 	private MenuRacional menuRacional = null;
-	private JMenuItem menuMinQuad = null;
+	private MenuInterpolacaoMinimosQuadrados menuMinQuad = null;
 	private MenuSpline menuSpline = null;
 	
 	public MenuInterpolacao() {
@@ -37,7 +37,7 @@ public class MenuInterpolacao extends JMenu{
 	}
 	private JMenuItem getMenuMinQuadrado() {
 		if (menuMinQuad == null) {
-			menuMinQuad = new JMenuItem("Método linear por Mínimos Quadrados"); 
+			menuMinQuad = new MenuInterpolacaoMinimosQuadrados(); 
 			menuMinQuad.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
