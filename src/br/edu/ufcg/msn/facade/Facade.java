@@ -219,7 +219,10 @@ public class Facade {
 		xs = new ArrayList<Double>();
 		ys = new ArrayList<Double>();
 		for (Point p : lp) {
-			addPoint(p.x, p.y);
+			if (!xs.contains(p.x)){
+				xs.add(p.x);
+				ys.add(p.y);
+			}
 		}
 	}
 
