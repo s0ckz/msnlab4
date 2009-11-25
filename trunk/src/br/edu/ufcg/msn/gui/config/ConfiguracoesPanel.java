@@ -1,6 +1,6 @@
 package br.edu.ufcg.msn.gui.config;
 
-import java.io.EOFException;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +9,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+
+import org.jfree.ui.tabbedui.VerticalLayout;
 
 import br.edu.ufcg.msn.facade.Facade;
 
 public class ConfiguracoesPanel extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static ConfiguracoesPanel instance = null;
 
 	public synchronized static ConfiguracoesPanel getInstance() {
@@ -156,43 +163,62 @@ public class ConfiguracoesPanel extends JPanel{
 		int yoffset = 10;
 		int space = 10;
 
-		JScrollPane sp = new JScrollPane();
-		sp.setSize(2*width+2*xoffset+space, 450);
-		sp.setLocation(5, 30);
-		sp.setAutoscrolls(true);
-		add(sp);
+		JPanel p = new JPanel();
 		List<Double> xs = facade.getXs();
 		List<Double> ys = facade.getYs();
-
+		p.setLayout(new VerticalLayout());
 		int i = 0;
+		JPanel point;
 		for (i = 0; i < xs.size(); i++) {
+			point = new JPanel();
+			point.setLayout(new GridLayout(0,2));
+
 			JTextField x = new JTextField(xs.get(i).toString());
-			x.setSize(width, height);
-			x.setLocation(xoffset, yoffset+(2*height*i));
+//			x.setSize(width, height);
+			//x.setLocation(xoffset, yoffset+(2*height*i));
 			x.setEditable(true);
 			xsText.add(x);
-			sp.add(x);
+			point.add(x);
 
 			JTextField y = new JTextField(ys.get(i).toString());
-			y.setSize(width, height);
-			y.setLocation(xoffset+space+width, yoffset+(2*height*i));
+	//		y.setSize(width, height);
+			//y.setLocation(xoffset+space+width, yoffset+(2*height*i));
 			y.setEditable(true);
 			ysText.add(y);
-			sp.add(y);
+			point.add(y);
+			point.setSize(2*width, height);
+			p.add(point);
 		}
+		point = new JPanel();
+		point.setLayout(new GridLayout(0,2));
+		
 		JTextField x = new JTextField();
-		x.setSize(width, height);
-		x.setLocation(xoffset, yoffset+(2*height*i));
+//		x.setSize(width, height);
+		//x.setLocation(xoffset, yoffset+(2*height*i));
 		x.setEditable(true);
 		xsText.add(x);
-		sp.add(x);
+		point.add(x);
 
 		JTextField y = new JTextField();
 		y.setSize(width, height);
-		y.setLocation(xoffset+space+width, yoffset+(2*height*i));
-		y.setEditable(true);
+		//y.setLocation(xoffset+space+width, yoffset+(2*height*i));
+//		y.setEditable(true);
 		ysText.add(y);
-		sp.add(y);
+		point.add(y);
+		point.setSize(2*width, height);
+		
+		p.add(point);
+		
+		p.setSize(2*width+2*xoffset+space, (i+1)*(yoffset+(2*height)));
+		add(p);
+		JScrollPane sp = new JScrollPane(p);
+		
+		sp.setSize(2*width+2*xoffset+space+20, 450);
+		sp.setLocation(5, 25);
+		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		this.add(sp);
+
 	}
 
 	public void refresh() {
