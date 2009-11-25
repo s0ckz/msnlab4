@@ -1,11 +1,15 @@
 package br.edu.ufcg.msn.facade;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.jfree.chart.ChartPanel;
+
+import com.sun.org.apache.bcel.internal.generic.NEWARRAY;
 
 import br.edu.ufcg.msn.ajuste.LeastSquareLinesFitting;
 import br.edu.ufcg.msn.ajustenaolinear.LeastSquaresFittingExponential;
@@ -107,7 +111,8 @@ public class Facade {
 			xs.add(x);
 			ys.add(y);
 		}
-		ConfiguracoesPanel.getInstance().newPoints();
+		sortPoints();
+		ConfiguracoesPanel.getInstance().refresh();
 	}
 	public void cleanUp(){
 		initFacade();
@@ -181,14 +186,18 @@ public class Facade {
 		functions = new ArrayList<UnivariateRealFunction>();
 	}
 
-	public void setXs(List<Double> xs) {
+	public void setXYs(List<Double> xs, List<Double> ys) {
 		this.xs = xs;
-	}
-	
-	private void setYs(List<Double> ys) {
 		this.ys = ys;
+		sortPoints();
+		TestMainFrame.newChartAvailable();
 	}
 
+	private void sortPoints() {
+		List<Point> lp = createList();
+		Collections.sort(lp);
+		putBack(lp);
+	}
 	public void updateConfigs(double d, double mx, double my, double Mx, double My) {
 		discreteness = d;
 		minX = mx<Mx?mx:Mx;
@@ -196,6 +205,41 @@ public class Facade {
 		minY = my<My?my:My;
 		maxY = my>My?my:My;
 		TestMainFrame.newChartAvailable();		
+	}
+	
+	private List<Point> createList() {
+		List<Point> res = new ArrayList<Point>();
+		for (int i = 0; i < xs.size(); i++) {
+			res.add(new Point(xs.get(i), ys.get(i)));
+		}
+		return res;
+	}
+	
+	private void putBack(List<Point> lp){
+		xs = new ArrayList<Double>();
+		ys = new ArrayList<Double>();
+		for (Point p : lp) {
+			xs.add(p.x);
+			ys.add(p.y);
+		}
+	}
+
+	private class Point implements Comparable{
+		double x;
+		double y;
+		
+		public Point(double x, double y){
+			this.x = x;
+			this.y = y;
+		}
+		public int compareTo(Object arg0) {
+			if(arg0 instanceof Point){
+				Point p = (Point)arg0;
+				return (this.x - p.x)<0?(-1):((this.x - p.x)>0?1:0);
+			}
+			return 0;
+		}
+		
 	}
 }
 

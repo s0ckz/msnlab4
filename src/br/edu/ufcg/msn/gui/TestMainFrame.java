@@ -59,6 +59,7 @@ public class TestMainFrame extends JFrame{
 			botaoLimpar.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					Facade.getInstance().cleanUp();
+					ConfiguracoesPanel.getInstance().refresh();
 				}
 			});
 		}
