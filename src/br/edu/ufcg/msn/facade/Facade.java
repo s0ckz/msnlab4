@@ -57,6 +57,12 @@ public class Facade {
 
 	String listKey = "";
 
+	public String getFocusPointSetKey() {
+		return listKey;
+	}
+	public void FocusPointSetKey(String listKey) {
+		this.listKey = listKey;
+	}
 	private Facade(){
 		initFacade();
 	}
@@ -163,10 +169,27 @@ public class Facade {
 		sortPoints();
 		ConfiguracoesPanel.getInstance().refresh();
 	}
-	public void cleanUp(){
+
+	public void claenUpAllConfigurations(){
 		initFacade();
+		MainFrame.newChartAvailable();		
+	}
+	
+	public void cleanUpAllPointsAndFunctions(){
+		cleanUpAllPoints();
+		cleanUpAllFunctions();
+	}
+
+	public void cleanUpAllPoints(){
+		xs = new TreeMap<String, List<Double>>();
+		ys = new TreeMap<String, List<Double>>();
 		MainFrame.newChartAvailable();
 	}
+
+	public void cleanUpAllFunctions(){
+		functions = new ArrayList<UnivariateRealFunction>();
+	}
+	
 	public ChartPanel getChart(){
 		try {
 			ChartPanel createChart = Utils.createChart(minX, minY, maxX, maxY, "", xs, ys, functions, discreteness, new ChartMouseClickListener () {
