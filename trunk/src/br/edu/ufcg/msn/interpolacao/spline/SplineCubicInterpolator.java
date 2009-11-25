@@ -8,6 +8,7 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.interpolation.SplineInterpolator;
 import org.jfree.chart.ChartPanel;
 
+import br.edu.ufcg.msn.util.SplineFunction;
 import br.edu.ufcg.msn.util.Utils;
 
 /**
