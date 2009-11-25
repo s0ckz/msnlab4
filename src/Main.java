@@ -1,6 +1,6 @@
 import javax.swing.UIManager;
 
-import br.edu.ufcg.msn.gui.TestMainFrame;
+import br.edu.ufcg.msn.gui.MainFrame;
 
 public class Main {
 	public static void main(String[] args) {
@@ -9,7 +9,7 @@ public class Main {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
-	        TestMainFrame t = TestMainFrame.getInstance();
+	        MainFrame t = MainFrame.getInstance();
 	        t.setVisible(true);
 	}
 }

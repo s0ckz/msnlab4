@@ -27,9 +27,15 @@ public class Demo {
 		ChartPanel createChart = Utils.createChart(-5, -5, 5, 5, "Gráfico", x, y, functions, 0.1, new ChartMouseClickListener () {
 
 			@Override
-			public void mouseClicked(ChartPanel chartPanel, double x, double y) {
-				Utils.addPoint(chartPanel, x, y);
-				System.out.println(Utils.getPointSeries(chartPanel));
+			public void mouseClicked(double x, double y) {
+//				Utils.addPoint(chartPanel, x, y);
+//				System.out.println(Utils.getPointSeries(chartPanel));
+			}
+
+			@Override
+			public void mouseOver(double x, double y) {
+				// TODO Auto-generated method stub
+				
 			}
 			
 		});
