@@ -4,7 +4,7 @@ import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 
 /**
- * This class represents a linear function.
+ * This class represents a Hermite function.
  * 
  * @see SplineLinearInterpolator
  * 
