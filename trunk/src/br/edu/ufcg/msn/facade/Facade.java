@@ -17,6 +17,8 @@ import br.edu.ufcg.msn.gui.config.ConfiguracoesPanel;
 import br.edu.ufcg.msn.interpolacao.InterpoladorLagrange;
 import br.edu.ufcg.msn.interpolacao.InterpoladorNeville;
 import br.edu.ufcg.msn.interpolacao.InterpoladorNewton;
+import br.edu.ufcg.msn.interpolacao.spline.AkimaCubicSplineInterpolator;
+import br.edu.ufcg.msn.interpolacao.spline.HermiteCubicSplineInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineCubicInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineLinearInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineQuadraticInterpolator;
@@ -86,11 +88,15 @@ public class Facade {
 		MainFrame.newChartAvailable();
 	}
 	
-	public void addMetodoSplineCubica() throws MathException {
-		functions.add(new SplineCubicInterpolator().interpolate(getXsArray(), getYsArray()));
+	public void addMetodoSplineCubicaAkima() throws MathException {
+		functions.add(new AkimaCubicSplineInterpolator().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
 	
+	public void addMetodoSplineCubicaHermite() throws MathException {
+		functions.add(new HermiteCubicSplineInterpolator().interpolate(getXsArray(), getYsArray()));
+		MainFrame.newChartAvailable();
+	}
 	//Interpolacao por Minimos Quadrados por Ajuste exponencial, 
 	//hiperbolico, ajuste linear, logaritmico e potencial
 	public void addMetodoIntMinQuadAjusteExponencial() throws MathException {
