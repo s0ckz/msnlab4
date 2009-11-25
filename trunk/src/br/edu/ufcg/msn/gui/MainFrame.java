@@ -12,6 +12,7 @@ import org.jfree.chart.ChartPanel;
 
 import br.edu.ufcg.msn.facade.Facade;
 import br.edu.ufcg.msn.gui.config.ConfiguracoesPanel;
+import br.edu.ufcg.msn.gui.menu.MenuLimpar;
 import br.edu.ufcg.msn.gui.menu.MenuNovo;
 
 public class MainFrame extends JFrame{
@@ -22,7 +23,7 @@ public class MainFrame extends JFrame{
 	Facade facade = Facade.getInstance();
 	private ChartPanel chartPanelInput;
 	private JTabbedPane painelAbas = null;
-	private JMenu menuLimpar = null; 
+	private MenuLimpar menuLimpar = null; 
 	
 	private static MainFrame instance = null;
 	
@@ -55,21 +56,6 @@ public class MainFrame extends JFrame{
 		return painelAbas;
 	}
 	
-	private JMenu getJMenuItemLimpar() {
-		if (menuLimpar == null) {
-			menuLimpar = new JMenu("Limpar");
-			JMenuItem menuItemLimparGrafico = new JMenuItem("Grafico");
-			menuItemLimparGrafico.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					Facade.getInstance().cleanUpAllConfigurations();
-					ConfiguracoesPanel.getInstance().refresh();
-				}
-			});
-			menuLimpar.add(menuItemLimparGrafico);
-		}
-		return menuLimpar;
-	}
-	
 	private JMenuBar getBarra() {
 		if (jMenuBar == null) {
 			jMenuBar = new JMenuBar();
@@ -85,7 +71,13 @@ public class MainFrame extends JFrame{
 		}
 		return menuNovo;
 	}
-
+	
+	private MenuLimpar getJMenuItemLimpar(){
+		if (menuLimpar == null) {
+			menuLimpar = new MenuLimpar();
+		}
+		return menuLimpar;
+	}
 	public void adicionaGraficoResposta(ChartPanel createChart) {
 		chartPanelInput.setVisible(false);
 		this.getContentPane().add(createChart);

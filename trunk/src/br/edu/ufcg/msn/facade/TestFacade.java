@@ -19,11 +19,11 @@ public class TestFacade {
 	
 	public static void main(String[] args) throws MathException {
 		Facade facade = Facade.getInstance();
-		facade.addPoint(4, 5);
-		facade.addPoint(3, 6);
-		facade.addPoint(2, 1);
-		facade.addPoint(0, 4);
-		facade.addMetodoAjusteLinear();
+//		facade.addPoint(4, 5);
+		//		facade.addPoint(3, 6);
+		//		facade.addPoint(2, 1);
+		//		facade.addPoint(0, 4);
+		//		facade.addMetodoAjusteLinear();
 		facade.addMetodoInterpolacaoLagrange();
 		
 		JPanel createChart = facade.getChart();
