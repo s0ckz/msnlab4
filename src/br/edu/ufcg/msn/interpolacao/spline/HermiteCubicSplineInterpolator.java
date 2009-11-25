@@ -24,16 +24,19 @@ public class HermiteCubicSplineInterpolator extends AbstractSplineInterpolator {
 	public UnivariateRealFunction interpolate(double[] xval, double[] yval)
 			throws MathException {
 		validate(xval, yval);
+		double[] tangents = findTangents(yval);
+		return interpolate(xval, yval, tangents);
+	}
 
+	protected SplineFunction interpolate(double[] xval, double[] yval,
+			double[] tangents) {
 		int n = xval.length - 1;
 		UnivariateRealFunction[] functions = new UnivariateRealFunction[n];
-		double[] tangents = findTangents(yval);
 		for (int i = 1; i <= n; i++) {
 			functions[i - 1] = new HermiteFunction(xval[i - 1], xval[i],
 					yval[i - 1], yval[i], tangents[i - 1], tangents[i]);
 
 		}
-
 		return new SplineFunction(xval, functions);
 	}
 

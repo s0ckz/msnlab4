@@ -18,7 +18,7 @@ import br.edu.ufcg.msn.util.Utils;
  * @author Rodrigo Bruno
  * 
  */
-public class AkimaCubicSplineInterpolator extends AbstractSplineInterpolator {
+public class AkimaCubicSplineInterpolator extends HermiteCubicSplineInterpolator {
 
 	@Override
 	public UnivariateRealFunction interpolate(double[] xval, double[] yval)
@@ -77,7 +77,7 @@ public class AkimaCubicSplineInterpolator extends AbstractSplineInterpolator {
 
 		}
 
-		return new SplineFunction(xval, functions);
+		return interpolate(xval, yval, d);
 	}
 
 	private static double diffthreepoint(double t, double x0, double f0,
