@@ -130,11 +130,26 @@ public class ConfiguracoesPanel extends JPanel{
 			double My = Double.parseDouble(maxYTextField.getText());
 			facade.updateConfigs(d, mx, my, Mx, My);
 		}catch(Exception e) {}
+		List<Double> xs = new ArrayList<Double>();
+		List<Double> ys = new ArrayList<Double>();
+		
+		for (int i = 0; i < xsText.size(); i++) {
+			try{
+				double x = Double.parseDouble(xsText.get(i).getText());
+				double y = Double.parseDouble(ysText.get(i).getText());
+				xs.add(x);
+				ys.add(y);
+			}catch (Exception e) { }
+			facade.setXYs(xs, ys);
+		}
+		refresh();
 	}
 
-	List<JTextField> xsText = new ArrayList<JTextField>();
-	List<JTextField> ysText = new ArrayList<JTextField>();
+	List<JTextField> xsText;
+	List<JTextField> ysText;
 	private void initPoints() {
+		xsText = new ArrayList<JTextField>();
+		ysText = new ArrayList<JTextField>();
 		int height = 20;
 		int width = 160;
 		int xoffset = 10;
@@ -157,11 +172,12 @@ public class ConfiguracoesPanel extends JPanel{
 			x.setEditable(true);
 			xsText.add(x);
 			sp.add(x);
+
 			JTextField y = new JTextField(ys.get(i).toString());
 			y.setSize(width, height);
 			y.setLocation(xoffset+space+width, yoffset+(2*height*i));
 			y.setEditable(true);
-			xsText.add(x);
+			ysText.add(y);
 			sp.add(y);
 		}
 		JTextField x = new JTextField();
@@ -170,16 +186,17 @@ public class ConfiguracoesPanel extends JPanel{
 		x.setEditable(true);
 		xsText.add(x);
 		sp.add(x);
+
 		JTextField y = new JTextField();
 		y.setSize(width, height);
 		y.setLocation(xoffset+space+width, yoffset+(2*height*i));
 		y.setEditable(true);
-		xsText.add(x);
+		ysText.add(y);
 		sp.add(y);
 	}
 
-	public void newPoints() {
-		initPoints();
+	public void refresh() {
+		this.removeAll();
+		initialize();
 	}
-
 }
