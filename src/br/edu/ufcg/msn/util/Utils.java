@@ -206,11 +206,19 @@ public class Utils {
 					double x = plot.getDomainAxis().java2DToValue(anchor.getX(), plotArea , plot.getDomainAxisEdge());
 					double y = plot.getRangeAxis().java2DToValue(anchor.getY(), plotArea , plot.getRangeAxisEdge());
 					
-					listener.mouseClicked(chartPanel, x, y);
+					listener.mouseClicked(x, y);
 				}
 				
 				@Override
 				public void chartMouseMoved(ChartMouseEvent event) {
+					Point anchor = event.getTrigger().getPoint();
+					XYPlot plot = chartPanel.getChart().getXYPlot();
+					Rectangle2D plotArea = chartPanel.getScreenDataArea();
+					
+					double x = plot.getDomainAxis().java2DToValue(anchor.getX(), plotArea , plot.getDomainAxisEdge());
+					double y = plot.getRangeAxis().java2DToValue(anchor.getY(), plotArea , plot.getRangeAxisEdge());
+					
+					listener.mouseOver(x, y);		
 				}
 				
 			});
