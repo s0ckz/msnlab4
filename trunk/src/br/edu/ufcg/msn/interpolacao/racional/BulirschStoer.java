@@ -2,9 +2,11 @@ package br.edu.ufcg.msn.interpolacao.racional;
 
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
+import org.apache.commons.math.analysis.interpolation.DividedDifferenceInterpolator;
 import org.apache.commons.math.analysis.interpolation.NevilleInterpolator;
 import org.apache.commons.math.analysis.interpolation.UnivariateRealInterpolator;
 import org.apache.commons.math.analysis.polynomials.PolynomialFunction;
+import org.apache.commons.math.analysis.polynomials.PolynomialFunctionLagrangeForm;
 /**
  * Interpolacao polinomial usando metodo de Bulirsch-Stoer
  * 
@@ -26,16 +28,8 @@ public class BulirschStoer implements UnivariateRealInterpolator {
 	@Override
 	public UnivariateRealFunction interpolate(double[] x, double[] y)
 			throws MathException {
-		
-		NevilleInterpolator interpoladorNeville = new NevilleInterpolator();
-		double[] temp = interpoladorNeville.interpolate(x, y). getCoefficients();
-		
-		double[] coeficientes = new double[temp.length/2];
-		for (int i = 0; i < coeficientes.length; i++) 
-			coeficientes[i] = temp[i];
-		
-		PolynomialFunction funcaoPolinomial = new PolynomialFunction(temp);
-		return funcaoPolinomial;
+		double[] coeficientes = new PolynomialFunctionBulirschStoer(x, y).getCoefficients(); 
+		return new PolynomialFunction(coeficientes);
 	}
 
 	
