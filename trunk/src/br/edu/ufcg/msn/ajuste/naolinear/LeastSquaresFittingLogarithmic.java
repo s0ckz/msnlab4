@@ -1,8 +1,9 @@
 package br.edu.ufcg.msn.ajuste.naolinear;
 
+import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.interpolation.UnivariateRealInterpolator;
-import org.apache.commons.math.analysis.polynomials.PolynomialFunction;
 
 /**
  * Exponential Non Linear Curve Fitting
@@ -13,8 +14,6 @@ import org.apache.commons.math.analysis.polynomials.PolynomialFunction;
  * {@link http://mathworld.wolfram.com/LeastSquaresFittingLogarithmic.html }
  */
 public class LeastSquaresFittingLogarithmic extends NonLinearFitting implements UnivariateRealInterpolator {
-
-	private double b;
 
 	/**
 	 * Fits a set of points to a exponential function, of the type y = A + B*ln(x).
@@ -28,20 +27,22 @@ public class LeastSquaresFittingLogarithmic extends NonLinearFitting implements 
 	 * @author Eduardo Santiago Moura
 	 * @author Italo Souto Figueiredo
 	 */
-	@Override
-	public UnivariateRealFunction interpolate(double[] xVal, double[] yVal) {
+	public UnivariateRealFunction interpolate(double[] xVal, double[] yVal)
+	throws MathException {
 
 		//B coefficient
 		this.b = solveB(xVal, yVal);
 
 		//A coefficient
-		double a = solveA(xVal, yVal);
+		this.a = solveA(xVal, yVal);
 
 		//First a, then b
-		double[] aAndB = {a, this.b};
+		double[] aAndB = {this.a, this.b};
 
 		//Results
-		return new PolynomialFunction(aAndB);
+		this.coefficients = aAndB;
+
+		return this;
 	}
 
 	/**
@@ -50,7 +51,6 @@ public class LeastSquaresFittingLogarithmic extends NonLinearFitting implements 
 	 * @author Eduardo Santiago Moura
 	 * @author Italo Souto Figueiredo
 	 */
-	@Override
 	protected double solveA(double[] xVal, double[] yVal){
 
 		//Number of points
@@ -83,7 +83,6 @@ public class LeastSquaresFittingLogarithmic extends NonLinearFitting implements 
 	 * @author Eduardo Santiago Moura
 	 * @author Italo Souto Figueiredo
 	 */
-	@Override
 	protected double solveB(double[] xVal, double[] yVal){
 
 		//Number of points
@@ -116,9 +115,34 @@ public class LeastSquaresFittingLogarithmic extends NonLinearFitting implements 
 
 		}
 
-		double B = ((n * yLnx) - (y * lnx)) / ((n * lnx2) - Math.pow(lnx,2));
+		double b = ((n * yLnx) - (y * lnx)) / ((n * lnx2) - Math.pow(lnx,2));
 
-		return B;
+		return b;
+	}
+
+	/**
+	 * Compute the value for the function.
+	 *
+	 * @author Eduardo Santiago Moura
+	 * @author Italo Souto Figueiredo
+	 *
+	 * @param x The point for which the function value should be computed
+	 *
+	 * @return The value
+	 *
+	 */
+	public double value(double x) throws FunctionEvaluationException {
+		return this.a + this.b * Math.log(x);
+	}
+
+	/**
+	 * ToString method.
+	 *
+	 * @author Eduardo Santiago Moura
+	 * @author Italo Souto Figueiredo
+	 */
+	public String toString(){
+		return this.a + " + ( " + this.b + " * ln(x))";
 	}
 
 	/**
@@ -127,18 +151,16 @@ public class LeastSquaresFittingLogarithmic extends NonLinearFitting implements 
  	 * @author Eduardo Santiago Moura
 	 * @author Italo Souto Figueiredo
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MathException {
 
 		final double[] xVal = {30., 21., 35., 42., 37., 20., 8., 17., 35., 25.};
 		final double[] yVal = {430., 335., 520., 490., 470., 210., 195., 270., 400., 480.};
 
-		LeastSquaresFittingExponential exp = new LeastSquaresFittingExponential();
+		UnivariateRealInterpolator log = new LeastSquaresFittingLogarithmic();
 
-		PolynomialFunction function = (PolynomialFunction) exp.interpolate(xVal, yVal);
+		UnivariateRealFunction function = log.interpolate(xVal, yVal);
 
-		double[] coefficients = function.getCoefficients();
-
-		System.out.println("Function: " + coefficients[0] + " + ( " + coefficients[1] + " * ln(x))");
+		System.out.println("Function: " + function);
 
 	}
 

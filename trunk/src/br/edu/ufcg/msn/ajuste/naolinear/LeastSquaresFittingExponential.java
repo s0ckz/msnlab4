@@ -1,8 +1,9 @@
 package br.edu.ufcg.msn.ajuste.naolinear;
 
+import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.interpolation.UnivariateRealInterpolator;
-import org.apache.commons.math.analysis.polynomials.PolynomialFunction;
 
 /**
  * Exponential Non Linear Curve Fitting
@@ -26,20 +27,22 @@ public class LeastSquaresFittingExponential extends NonLinearFitting implements 
 	 * @author Eduardo Santiago Moura
 	 * @author Italo Souto Figueiredo
 	 */
-	@Override
-	public UnivariateRealFunction interpolate(double[] xVal, double[] yVal) {
+	public UnivariateRealFunction interpolate(double[] xVal, double[] yVal)
+	throws MathException {
 
 		//A coefficient
-		double a = Math.exp(solveA(xVal, yVal));
+		this.a = Math.exp(solveA(xVal, yVal));
 
 		//B coefficient
-		double b = solveB(xVal, yVal);
+		this.b = solveB(xVal, yVal);
 
 		//First a, then b
-		double[] aAndB = {a, b};
+		double[] aAndB = {this.a, this.b};
 
 		//Results
-		return new PolynomialFunction(aAndB);
+		this.coefficients = aAndB;
+
+		return this;
 	}
 
 	/**
@@ -48,7 +51,6 @@ public class LeastSquaresFittingExponential extends NonLinearFitting implements 
 	 * @author Eduardo Santiago Moura
 	 * @author Italo Souto Figueiredo
 	 */
-	@Override
 	protected double solveA(double[] xVal, double[] yVal){
 
 		//Number of points
@@ -87,7 +89,7 @@ public class LeastSquaresFittingExponential extends NonLinearFitting implements 
 
 		double a = ((x2y * yLny) - (xy * xyLny)) / ((y * x2y) - Math.pow(xy,2));
 
-		return Math.exp(a);
+		return a;
 	}
 
 	/**
@@ -96,7 +98,6 @@ public class LeastSquaresFittingExponential extends NonLinearFitting implements 
 	 * @author Eduardo Santiago Moura
 	 * @author Italo Souto Figueiredo
 	 */
-	@Override
 	protected double solveB(double[] xVal, double[] yVal){
 
 		//Number of points
@@ -139,24 +140,48 @@ public class LeastSquaresFittingExponential extends NonLinearFitting implements 
 	}
 
 	/**
+	 * Compute the value for the function.
+	 *
+	 * @author Eduardo Santiago Moura
+	 * @author Italo Souto Figueiredo
+	 *
+	 * @param x The point for which the function value should be computed
+	 *
+	 * @return The value
+	 *
+	 */
+	public double value(double x) throws FunctionEvaluationException {
+		return this.a * Math.exp(this.b * x);
+	}
+
+	/**
+	 * ToString method.
+	 *
+	 * @author Eduardo Santiago Moura
+	 * @author Italo Souto Figueiredo
+	 */
+	public String toString(){
+		return this.a + " * e^(" + this.b + " * x)";
+	}
+
+	/**
 	 * This main method will just be used during manual tests.
 	 *
  	 * @author Eduardo Santiago Moura
 	 * @author Italo Souto Figueiredo
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MathException {
 
 		final double[] xVal = {30., 21., 35., 42., 37., 20., 8., 17., 35., 25.};
 		final double[] yVal = {430., 335., 520., 490., 470., 210., 195., 270., 400., 480.};
 
-		LeastSquaresFittingExponential exp = new LeastSquaresFittingExponential();
+		UnivariateRealInterpolator exp = new LeastSquaresFittingExponential();
 
-		PolynomialFunction function = (PolynomialFunction) exp.interpolate(xVal, yVal);
+		UnivariateRealFunction function = exp.interpolate(xVal, yVal);
 
-		double[] coefficients = function.getCoefficients();
-
-		System.out.println("Function: " + coefficients[0] + " e^( " + coefficients[1] + "x )");
+		System.out.println("Function: " + function);
 
 	}
+
 
 }
