@@ -229,9 +229,6 @@ public class PolynomialFunctionBulirschStoer implements UnivariateRealFunction {
                 }
             }
             t = y[i] / d;
-            // Lagrange polynomial is the sum of n terms, each of which is a
-            // polynomial of degree n-1. tc[] are the coefficients of the i-th
-            // numerator Pi(x) = (x-x[0])...(x-x[i-1])(x-x[i+1])...(x-x[n-1]).
             tc[n-1] = c[n];     // actually c[n] = 1
             coefficients[n-1] += t * tc[n-1];
             for (j = n-2; j >= 0; j--) {
