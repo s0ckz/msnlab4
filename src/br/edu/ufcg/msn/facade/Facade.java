@@ -218,13 +218,13 @@ public class Facade {
 		try {
 			ChartPanel createChart = Utils.createChart(minX, minY, maxX, maxY, "", xs, ys, functions, discreteness, new ChartMouseClickListener () {
 				@Override
-				public void mouseClicked(double x, double y) {
+				public void mouseClicked(double x, double y, ChartPanel chartPanel) {
 					addPoint(x, y);
 					MainFrame.newChartAvailable();
 				}
 
 				@Override
-				public void mouseOver(double x, double y) {
+				public void mouseOver(double x, double y, ChartPanel chartPanel) {
 					MainFrame.getInstance().setToolTipText("(" + x + ", "  + y + ")");
 				}
 			});

@@ -1,7 +1,7 @@
 package br.edu.ufcg.msn.util;
 
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
+
 
 /**
  * @author Abmar Barros
@@ -12,8 +12,8 @@ import org.jfree.chart.JFreeChart;
  */
 public interface ChartMouseClickListener {
 
-	public void mouseClicked(double x, double y);
+	public void mouseClicked(double x, double y, ChartPanel chartPanel);
 
-	public void mouseOver(double x, double y);
+	public void mouseOver(double x, double y, ChartPanel chartPanel);
 	
 }

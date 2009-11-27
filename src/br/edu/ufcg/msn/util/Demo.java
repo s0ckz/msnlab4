@@ -1,7 +1,10 @@
 package br.edu.ufcg.msn.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
@@ -14,8 +17,6 @@ import org.jfree.chart.ChartPanel;
 public class Demo {
 
 	public static void main(String[] args) throws FunctionEvaluationException {
-		double[] x = {0, 1, 2, 3, 4};
-		double[] y = {4, 3, 2, 1, 0};
 		
 		List<UnivariateRealFunction> functions = new ArrayList<UnivariateRealFunction>();
 		
@@ -24,16 +25,23 @@ public class Demo {
 		
 		functions.add(f1);
 		functions.add(f2);
-		ChartPanel createChart = Utils.createChart(-5, -5, 5, 5, "Gráfico", x, y, functions, 0.1, new ChartMouseClickListener () {
+		
+		Map<String, List<Double>> xs = new HashMap<String, List<Double>>();
+		xs.put("pontos", Arrays.asList(0d, 1d, 2d, 3d, 4d));
+		
+		Map<String, List<Double>> ys = new HashMap<String, List<Double>>();
+		ys.put("pontos", Arrays.asList(4d, 3d, 2d, 1d, 0d));
+		
+		ChartPanel createChart = Utils.createChart(-5, -5, 5, 5, "Gráfico", xs, ys, functions, 0.1, new ChartMouseClickListener () {
 
 			@Override
-			public void mouseClicked(double x, double y) {
-//				Utils.addPoint(chartPanel, x, y);
-//				System.out.println(Utils.getPointSeries(chartPanel));
+			public void mouseClicked(double x, double y, ChartPanel chartPanel) {
+				Utils.addPoint(chartPanel, x, y);
+				System.out.println(Utils.getPointSeries(chartPanel));
 			}
 
 			@Override
-			public void mouseOver(double x, double y) {
+			public void mouseOver(double x, double y, ChartPanel chartPanel) {
 				// TODO Auto-generated method stub
 				
 			}

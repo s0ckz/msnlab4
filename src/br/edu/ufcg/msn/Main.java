@@ -1,3 +1,4 @@
+package br.edu.ufcg.msn;
 import javax.swing.UIManager;
 
 import br.edu.ufcg.msn.gui.MainFrame;

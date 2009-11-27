@@ -209,7 +209,7 @@ public class Utils {
 					double x = plot.getDomainAxis().java2DToValue(anchor.getX(), plotArea , plot.getDomainAxisEdge());
 					double y = plot.getRangeAxis().java2DToValue(anchor.getY(), plotArea , plot.getRangeAxisEdge());
 
-					listener.mouseClicked(x, y);
+					listener.mouseClicked(x, y, chartPanel);
 				}
 
 				@Override
@@ -221,7 +221,7 @@ public class Utils {
 					double x = plot.getDomainAxis().java2DToValue(anchor.getX(), plotArea , plot.getDomainAxisEdge());
 					double y = plot.getRangeAxis().java2DToValue(anchor.getY(), plotArea , plot.getRangeAxisEdge());
 
-					listener.mouseOver(x, y);		
+					listener.mouseOver(x, y, chartPanel);		
 				}
 
 			});
