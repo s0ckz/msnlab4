@@ -41,7 +41,7 @@ public class FastFourierTransformer implements Serializable {
     	jFrame.setVisible(true);
     }
 
-    private UnivariateRealFunction transformer(double[] xval, double[] yval, int degree) {
+    public UnivariateRealFunction transformer(double[] xval, double[] yval, int degree) {
 		
     	return new FourierFunction(xval, yval, degree);
 	}
