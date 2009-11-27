@@ -24,7 +24,7 @@ public class ContourDemo {
 			}
 		};
 
-		JPanel contourChart = Utils.createContourChart(f, 0, 100, 0, 100, 1, "Contour");
+		JPanel contourChart = Utils.createContourChart(f, 0, 100, 0, 100, 0.1, "Contour");
 		
 		JDialog dialog = new JDialog();
 		dialog.setContentPane(contourChart);
