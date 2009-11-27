@@ -24,6 +24,7 @@ import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjusteExponencial;
 import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjusteHiperbolico;
 import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjusteLinear;
 import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjusteLogaritmo;
+import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjustePolinomial;
 import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjustePotencial;
 import br.edu.ufcg.msn.interpolacao.spline.AkimaCubicSplineInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.HermiteCubicSplineInterpolator;
@@ -114,7 +115,7 @@ public class Facade {
 		MainFrame.newChartAvailable();
 	}
 	//Interpolacao por Minimos Quadrados por Ajuste exponencial, 
-	//hiperbolico, ajuste linear, logaritmico e potencial
+	//hiperbolico, ajuste linear, logaritmico, potencial, polinomial
 	public void addMetodoIntMinQuadAjusteExponencial( ) throws MathException {
 		functions.add(new AjusteExponencial().interpolate(getXsArray() , getYsArray()));
 		MainFrame.newChartAvailable();
@@ -139,7 +140,12 @@ public class Facade {
 		functions.add(new AjustePotencial().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
-
+	
+	public void addMetodoIntMinQuadAjustePolinomial(int grau) throws MathException {
+		functions.add(new AjustePolinomial().interpolate(getXsArray(), getYsArray(), grau));
+		MainFrame.newChartAvailable();
+	}
+	
 	//Ajuste de curva Nao Linear: Exponencial, logaritmico, potencia
 	public void addMetodoAjusteNaoLinearExponencial( ) throws MathException {
 		functions.add(new LeastSquaresFittingExponential().interpolate(getXsArray() , getYsArray()));
