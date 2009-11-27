@@ -14,6 +14,8 @@ import br.edu.ufcg.msn.ajuste.linear.LeastSquareLinesFitting;
 import br.edu.ufcg.msn.ajuste.naolinear.LeastSquaresFittingExponential;
 import br.edu.ufcg.msn.ajuste.naolinear.LeastSquaresFittingLogarithmic;
 import br.edu.ufcg.msn.ajuste.naolinear.LeastSquaresFittingPowerLaw;
+import br.edu.ufcg.msn.fft.FastFourierTransformer;
+import br.edu.ufcg.msn.fft.FourierFunction;
 import br.edu.ufcg.msn.gui.MainFrame;
 import br.edu.ufcg.msn.gui.config.ConfiguracoesPanel;
 import br.edu.ufcg.msn.gui.menu.MenuLimpar;
@@ -145,6 +147,13 @@ public class Facade {
 		functions.add(new AjustePolinomial().interpolate(getXsArray(), getYsArray(), grau));
 		MainFrame.newChartAvailable();
 	}
+	
+	// Transf Rapida de Fourier
+	public void addMetodoTrasformadaRapidaFourier(int grau) throws MathException {
+		functions.add(new FastFourierTransformer().transformer(getXsArray(), getYsArray(), grau));
+		MainFrame.newChartAvailable();
+	}
+	
 	
 	//Ajuste de curva Nao Linear: Exponencial, logaritmico, potencia
 	public void addMetodoAjusteNaoLinearExponencial( ) throws MathException {
