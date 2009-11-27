@@ -50,18 +50,18 @@ public class Utils {
 	/**
 	 * Creates a panel containing a chart defined by a given function.
 	 * @param function
-	 * @param maxX
 	 * @param minX
+	 * @param maxX
 	 * @param discreteness
 	 * @param chartLabel
 	 * @return
 	 * @throws FunctionEvaluationException
 	 */
 	public static ChartPanel createChart(UnivariateRealFunction function, 
-			double maxX, double minX, double discreteness, String chartLabel, 
+			double minX, double maxX, double discreteness, String chartLabel, 
 			final ChartMouseClickListener listener) throws FunctionEvaluationException {
 
-		XYSeries series = createFunctionSeries(maxX, minX, discreteness, function);
+		XYSeries series = createFunctionSeries(minX, maxX, discreteness, function);
 		XYDataset xyDataset = new XYSeriesCollection(series);
 
 		JFreeChart chart = ChartFactory.createXYLineChart(chartLabel, 
