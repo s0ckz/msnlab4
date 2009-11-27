@@ -1,31 +1,51 @@
 package br.edu.ufcg.msn.gui.menu;
 
-import javax.swing.JApplet;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import br.edu.ufcg.msn.facade.Facade;
 import br.edu.ufcg.msn.gui.menu.ajustecurvas.MenuAjusteCurva;
-import br.edu.ufcg.msn.gui.menu.ajustecurvas.MenuTransfRapidaFourier;
 import br.edu.ufcg.msn.gui.menu.interpolacao.MenuInterpolacao;
 
 @SuppressWarnings("serial")
 public class MenuNovo extends JMenu{
 	
 	private MenuAjusteCurva menuAjCurva = null;
-	private MenuTransfRapidaFourier menuTrasRapFourier = null;
 	private MenuInterpolacao menuInterp = null;
-	private JMenuItem itemSetConjuntoPonto = null;
-	private JOptionPane optPane = new JOptionPane();
+	private JMenuItem itemSetConjuntoPonto, menuItemTrasRapFourier = null;
 	
 	public MenuNovo() {
 		initialize();
 	}
-
+	
 	private void initialize() {
 		this.setText("Novo");
-		setMenuAjusteCurva();
+		menuAjCurva = new MenuAjusteCurva();
+		menuInterp = new MenuInterpolacao();
+		this.add(menuInterp);
+		this.add(menuAjCurva);
+		this.add(getJMenuItemFFT());
+		this.add(getJMenuItemConjPontos());
+	}
+
+	private JMenuItem getJMenuItemFFT() {
+		menuItemTrasRapFourier = new JMenuItem("Trasformada Rapida de Fourier");
+		menuItemTrasRapFourier.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				try {
+					int grau =  Integer.parseInt(JOptionPane.showInputDialog(menuItemTrasRapFourier, "Digite o o grau do polinomio."));
+					Facade.getInstance().addMetodoTrasformadaRapidaFourier(grau);
+					
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(menuItemTrasRapFourier, "O valor digitado não corresponde a um numero, tente novamente");
+				}
+			}
+		});
+		return menuItemTrasRapFourier;	
+	}
+
+	private JMenuItem getJMenuItemConjPontos() {
 		itemSetConjuntoPonto = new JMenuItem("Conjunto de Pontos");
 		itemSetConjuntoPonto.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -37,23 +57,6 @@ public class MenuNovo extends JMenu{
 				Facade.getInstance().setFocusPoint(listKey);
 			}
 		});
-		this.add(itemSetConjuntoPonto);	
+		return itemSetConjuntoPonto;	
 	}
-
-	private void setMenuAjusteCurva() {
-		menuAjCurva = new MenuAjusteCurva();
-		menuTrasRapFourier = new MenuTransfRapidaFourier();
-		menuTrasRapFourier.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
-			}
-		});
-		menuInterp = new MenuInterpolacao();
-		this.add(menuInterp);
-		this.add(menuAjCurva);
-		this.add(menuTrasRapFourier);
-		
-	}
-	
-	
 }
