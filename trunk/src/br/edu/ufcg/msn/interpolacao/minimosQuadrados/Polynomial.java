@@ -36,13 +36,13 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
  *************************************************************************/
 
 public class Polynomial implements UnivariateRealFunction{
-    private int[] coef;  // coefficients
-    private int deg;     // degree of polynomial (0 for the zero polynomial)
+    private double[] coef;  // coefficients
+    private double deg;     // degree of polynomial (0 for the zero polynomial)
 
     // a * x^b
-    public Polynomial(int a, int b) {
-        coef = new int[b+1];
-        coef[b] = a;
+    public Polynomial(double a, double b) {
+        coef = new double[(int) (b+1)];
+        coef[(int) b] = a;
         deg = degree();
     }
 
@@ -89,7 +89,7 @@ public class Polynomial implements UnivariateRealFunction{
     public Polynomial compose(Polynomial b) {
         Polynomial a = this;
         Polynomial c = new Polynomial(0, 0);
-        for (int i = a.deg; i >= 0; i--) {
+        for (int i = (int) a.deg; i >= 0; i--) {
             Polynomial term = new Polynomial(a.coef[i], 0);
             c = term.plus(b.times(c));
         }
@@ -101,7 +101,7 @@ public class Polynomial implements UnivariateRealFunction{
     public boolean eq(Polynomial b) {
         Polynomial a = this;
         if (a.deg != b.deg) return false;
-        for (int i = a.deg; i >= 0; i--)
+        for (int i = (int) a.deg; i >= 0; i--)
             if (a.coef[i] != b.coef[i]) return false;
         return true;
     }
@@ -110,7 +110,7 @@ public class Polynomial implements UnivariateRealFunction{
     // use Horner's method to compute and return the polynomial evaluated at x
     public double value(double x) {
     	double p = 0;
-        for (int i = deg; i >= 0; i--)
+        for (int i = (int) deg; i >= 0; i--)
             p = coef[i] + (x * p);
         return p;
     }
@@ -131,8 +131,8 @@ public class Polynomial implements UnivariateRealFunction{
     public String toString() {
         if (deg ==  0) return "" + coef[0];
         if (deg ==  1) return coef[1] + "x + " + coef[0];
-        String s = coef[deg] + "x^" + deg;
-        for (int i = deg-1; i >= 0; i--) {
+        String s = coef[(int) deg] + "x^" + deg;
+        for (int i = (int) (deg-1); i >= 0; i--) {
             if      (coef[i] == 0) continue;
             else if (coef[i]  > 0) s = s + " + " + ( coef[i]);
             else if (coef[i]  < 0) s = s + " - " + (-coef[i]);
