@@ -2,7 +2,7 @@ package br.edu.ufcg.msn.interpolacao.spline3d;
 
 import org.apache.commons.math.analysis.MultivariateRealFunction;
 
-public class BicubicSplineTest {
+public class BilinearSplineTest {
 	
 	public static void main(String arg[]) throws Exception {
 //		// Array of wavelengths (m)
@@ -21,11 +21,11 @@ public class BicubicSplineTest {
 //		// Interpolation variables
 //		double x1, x2, y1;
 //
-//		// Create a BiCubicSpline instance and initialise it to the data stored
+//		// Create a BiLinearSpline instance and initialise it to the data stored
 //		// in the arrays wavelength, temperature and refrindex
-//		BicubicSplineInterpolator bcsi = new BicubicSplineInterpolator();
+//		BilinearSplineInterpolator blsi = new BilinearSplineInterpolator();
 //
-//		MultivariateRealFunction mrf = bcsi.interpolate(wavelength, temperature, refrindex);
+//		MultivariateRealFunction mrf = blsi.interpolate(wavelength, temperature, refrindex);
 //		
 //		// First interpolation at a wavelength of 404.6 nm and a temperature of
 //		// 20 degrees Celsius
@@ -45,7 +45,7 @@ public class BicubicSplineTest {
 //		x2 = 33.0;
 //		y1 = mrf.value(new double[]{x1, x2});
 //		
-////		assert(y1 == 1.3314520839241857);
+////		assert(y1 == 1.331427609215017);
 //		System.out.println("The refractive index of water at " + x1 * 1.0e9 + " nm and " + x2 + " C is " + y1);
 		
 		double[] x1 = { 1, 2, 3 };
@@ -57,14 +57,15 @@ public class BicubicSplineTest {
 
 		// Create a BiLinearSpline instance and initialise it to the data stored
 		// in the arrays wavelength, temperature and refrindex
-		BicubicSplineInterpolator bcsi = new BicubicSplineInterpolator();
+		BilinearSplineInterpolator blsi = new BilinearSplineInterpolator();
 
-		MultivariateRealFunction mrf = bcsi.interpolate(x1, x2, pesos);
+		MultivariateRealFunction mrf = blsi.interpolate(x1, x2, pesos);
 		
 		x1_ = 2.5;
 		x2_ = 2.5;
 		y1 = mrf.value(new double[]{x1_, x2_});
 		
 		System.out.println(y1);
+		
 	}
 }
