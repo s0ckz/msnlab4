@@ -29,8 +29,8 @@ public class ContourDemo {
 		}
 		
 		SimpleGrid newData = new SimpleGrid(z, x, y, null);
-		newData.setXMetaData(new SGTMetaData("x",null));
-		newData.setYMetaData(new SGTMetaData("y",null));
+		newData.setXMetaData(new SGTMetaData("x","u"));
+		newData.setYMetaData(new SGTMetaData("y","u"));
 		newData.setZMetaData(new SGTMetaData("z","Peso"));
 
 		JDialog dialog = new JDialog();
