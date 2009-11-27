@@ -2,13 +2,14 @@ package br.edu.ufcg.msn.gui.menu.interpolacao;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import br.edu.ufcg.msn.facade.Facade;
 
 public class MenuInterpolacaoMinimosQuadrados extends JMenu{
 	
 	private JMenuItem ajusteExponencial, ajusteHiperbolico, ajusteLinear,
-	ajusteLogaritmico, ajustePotencial = null;
+	ajusteLogaritmico, ajustePotencial, ajustePolinomial = null;
 	
 	
 	public MenuInterpolacaoMinimosQuadrados() {
@@ -22,6 +23,7 @@ public class MenuInterpolacaoMinimosQuadrados extends JMenu{
 		this.add(getMenuItemAjusteLinear());
 		this.add(getMenuItemAjusteLogaritmico());
 		this.add(getMenuItemAjustePotencial());
+		this.add(getMenuItemAjustePolinomial());
 	}
 
 	private JMenuItem getMenuItemAjusteExponencial() {
@@ -102,5 +104,23 @@ public class MenuInterpolacaoMinimosQuadrados extends JMenu{
 			});
 		}
 		return ajustePotencial;
+	}
+	
+	private JMenuItem getMenuItemAjustePolinomial() {
+		if (ajustePolinomial == null) {
+			ajustePolinomial = new JMenuItem("Ajuste Polinomial");
+			ajustePolinomial.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try {
+						int grau =  Integer.parseInt(JOptionPane.showInputDialog(ajustePolinomial, "Digite o o grau do polinomio."));
+						Facade.getInstance().addMetodoIntMinQuadAjustePolinomial(grau);
+						
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(ajustePolinomial, "O valor digitado não corresponde a um numero, tente novamente");
+					}
+				}
+			});
+		}
+		return ajustePolinomial;
 	}
 }	
