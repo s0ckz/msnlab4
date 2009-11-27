@@ -1,14 +1,21 @@
 package br.edu.ufcg.msn.util;
+import gov.noaa.pmel.sgt.dm.SGTMetaData;
+import gov.noaa.pmel.sgt.dm.SimpleGrid;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.JPanel;
 
 import org.apache.commons.math.ConvergenceException;
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.analysis.DifferentiableUnivariateRealFunction;
+import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.integration.TrapezoidIntegrator;
 import org.apache.commons.math.analysis.integration.UnivariateRealIntegrator;
@@ -155,6 +162,44 @@ public class Utils {
 		return createChartPanel(listener, chart);
 	}
 
+	public static JPanel createContourChart(MultivariateRealFunction function, 
+			double minX, double maxX, double minY, double maxY, double discreteness, 
+			String chartLabel) throws FunctionEvaluationException, IllegalArgumentException {
+		
+		List<Double> x = new ArrayList<Double>();
+		for (double i = minX; i <= maxX; i+=discreteness) {
+			x.add(i);
+		}
+		
+		List<Double> y = new ArrayList<Double>();
+		for (double i = minY; i <= maxY; i+=discreteness) {
+			y.add(i);
+		}
+		
+		List<Double> z = new ArrayList<Double>(x.size()*y.size());
+		for (Double xValue : x) {
+			for (Double yValue : y) {
+				z.add(function.value(new double[]{xValue,yValue}));
+			}
+		}
+		
+		SimpleGrid simpleGrid = new SimpleGrid(toDoubleArray(z), toDoubleArray(x), toDoubleArray(y), chartLabel);
+		simpleGrid.setXMetaData(new SGTMetaData("x", "x"));
+		simpleGrid.setYMetaData(new SGTMetaData("y", "y"));
+		simpleGrid.setZMetaData(new SGTMetaData(function.toString(), ""));
+		
+		return new ContourChartPanel(new ContourPlotLayout(chartLabel, simpleGrid));
+		
+	}
+	
+	private static double[] toDoubleArray(List<Double> list) {
+		double[] arr = new double[list.size()];
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = list.get(i);
+		}
+		return arr;
+	}
+	
 	public static ChartPanel createBlankChart(double minX, double maxX, double minY, double maxY, 
 			String chartLabel, final ChartMouseClickListener listener)  {
 

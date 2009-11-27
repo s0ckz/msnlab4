@@ -1,40 +1,33 @@
 package br.edu.ufcg.msn.util;
 
-import gov.noaa.pmel.sgt.dm.SGTMetaData;
-import gov.noaa.pmel.sgt.dm.SimpleGrid;
-
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+
+import org.apache.commons.math.FunctionEvaluationException;
+import org.apache.commons.math.analysis.MultivariateRealFunction;
 
 public class ContourDemo {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FunctionEvaluationException, IllegalArgumentException {
 		
-		double[] x = new double[20];
-		for (int i = 0; i < x.length; i++) {
-			x[i] = i;
-		}
-		
-		double[] y = new double[20];
-		for (int i = 0; i < y.length; i++) {
-			y[i] = i;
-		}
-
-		double[] z = new double[20*20];
-		int zidx = 0;
-		for (int i = 0; i < x.length; i++) {
-			for (int j = 0; j < y.length; j++) {
-				z[zidx++] = i * j;
+		MultivariateRealFunction f = new MultivariateRealFunction() {
+			
+			public double value(double[] arg0) throws FunctionEvaluationException,
+					IllegalArgumentException {
+				return Math.sin(arg0[0]*arg0[1]);
 			}
-		}
-		
-		SimpleGrid newData = new SimpleGrid(z, x, y, null);
-		newData.setXMetaData(new SGTMetaData("x","u"));
-		newData.setYMetaData(new SGTMetaData("y","u"));
-		newData.setZMetaData(new SGTMetaData("z","Peso"));
+			
+			@Override
+			public String toString() {
+				return "f(x,y) = sen(x*y)";
+			}
+		};
 
+		JPanel contourChart = Utils.createContourChart(f, 0, 100, 0, 100, 1, "Contour");
+		
 		JDialog dialog = new JDialog();
-		dialog.setContentPane(new ContourChartPanel(new ContourPlotLayout("Contour Demo", newData)));
+		dialog.setContentPane(contourChart);
 		dialog.setVisible(true);
 		dialog.setSize(800, 600);
 		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
