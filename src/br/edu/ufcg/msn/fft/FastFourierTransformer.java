@@ -33,7 +33,7 @@ public class FastFourierTransformer implements Serializable {
     	double[] xval = { -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6 };
     	double[] yval = { 1, 2, 10, 5, 6, 9, 6, 3, 1, 4, 6, 7, 0 };
     	ChartPanel chartPanel = Utils.createChart(
-    			new FastFourierTransformer().transformar(xval, yval, 5), -6,
+    			new FastFourierTransformer().transformer(xval, yval, 5), -6,
     			6, 0.1, "Teste");
     	JFrame jFrame = new JFrame();
     	jFrame.add(chartPanel);
@@ -41,7 +41,7 @@ public class FastFourierTransformer implements Serializable {
     	jFrame.setVisible(true);
     }
 
-    private UnivariateRealFunction transformar(double[] xval, double[] yval, int degree) {
+    private UnivariateRealFunction transformer(double[] xval, double[] yval, int degree) {
 		
     	return new FourierFunction(xval, yval, degree);
 	}
