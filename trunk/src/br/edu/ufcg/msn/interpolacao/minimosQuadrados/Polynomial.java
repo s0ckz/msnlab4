@@ -1,12 +1,27 @@
 package br.edu.ufcg.msn.interpolacao.minimosQuadrados;
 
-/*************************************************************************
- *  Compilation:  javac Polynomial.java
- *  Execution:    java Polynomial
- *
- *  Polynomials with integer coefficients.
- *
- *  % java Polynomial
+import org.apache.commons.math.analysis.UnivariateRealFunction;
+
+/**
+ * <br>
+ * UNIVERSIDADE FEDERAL DE CAMPINA GRANDE - UFCG <br>
+ * CENTRO DE ENGENHARIA EL�TRICA E INFORMATICA � CEEI <br>
+ * DEPARTAMENTO DE SISTEMAS E COMPUTACAO - DSC <br>
+ * CURSO DE CIENCIA DA COMPUTACAO - CCC <br>
+ * METODOS E SOFTWARE NUMERICOS <br>
+ * Prof.: Jos� Eust�quio Rangel de Queiroz <br>
+ * Periodo: 2009.2 <br>
+ * <b>FERRAMENTA B�SICA PARA INTERPOLA��O E AJUSTE DE CURVAS</b>
+ * 
+ * @author <br>
+ *         Anderson Igor F. Ara�jo Mat.: 20411014 </br>
+ * @author <br>
+ *         Daniel Leite Viana Costa Mat.: 20821007 </br>
+ * @version 1.0
+ * @since 20/11/2009
+ *        <p>
+ *        Classe representa um polinomio.
+ *        </p>
  *  zero(x) =     0
  *  p(x) =        4x^3 + 3x^2 + 2x + 1
  *  q(x) =        3x^2 + 5
@@ -20,7 +35,7 @@ package br.edu.ufcg.msn.interpolacao.minimosQuadrados;
  *
  *************************************************************************/
 
-public class Polynomial {
+public class Polynomial implements UnivariateRealFunction{
     private int[] coef;  // coefficients
     private int deg;     // degree of polynomial (0 for the zero polynomial)
 
@@ -93,8 +108,8 @@ public class Polynomial {
 
 
     // use Horner's method to compute and return the polynomial evaluated at x
-    public int evaluate(int x) {
-        int p = 0;
+    public double value(double x) {
+    	double p = 0;
         for (int i = deg; i >= 0; i--)
             p = coef[i] + (x * p);
         return p;
@@ -109,6 +124,8 @@ public class Polynomial {
             deriv.coef[i] = (i + 1) * coef[i + 1];
         return deriv;
     }
+    
+
 
     // convert to string representation
     public String toString() {
@@ -124,6 +141,7 @@ public class Polynomial {
         }
         return s;
     }
+    
 
     // test client
     public static void main(String[] args) { 
@@ -133,7 +151,7 @@ public class Polynomial {
         Polynomial p2   = new Polynomial(3, 2);
         Polynomial p3   = new Polynomial(1, 0);
         Polynomial p4   = new Polynomial(2, 1);
-        Polynomial p    = p1.plus(p2).plus(p3).plus(p4);   // 4x^3 + 3x^2 + 1
+        Polynomial p    = p1.plus(p2).plus(p3).plus(p4);   // 4x^3 + 3x^2 + 2x +1
 
         Polynomial q1   = new Polynomial(3, 2);
         Polynomial q2   = new Polynomial(5, 0);
@@ -151,9 +169,11 @@ public class Polynomial {
         System.out.println("p(x) * q(x) = " + s);
         System.out.println("p(q(x))     = " + t);
         System.out.println("0 - p(x)    = " + zero.minus(p));
-        System.out.println("p(3)        = " + p.evaluate(3));
+        System.out.println("p(3)        = " + p.value(3));
         System.out.println("p'(x)       = " + p.differentiate());
         System.out.println("p''(x)      = " + p.differentiate().differentiate());
    }
+
+
 
 }
