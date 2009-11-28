@@ -1,11 +1,9 @@
 package br.edu.ufcg.msn.gui;
 import java.awt.BorderLayout;
+import java.awt.Component;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
@@ -15,6 +13,7 @@ import br.edu.ufcg.msn.facade.Facade;
 import br.edu.ufcg.msn.gui.config.ConfiguracoesPanel;
 import br.edu.ufcg.msn.gui.menu.MenuLimpar;
 import br.edu.ufcg.msn.gui.menu.MenuNovo;
+import br.edu.ufcg.msn.help.MenuHelp;
 
 public class MainFrame extends JFrame{
 
@@ -24,7 +23,8 @@ public class MainFrame extends JFrame{
 	Facade facade = Facade.getInstance();
 	private ChartPanel chartPanelInput;
 	private JTabbedPane painelAbas = null;
-	private MenuLimpar menuLimpar = null; 
+	private MenuLimpar menuLimpar = null;
+	private MenuHelp menuHelp = null;
 	
 	private static MainFrame instance = null;
 	
@@ -63,8 +63,16 @@ public class MainFrame extends JFrame{
 			jMenuBar = new JMenuBar();
 			jMenuBar.add(BorderLayout.WEST, getJMenuFile());
 			jMenuBar.add(BorderLayout.EAST, getJMenuItemLimpar());
+			jMenuBar.add(BorderLayout.EAST, getJMenuItemHelp());
 		}
 		return jMenuBar;
+	}
+
+	private Component getJMenuItemHelp() {
+		if (menuHelp == null) {
+			menuHelp = new MenuHelp();
+		}		
+		return menuHelp;
 	}
 
 	private MenuNovo getJMenuFile() {
