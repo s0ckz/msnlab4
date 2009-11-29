@@ -25,13 +25,8 @@ public class MenuHelp extends JMenu {
 	private ImageIcon forwardIcon = new ImageIcon(prefix + "Forward24.gif");
 	private ImageIcon helpIcon = new ImageIcon(prefix + "Help16.gif");
 	
-	private final static String prefix = "src" + System.getProperty("file.separator") +
-								"br" + System.getProperty("file.separator") +
-								"edu" + System.getProperty("file.separator") +
-								"ufcg" + System.getProperty("file.separator") +
-								"msn" + System.getProperty("file.separator") +
-								"help" + System.getProperty("file.separator") +
-								"offline" + System.getProperty("file.separator");
+	private final static String prefix = "helpfiles" + System.getProperty("file.separator") +
+										"offline" + System.getProperty("file.separator");
 								
 	
 	public MenuHelp() {
