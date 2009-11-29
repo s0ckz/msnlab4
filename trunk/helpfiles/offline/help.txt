@@ -1,6 +1,5 @@
-Getting Started  ?=helpfiles/offline/help/start.html uid=start
-Content Hierarchy  ?=helpfiles/offline/help/hierchy.html
-
+Comecando  ?=helpfiles/offline/help/start.html uid=start
+Hieraquia  ?=helpfiles/offline/help/hierchy.html
 Menu Novo  ?= topic.html
  Interpolação ?=helpfiles/offline/help/menuNovo/interpolacao/index.html
   Aprox. Polinominal ?=helpfiles/offline/help/index.html
@@ -43,6 +42,5 @@ Menu Limpar ?=helpfiles/offline/help/menuLimpar/index.html
  Todas as Funcoes ?=helpfiles/offline/help/menuLimpar/funcoes.html
  Pontos ?=helpfiles/offline/help/index.html
   Conjunto ?=helpfiles/offline/help/menuLimpar/conjuntodepontos.html
-Graphics  ?=helpfiles/offline/help/graphics.html
-Links  ?=helpfiles/offline/help/links.html
-Search Tab  ?=helpfiles/offline/help/search.html
+Aba de Search ?=helpfiles/offline/help/search.html
+Licença ?=helpfiles/offline/help/license.html
