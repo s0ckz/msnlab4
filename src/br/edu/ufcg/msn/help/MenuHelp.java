@@ -67,7 +67,7 @@ public class MenuHelp extends JMenu {
 
 	protected void jMenuContent_actionPerformed(ActionEvent e) {
 		jHelpFrame = new JHelpFrame(new File(prefix + "help.txt"), new Frame());		    
-		jHelpFrame.setTitle("Help");
+		jHelpFrame.setTitle("Help");		
 		jHelpFrame.setSize(600, 450);
 		jHelpFrame.setDividerLocation(200);
 		jHelpFrame.setIconImage(helpIcon.getImage());
