@@ -2,6 +2,7 @@ package br.edu.ufcg.msn.help;
 
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -29,28 +30,38 @@ public class MenuHelp extends JMenu {
 										"offline" + System.getProperty("file.separator");
 								
 	
-	public MenuHelp() {
+	public MenuHelp() {		
 		initialize();
 	}
 	
 	private void initialize() {
 		this.setText("Help");
 		this.add(getHelpContent());
-		this.add(getHelpTips());
+		this.add(getHelpTips());		
 	}
 	
+	 public void this_windowClosing(WindowEvent e) {
+//		jMenuContent = null;
+//		jMenuItemTips = null;		
+//		jHelpFrame = null;
+//		jTipsDialog = null;
+//		backIcon = null;
+//		forwardIcon = null;
+//		helpIcon = null;		
+	  }
+	
 	private JMenuItem getHelpContent() {
-		jMenuContent = new JMenuItem("Content");
+		jMenuContent = new JMenuItem("Conteudo");
 		jMenuContent.addActionListener(new java.awt.event.ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	        	jMenuContent_actionPerformed(e);	        	
 	        }
-	      });
+	      });		
 		return jMenuContent;	
 	}
 
 	private JMenuItem getHelpTips() {
-		jMenuItemTips = new JMenuItem("Tips");	
+		jMenuItemTips = new JMenuItem("Dicas");	
 		jMenuItemTips.addActionListener(new java.awt.event.ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	        	jMenuItemTips_actionPerformed(e);
@@ -74,6 +85,11 @@ public class MenuHelp extends JMenu {
 			jHelpFrame.displayContentUID("start");
 		
 		jHelpFrame.show();
+		jHelpFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+		      public void windowClosing(WindowEvent e) {
+		          this_windowClosing(e);
+		        }
+		      });
 	}
 
 	
@@ -88,5 +104,11 @@ public class MenuHelp extends JMenu {
 		jTipsDialog.showIndex(0);
 		jTipsDialog.centerDialog();
 		jTipsDialog.show();
+		
+		jTipsDialog.addWindowListener(new java.awt.event.WindowAdapter() {
+		      public void windowClosing(WindowEvent e) {
+		          this_windowClosing(e);
+		        }
+		      });
 	}
 }
