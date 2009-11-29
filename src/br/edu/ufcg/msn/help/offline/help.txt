@@ -1,7 +1,8 @@
 Getting Started  ?=src/br/edu/ufcg/msn/help/offline/help/start.html uid=start
 Content Hierarchy  ?=src/br/edu/ufcg/msn/help/offline/help/hierchy.html
-Topic  ?=src/br/edu/ufcg/msn/help/offline/help/topic.html
- Subtopic 1  ?=src/br/edu/ufcg/msn/help/offline/help/stopic1.html
+
+Novo  ?=src/br/edu/ufcg/msn/help/offline/help/topic.html
+ Transformada Rapida de Fourier ?=src/br/edu/ufcg/msn/help/offline/help/transformadaRapidaDeFourier/index.html
  Subtopic 2  ?=src/br/edu/ufcg/msn/help/offline/help/stopic2.html
   Sub-Subtopic  ?=src/br/edu/ufcg/msn/help/offline/help/sstopic.html
 Graphics  ?=src/br/edu/ufcg/msn/help/offline/help/graphics.html
