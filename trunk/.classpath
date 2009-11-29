@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="lib/sgt_v30.jar" sourcepath="lib/sgt_src_v30.jar"/>
 	<classpathentry kind="lib" path="lib/colt.jar"/>
 	<classpathentry kind="lib" path="lib/ssj.jar"/>
+	<classpathentry kind="lib" path="src/br/edu/ufcg/msn/help/jhelp.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
