@@ -37,7 +37,6 @@ public class BicubicSplineFunction implements MultivariateRealFunction {
 		}
 	}
 
-	@Override
 	public double value(double[] points) throws FunctionEvaluationException, IllegalArgumentException {
 		if (points.length < 2) {
 			throw new IllegalArgumentException(

@@ -26,7 +26,6 @@ public class SplineCubicInterpolator extends AbstractSplineInterpolator {
 
 	private SplineInterpolator splineInterpolator = new SplineInterpolator();
 
-	@Override
 	public UnivariateRealFunction interpolate(double[] xval, double[] yval)
 			throws MathException {
 		validate(xval, yval);

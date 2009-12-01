@@ -8,7 +8,6 @@ import br.edu.ufcg.msn.interpolacao.spline.SplineCubicInterpolator;
 
 public class BicubicSplineInterpolator implements MultivariateRealInterpolator {
 
-	@Override
 	public MultivariateRealFunction interpolate(double[] x1, double[] x2,
 			double[][] yval) throws MathException, IllegalArgumentException {
 		return new BicubicSplineFunction(x1, x2, yval);

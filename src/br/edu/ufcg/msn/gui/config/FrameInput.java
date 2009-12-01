@@ -18,19 +18,16 @@ public class FrameInput implements BotaoListener{
 		return instance;
 	}
 	
-	@Override
 	public void criaGraficoEvent(MetodoEvent event)
 			throws FunctionEvaluationException {
 		event.criaGrafico();
 		
 	}
 
-	@Override
 	public void mouseClicked(MouseEvent e) {
 		
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		

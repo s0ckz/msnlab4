@@ -24,7 +24,6 @@ public class InterpoladorNewton implements UnivariateRealInterpolator {
 	 * @return Funcao polinomial Interpoladora dos pontos passados como parametro
 	 * @throws MathException MathException
 	 */
-	@Override
 	public UnivariateRealFunction interpolate(double[] vetorX, double[] vetorFx)
 			throws MathException {
 		

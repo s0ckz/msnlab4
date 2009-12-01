@@ -22,7 +22,6 @@ import br.edu.ufcg.msn.util.Utils;
  */
 public class SplineQuadraticInterpolator extends AbstractSplineInterpolator {
 
-	@Override
 	public UnivariateRealFunction interpolate(double[] xval, double[] yval)
 			throws MathException {
 		validate(xval, yval);
