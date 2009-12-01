@@ -7,9 +7,9 @@ import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.jfree.chart.ChartPanel;
 
-import br.edu.ufcg.msn.util.LinearFunction;
-import br.edu.ufcg.msn.util.SplineFunction;
 import br.edu.ufcg.msn.util.Utils;
+import br.edu.ufcg.msn.util.functions.LinearFunction;
+import br.edu.ufcg.msn.util.functions.SplineFunction;
 
 /**
  * Linear spline interpolation is the simplest form of spline interpolation and
