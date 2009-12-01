@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.swing.JPanel;
+
+import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathException;
+import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.jfree.chart.ChartPanel;
 
@@ -32,6 +36,7 @@ import br.edu.ufcg.msn.interpolacao.spline.HermiteCubicSplineInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineCubicInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineLinearInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineQuadraticInterpolator;
+import br.edu.ufcg.msn.interpolacao.spline3d.BicubicSplineInterpolator;
 import br.edu.ufcg.msn.util.ChartMouseClickListener;
 import br.edu.ufcg.msn.util.Utils;
 
@@ -115,6 +120,13 @@ public class Facade {
 		functions.add(new HermiteCubicSplineInterpolator().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
+	//Splines bilinear e bicubica
+
+	public JPanel getMetodoSplineBicubica(double[] x, double[] y, double[][] z) throws IllegalArgumentException, MathException{	
+		MultivariateRealFunction function = new BicubicSplineInterpolator().interpolate(x, y, z);
+		return Utils.createContourChart(function, minX, maxX, minY, maxY, discreteness, "Spline Bicubica");
+	}
+	
 	//Interpolacao por Minimos Quadrados por Ajuste exponencial, 
 	//hiperbolico, ajuste linear, logaritmico, potencial, polinomial
 	public void addMetodoIntMinQuadAjusteExponencial( ) throws MathException {
@@ -258,6 +270,15 @@ public class Facade {
 	public double getMinY() {
 		return minY;
 	}
+	
+	public List<Double> getPointSetXs(){
+		return xs.get(this.listKey);
+	}
+	
+	public List<Double> getPointSetYs(){
+		return ys.get(this.listKey);
+	}
+	
 	public Map<String, List<Double>> getXs() {
 		return this.xs;
 	}
