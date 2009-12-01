@@ -1,4 +1,4 @@
-package br.edu.ufcg.msn.util;
+package br.edu.ufcg.msn.util.functions;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 
 /**

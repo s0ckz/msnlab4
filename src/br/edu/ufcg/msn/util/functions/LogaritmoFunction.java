@@ -1,7 +1,7 @@
-package br.edu.ufcg.msn.util;
+package br.edu.ufcg.msn.util.functions;
+
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
-
 /**
  * <br>
  * UNIVERSIDADE FEDERAL DE CAMPINA GRANDE - UFCG <br>
@@ -23,36 +23,37 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
  *        Classe que Classe que implementa a classe UnivariateRealFunction , sobre-escrevendo o método value
  *        </p>
  */
-public class PotencialFunction implements UnivariateRealFunction {
+public class LogaritmoFunction implements UnivariateRealFunction {
 
 	private double[] coef;
 	/**
-	 * Método que recebe os coeficientes do MMQ pontencial para adequar a saída para os outros módulos do projeto   
-	 * @param coeficientes recebe os parâmetros dos coeficientes do MMQ pontencial
+	 * Método que recebe os coeficientes do MMQ logaritmo para adequar a saída para os outros módulos do projeto   
+	 * @param coeficientes recebe os parâmetros dos coeficientes do MMQ logaritmo
 	 */
-	public PotencialFunction(double[] coeficientes) {
+	public LogaritmoFunction(double[] coeficientes) {
 		this.coef = coeficientes;
 	}
 	/**
-	 * Método que retorna a saída esperada do MMQ pontencial	
+	 * Método que retorna a saída esperada do MMQ logaritmo	
 	 * @Override
 	 * @return a funcao de saida formatada para os outros módulos
 	 */
 	public double value(double x) throws FunctionEvaluationException {
-		return Math.exp(coef[0])*Math.pow(x,coef[1]);
+
+		return coef[0]+coef[1]*Math.log(x);
 	}
 	/**
-	 * Retorna os coeficientes da funcao da reta do MMQ pontencial
+	 * Retorna os coeficientes da funcao da reta do MMQ logaritmo
 	 * @return coef coeficientes da reta
 	 */
 	public double[] getCoefficients(){
 		return coef;
 	}
 	/**
-	 * Método para imprimir a funcao do MMQ pontencial
+	 * Método para imprimir a funcao do MMQ logaritmo
 	 */
 	public String toString(){
-		return Double.toString(Math.exp(Math.floor(coef[0])/1000))+" * x ^ "+Double.toString(Math.floor(coef[1]*1000)/1000);
+		return (Double.toString(Math.floor(coef[0]*1000)/1000))+" + "+Double.toString(Math.floor(coef[1]*1000)/1000)+" * ln(x)";
 	}
 
 }
