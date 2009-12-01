@@ -37,6 +37,7 @@ import br.edu.ufcg.msn.interpolacao.spline.SplineCubicInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineLinearInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineQuadraticInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline3d.BicubicSplineInterpolator;
+import br.edu.ufcg.msn.interpolacao.spline3d.BilinearSplineInterpolator;
 import br.edu.ufcg.msn.util.ChartMouseClickListener;
 import br.edu.ufcg.msn.util.Utils;
 
@@ -125,6 +126,11 @@ public class Facade {
 	public JPanel getMetodoSplineBicubica(double[] x, double[] y, double[][] z) throws IllegalArgumentException, MathException{	
 		MultivariateRealFunction function = new BicubicSplineInterpolator().interpolate(x, y, z);
 		return Utils.createContourChart(function, minX, maxX, minY, maxY, discreteness, "Spline Bicubica");
+	}
+
+	public JPanel getMetodoSplineBilinear(double[] x, double[] y, double[][] z) throws IllegalArgumentException, MathException{	
+		MultivariateRealFunction function = new BilinearSplineInterpolator().interpolate(x, y, z);
+		return Utils.createContourChart(function, minX, maxX, minY, maxY, discreteness, "Spline Bilinear");
 	}
 	
 	//Interpolacao por Minimos Quadrados por Ajuste exponencial, 
