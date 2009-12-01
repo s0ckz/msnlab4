@@ -8,8 +8,8 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.interpolation.SplineInterpolator;
 import org.jfree.chart.ChartPanel;
 
-import br.edu.ufcg.msn.util.SplineFunction;
 import br.edu.ufcg.msn.util.Utils;
+import br.edu.ufcg.msn.util.functions.SplineFunction;
 
 /**
  * Cubic_spline_interpolation For a data set {xi} of n+1 points, we can

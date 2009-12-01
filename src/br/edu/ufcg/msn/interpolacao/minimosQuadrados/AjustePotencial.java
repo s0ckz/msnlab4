@@ -4,7 +4,7 @@ import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.interpolation.UnivariateRealInterpolator;
 
-import br.edu.ufcg.msn.util.PotencialFunction;
+import br.edu.ufcg.msn.util.functions.PotencialFunction;
 
 /**
  * <br>
