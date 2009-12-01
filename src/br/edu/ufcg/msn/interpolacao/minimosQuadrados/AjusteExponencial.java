@@ -1,4 +1,6 @@
 package br.edu.ufcg.msn.interpolacao.minimosQuadrados;
+import java.awt.Color;
+
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.interpolation.UnivariateRealInterpolator;
@@ -42,9 +44,20 @@ public class AjusteExponencial implements UnivariateRealInterpolator {
 		//recebe a quantidade de elementos passados
 		int numElementos = xval.length;
 		
-		int c= numElementos; 
+		int c= 0; 
+		
+		//No ajuste exponencial, os pontos que possuirem y negativo serão desconsiderados. 
+		for (int i=0; i<numElementos; i++){
+			if (yval[i] >0){
+				xval[c] =  xval[i];
+				yval[c] =  yval[i];
+				c += 1;  
+			}
+		}
+		
+		if(c<=1) throw new MathException("Grau de liberdade insufiente!");
 	                                 
-		for (int i=0; i<numElementos; i++){ 
+		for (int i=0; i<c; i++){ 
 			xsom += xval[i]; //somatorio de x  
 			ylnsom += Math.log(yval[i]);//somatorio do ln de y
 			xquad += xval[i]*xval[i];//somatorio de x ao quadrado  

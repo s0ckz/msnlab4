@@ -41,7 +41,18 @@ public class AjustePotencial implements UnivariateRealInterpolator {
 
 		//recebe a quantidade de elementos passados
 		int numElementos = xval.length;
-		int c = numElementos; 
+		int c = 0; 
+		
+		//No ajuste potencial, os pontos que possuirem x ou y negativos serão desconsiderados. 
+		for (int i=0; i<numElementos; i++){
+			if (!(xval[i] <=0 || yval[i] <=0)){
+				xval[c] =  xval[i];
+				yval[c] =  yval[i];
+				c += 1;  
+			}
+		}
+		
+		if(c<=1) throw new MathException("Grau de liberdade insufiente!");
 
 		for (int i=0; i<c; i++){ 
 			xlnsom += Math.log(xval[i]);//soamtorio do ln x
