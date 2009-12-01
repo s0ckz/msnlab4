@@ -1,13 +1,13 @@
-package br.edu.ufcg.msn.util;
+package br.edu.ufcg.msn.util.functions;
 
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 
-import br.edu.ufcg.msn.interpolacao.spline.SplineLinearInterpolator;
+import br.edu.ufcg.msn.interpolacao.spline.SplineCubicInterpolator;
 
-public class BilinearSplineFunction implements MultivariateRealFunction {
+public class BicubicSplineFunction implements MultivariateRealFunction {
 
 	private int nPoints;
 	private int mPoints;
@@ -16,7 +16,7 @@ public class BilinearSplineFunction implements MultivariateRealFunction {
 	private double[][] y;
 	private UnivariateRealFunction[] functions;
 	
-	public BilinearSplineFunction(double[] x1, double[] x2, double[][] yval) {
+	public BicubicSplineFunction(double[] x1, double[] x2, double[][] yval) {
 		this.nPoints = x1.length;
 		this.mPoints = x2.length;
 		
@@ -30,7 +30,7 @@ public class BilinearSplineFunction implements MultivariateRealFunction {
 			for (int j = 0; j < this.mPoints; j++)
 				yTempn[j] = this.y[i][j];
 			try {
-				functions[i] = new SplineLinearInterpolator().interpolate(this.x2, yTempn);
+				functions[i] = new SplineCubicInterpolator().interpolate(this.x2, yTempn);
 			} catch (MathException e) {
 				e.printStackTrace();
 			}
@@ -53,7 +53,7 @@ public class BilinearSplineFunction implements MultivariateRealFunction {
 
 		UnivariateRealFunction urf = null;
 		try {
-			urf = new SplineLinearInterpolator().interpolate(x1, yTempm);
+			urf = new SplineCubicInterpolator().interpolate(x1, yTempm);
 		} catch (MathException e) {
 			e.printStackTrace();
 		}
