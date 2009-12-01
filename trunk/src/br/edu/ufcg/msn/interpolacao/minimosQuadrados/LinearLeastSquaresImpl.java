@@ -53,6 +53,12 @@ public class LinearLeastSquaresImpl implements LinearLeastSquares {
 		return new AjustePotencial().interpolate(xval, yval);
 	}
 
+	@Override
+	public UnivariateRealFunction polinomial(double[] xval, double[] yval, int grauPolinomio)
+			throws MathException {
+		return new AjustePolinomial().interpolate(xval, yval, grauPolinomio);
+	}
+
 	
 
 }

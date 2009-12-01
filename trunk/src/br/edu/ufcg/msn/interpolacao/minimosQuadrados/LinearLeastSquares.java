@@ -34,4 +34,8 @@ public interface LinearLeastSquares {
 	public UnivariateRealFunction sigmoidal(double[] xval, double[] yval) throws MathException;
 	
 	public UnivariateRealFunction potencial(double[] xval, double[] yval) throws MathException;
+	
+	public UnivariateRealFunction polinomial(double[] xval, double[] yval, int grauPolinomio) throws MathException;
+	
+	
 }
