@@ -2,9 +2,7 @@ package br.edu.ufcg.msn.interpolacao.spline3d;
 
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.MultivariateRealFunction;
-import org.apache.commons.math.analysis.UnivariateRealFunction;
-
-import br.edu.ufcg.msn.interpolacao.spline.SplineCubicInterpolator;
+import br.edu.ufcg.msn.util.BicubicSplineFunction;
 
 public class BicubicSplineInterpolator implements MultivariateRealInterpolator {
 

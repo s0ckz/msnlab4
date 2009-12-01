@@ -15,7 +15,6 @@ import br.edu.ufcg.msn.ajuste.naolinear.LeastSquaresFittingExponential;
 import br.edu.ufcg.msn.ajuste.naolinear.LeastSquaresFittingLogarithmic;
 import br.edu.ufcg.msn.ajuste.naolinear.LeastSquaresFittingPowerLaw;
 import br.edu.ufcg.msn.fft.FastFourierTransformer;
-import br.edu.ufcg.msn.fft.FourierFunction;
 import br.edu.ufcg.msn.gui.MainFrame;
 import br.edu.ufcg.msn.gui.config.ConfiguracoesPanel;
 import br.edu.ufcg.msn.gui.menu.MenuLimpar;
