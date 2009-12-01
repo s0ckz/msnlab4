@@ -275,20 +275,12 @@ public class Facade {
 	public double getMinY() {
 		return minY;
 	}
-	
-	public List<Double> getPointSetXs(){
-		return xs.get(this.listKey);
-	}
-	
-	public List<Double> getPointSetYs(){
-		return ys.get(this.listKey);
-	}
-	
+		
 	public Map<String, List<Double>> getXs() {
 		return this.xs;
 	}
 
-	private double[] getXsArray() {
+	public double[] getXsArray() {
 		double res[] = new double[xs.get(listKey).size()];
 		for (int i = 0; i < res.length; i++) {
 			res[i] = xs.get(listKey).get(i);
@@ -300,7 +292,7 @@ public class Facade {
 		return this.ys;
 	}
 
-	private double[] getYsArray() {
+	public double[] getYsArray() {
 		double res[] = new double[ys.get(listKey).size()];
 		for (int i = 0; i < res.length; i++) {
 			res[i] = ys.get(listKey).get(i);
