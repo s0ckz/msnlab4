@@ -7,9 +7,9 @@ import br.edu.ufcg.msn.util.functions.BicubicSplineFunction;
 
 public class BicubicSplineInterpolator implements MultivariateRealInterpolator {
 
-	public MultivariateRealFunction interpolate(double[] x, double[] y,
-			double[][] z) throws MathException, IllegalArgumentException {
-		return new BicubicSplineFunction(x, y, z);
+	public MultivariateRealFunction interpolate(double[] x1, double[] x2,
+			double[][] yval) throws MathException, IllegalArgumentException {
+		return new BicubicSplineFunction(x1, x2, yval);
 	}
 
 }
