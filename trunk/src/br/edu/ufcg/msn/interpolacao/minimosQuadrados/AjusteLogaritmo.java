@@ -41,9 +41,21 @@ public class AjusteLogaritmo implements UnivariateRealInterpolator {
 
 		//recebe a quantidade de elementos passados
 		int numElementos = xval.length;
-		int c=numElementos; 
+		
+		int c= 0; 
+		
+		//No ajuste logaritmo, os pontos que possuirem x negativo serão desconsiderados.	
+		for (int i=0; i<numElementos; i++){
+			if (xval[i] >0){
+				xval[c] =  xval[i];
+				yval[c] =  yval[i];
+				c += 1;  
+			}
+		}
+		
+		if(c<=1) throw new MathException("Grau de liberdade insufiente!");
 		                
-		for (int i=0; i<numElementos; i++){ 
+		for (int i=0; i<c; i++){ 
 			xlnsom += Math.log(xval[i]);//somatorio do ln de x
 			ysom += yval[i];//somatorio de y  
 			xlnquad += Math.log(xval[i])*Math.log(xval[i]);//somatorio do ln de x ao quadrado  

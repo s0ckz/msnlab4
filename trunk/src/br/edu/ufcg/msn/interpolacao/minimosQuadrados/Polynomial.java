@@ -36,8 +36,8 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
  *************************************************************************/
 
 public class Polynomial implements UnivariateRealFunction{
-    private double[] coef;  // coefficients
-    private double deg;     // degree of polynomial (0 for the zero polynomial)
+    private double[] coef;  // coeficientes
+    private double deg;     // grau do polinomio(0 para o polinomial zero)
 
     // a * x^b
     public Polynomial(double a, double b) {
@@ -46,7 +46,7 @@ public class Polynomial implements UnivariateRealFunction{
         deg = degree();
     }
 
-    // return the degree of this polynomial (0 for the zero polynomial)
+    // retorna o grau deste polinomio(0 para o polinomio zero)
     public int degree() {
         int d = 0;
         for (int i = 0; i < coef.length; i++)
@@ -54,7 +54,7 @@ public class Polynomial implements UnivariateRealFunction{
         return d;
     }
 
-    // return c = a + b
+    // retorna c = a + b
     public Polynomial plus(Polynomial b) {
         Polynomial a = this;
         Polynomial c = new Polynomial(0, Math.max(a.deg, b.deg));
@@ -64,7 +64,7 @@ public class Polynomial implements UnivariateRealFunction{
         return c;
     }
 
-    // return (a - b)
+    // retorna (a - b)
     public Polynomial minus(Polynomial b) {
         Polynomial a = this;
         Polynomial c = new Polynomial(0, Math.max(a.deg, b.deg));
@@ -74,7 +74,7 @@ public class Polynomial implements UnivariateRealFunction{
         return c;
     }
 
-    // return (a * b)
+    // retorna (a * b)
     public Polynomial times(Polynomial b) {
         Polynomial a = this;
         Polynomial c = new Polynomial(0, a.deg + b.deg);
@@ -85,7 +85,7 @@ public class Polynomial implements UnivariateRealFunction{
         return c;
     }
 
-    // return a(b(x))  - compute using Horner's method
+    // retorna a(b(x))  - utiliza o metodo de Horner
     public Polynomial compose(Polynomial b) {
         Polynomial a = this;
         Polynomial c = new Polynomial(0, 0);
@@ -97,7 +97,7 @@ public class Polynomial implements UnivariateRealFunction{
     }
 
 
-    // do a and b represent the same polynomial?
+    // faz a e b representar o mesmo polinomial??
     public boolean eq(Polynomial b) {
         Polynomial a = this;
         if (a.deg != b.deg) return false;
@@ -107,7 +107,7 @@ public class Polynomial implements UnivariateRealFunction{
     }
 
 
-    // use Horner's method to compute and return the polynomial evaluated at x
+    // usa o metodo de Horner para calcular e retornar o valor do polinomio em x
     public double value(double x) {
     	double p = 0;
         for (int i = (int) deg; i >= 0; i--)
@@ -115,7 +115,7 @@ public class Polynomial implements UnivariateRealFunction{
         return p;
     }
 
-    // differentiate this polynomial and return it
+    // diferenciacao do polinomio e retorno dele
     public Polynomial differentiate() {
         if (deg == 0) return new Polynomial(0, 0);
         Polynomial deriv = new Polynomial(0, deg - 1);
@@ -127,7 +127,7 @@ public class Polynomial implements UnivariateRealFunction{
     
 
 
-    // convert to string representation
+    // converte para uma string 
     public String toString() {
         if (deg ==  0) return "" + coef[0];
         if (deg ==  1) return coef[1] + "x + " + coef[0];
@@ -143,7 +143,7 @@ public class Polynomial implements UnivariateRealFunction{
     }
     
 
-    // test client
+    // testa o cliente
     public static void main(String[] args) { 
         Polynomial zero = new Polynomial(0, 0);
 
