@@ -8,8 +8,12 @@ import br.edu.ufcg.msn.gui.config.ConfiguracoesPanel;
 
 public class MenuLimpar extends JMenu{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JMenuItem itemTudo, itemPontos, itemFuncao = null;
-	private JMenu menuPontos, funcoes = null;
+	private JMenu menuPontos = null;
 	private Object[] listaChavePontos;
 	
 	private static MenuLimpar instance = null;

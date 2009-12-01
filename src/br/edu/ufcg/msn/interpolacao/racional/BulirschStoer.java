@@ -2,11 +2,8 @@ package br.edu.ufcg.msn.interpolacao.racional;
 
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
-import org.apache.commons.math.analysis.interpolation.DividedDifferenceInterpolator;
-import org.apache.commons.math.analysis.interpolation.NevilleInterpolator;
 import org.apache.commons.math.analysis.interpolation.UnivariateRealInterpolator;
 import org.apache.commons.math.analysis.polynomials.PolynomialFunction;
-import org.apache.commons.math.analysis.polynomials.PolynomialFunctionLagrangeForm;
 /**
  * Interpolacao polinomial usando metodo de Bulirsch-Stoer
  * 

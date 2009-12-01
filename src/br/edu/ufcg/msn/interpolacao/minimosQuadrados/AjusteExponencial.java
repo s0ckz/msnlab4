@@ -1,6 +1,4 @@
 package br.edu.ufcg.msn.interpolacao.minimosQuadrados;
-import java.awt.Color;
-
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.interpolation.UnivariateRealInterpolator;

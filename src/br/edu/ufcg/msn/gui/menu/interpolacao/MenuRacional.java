@@ -12,6 +12,10 @@ import javax.swing.JMenuItem;
  */
 public class MenuRacional extends JMenu{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JMenuItem menuItemStoer, menuItemWerner,
 	menuItemBerrut, menuItemFloater = null;
 	
