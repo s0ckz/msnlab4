@@ -25,7 +25,6 @@ public class BulirschStoer implements UnivariateRealInterpolator {
 	 * @return Funcao polinomial Interpoladora dos pontos passados como parametro
 	 * @throws MathException
 	 */
-	@Override
 	public UnivariateRealFunction interpolate(double[] x, double[] y)
 			throws MathException {
 		double[] coeficientes = new PolynomialFunctionBulirschStoer(x, y).getCoefficients(); 

@@ -23,7 +23,6 @@ public class InterpoladorNeville implements UnivariateRealInterpolator {
 	 * @return Funcao polinomial Interpoladora dos pontos passados como parametro
 	 * @throws MathException MathException
 	 */
-	@Override
 	public UnivariateRealFunction interpolate(double[] arg0, double[] arg1)
 			throws MathException {
 		NevilleInterpolator interpoladorNeville = new NevilleInterpolator();

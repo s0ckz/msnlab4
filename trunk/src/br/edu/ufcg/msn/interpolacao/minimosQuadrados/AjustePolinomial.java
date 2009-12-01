@@ -37,7 +37,6 @@ public class AjustePolinomial implements UnivariateRealInterpolator {
 		return polinomio;
 	}
 
-	@Override
 	public UnivariateRealFunction interpolate(double[] xval, double[] yval)
 	throws MathException {
 

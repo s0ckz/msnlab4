@@ -72,7 +72,6 @@ public class Polinomio implements UnivariateRealFunction{
 		}
 	}
 
-	@Override
 	public double value(double x) throws FunctionEvaluationException {
 		return this.mq.evaluate(x);
 	}

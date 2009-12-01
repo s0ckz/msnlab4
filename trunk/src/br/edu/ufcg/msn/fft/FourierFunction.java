@@ -25,7 +25,6 @@ public class FourierFunction implements UnivariateRealFunction {
 		System.arraycopy(yval, 0, this.y, 0, n + 1);
 	}
 	
-	@Override
 	public double value(double arg0) throws FunctionEvaluationException {
 		double sum = 0;
 		

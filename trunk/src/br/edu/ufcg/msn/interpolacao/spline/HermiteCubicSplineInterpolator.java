@@ -22,7 +22,6 @@ import br.edu.ufcg.msn.util.Utils;
  */
 public class HermiteCubicSplineInterpolator extends AbstractSplineInterpolator {
 
-	@Override
 	public UnivariateRealFunction interpolate(double[] xval, double[] yval)
 			throws MathException {
 		validate(xval, yval);

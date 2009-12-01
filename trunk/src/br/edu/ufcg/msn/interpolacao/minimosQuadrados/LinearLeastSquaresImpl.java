@@ -27,33 +27,27 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
 */
 public class LinearLeastSquaresImpl implements LinearLeastSquares {
 
-	@Override
 	public UnivariateRealFunction exponencial(double[] xval, double[] yval) throws MathException {
 		return new AjusteExponencial().interpolate(xval, yval);
 	}
 
-	@Override
 	public UnivariateRealFunction linear(double[] xval, double[] yval) throws MathException {
 		return new AjusteLinear().interpolate(xval, yval);
 	}
 
-	@Override
 	public UnivariateRealFunction logaritmica(double[] xval, double[] yval) throws MathException {
 		return new AjusteLogaritmo().interpolate(xval, yval);
 	}
 
-	@Override
 	public UnivariateRealFunction sigmoidal(double[] xval, double[] yval) throws MathException {
 		return new AjusteHiperbolico().interpolate(xval, yval);
 	}
 
-	@Override
 	public UnivariateRealFunction potencial(double[] xval, double[] yval)
 			throws MathException {
 		return new AjustePotencial().interpolate(xval, yval);
 	}
 
-	@Override
 	public UnivariateRealFunction polinomial(double[] xval, double[] yval, int grauPolinomio)
 			throws MathException {
 		return new AjustePolinomial().interpolate(xval, yval, grauPolinomio);

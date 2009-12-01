@@ -4,6 +4,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import org.apache.commons.math.MathException;
+
 import br.edu.ufcg.msn.facade.Facade;
 
 public class MenuInterpolacaoMinimosQuadrados extends JMenu{
@@ -115,8 +117,10 @@ public class MenuInterpolacaoMinimosQuadrados extends JMenu{
 						int grau =  Integer.parseInt(JOptionPane.showInputDialog(ajustePolinomial, "Digite o o grau do polinomio."));
 						Facade.getInstance().addMetodoIntMinQuadAjustePolinomial(grau);
 						
-					} catch (Exception e1) {
-						JOptionPane.showMessageDialog(ajustePolinomial, "O valor digitado não corresponde a um numero, tente novamente");
+					}catch (NumberFormatException e1){
+						JOptionPane.showMessageDialog(ajustePolinomial, "O valor digitado nao corresponte a um numero");						
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(ajustePolinomial, e2.getMessage());
 					}
 				}
 			});

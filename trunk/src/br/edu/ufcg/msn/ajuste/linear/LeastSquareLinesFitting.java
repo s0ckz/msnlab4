@@ -20,7 +20,6 @@ public class LeastSquareLinesFitting implements UnivariateRealInterpolator {
 	/**
 	 * Fits a set of points to a linear function, of the type AX + B
 	 */
-	@Override
 	public UnivariateRealFunction interpolate(double[] xVal, double[] yVal)
 			throws MathException {
 		

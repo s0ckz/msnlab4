@@ -226,13 +226,11 @@ public class Facade {
 	public ChartPanel getChart(){
 		try {
 			ChartPanel createChart = Utils.createChart(minX, minY, maxX, maxY, "", xs, ys, functions, discreteness, new ChartMouseClickListener () {
-				@Override
 				public void mouseClicked(double x, double y, ChartPanel chartPanel) {
 					addPoint(x, y);
 					MainFrame.newChartAvailable();
 				}
 
-				@Override
 				public void mouseOver(double x, double y, ChartPanel chartPanel) {
 					MainFrame.getInstance().setToolTipText("(" + x + ", "  + y + ")");
 				}
@@ -290,7 +288,7 @@ public class Facade {
 		minY = -5;
 		maxX = 5;
 		maxY = 5;
-		discreteness = 0.1;
+		discreteness = 0.001;
 		xs = new TreeMap<String, List<Double>>();
 		ys = new TreeMap<String, List<Double>>();
 		functions = new ArrayList<UnivariateRealFunction>();

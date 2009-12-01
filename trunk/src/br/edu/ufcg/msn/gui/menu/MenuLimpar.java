@@ -3,8 +3,6 @@ package br.edu.ufcg.msn.gui.menu;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
 import br.edu.ufcg.msn.facade.Facade;
 import br.edu.ufcg.msn.gui.config.ConfiguracoesPanel;
 

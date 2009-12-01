@@ -245,7 +245,6 @@ public class Utils {
 
 			chartPanel.addChartMouseListener(new ChartMouseListener() {
 
-				@Override
 				public void chartMouseClicked(ChartMouseEvent event) {
 					Point anchor = event.getTrigger().getPoint();
 					XYPlot plot = chartPanel.getChart().getXYPlot();
@@ -257,7 +256,6 @@ public class Utils {
 					listener.mouseClicked(x, y, chartPanel);
 				}
 
-				@Override
 				public void chartMouseMoved(ChartMouseEvent event) {
 					Point anchor = event.getTrigger().getPoint();
 					XYPlot plot = chartPanel.getChart().getXYPlot();
