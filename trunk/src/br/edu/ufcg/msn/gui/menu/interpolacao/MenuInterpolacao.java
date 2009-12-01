@@ -5,6 +5,10 @@ import javax.swing.JMenuItem;
 
 public class MenuInterpolacao extends JMenu{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private MenuAproxiPolinomial menuAprPol = null;
 	private MenuRacional menuRacional = null;
 	private MenuInterpolacaoMinimosQuadrados menuMinQuad = null;

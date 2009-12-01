@@ -1,18 +1,10 @@
 package br.edu.ufcg.msn.facade;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import org.apache.commons.math.MathException;
-import org.apache.commons.math.analysis.UnivariateRealFunction;
-import org.jfree.chart.ChartPanel;
-
-import br.edu.ufcg.msn.util.ChartMouseClickListener;
-import br.edu.ufcg.msn.util.Utils;
 
 public class TestFacade {
 	

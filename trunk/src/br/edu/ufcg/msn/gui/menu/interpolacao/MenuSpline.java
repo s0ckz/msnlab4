@@ -17,6 +17,10 @@ import br.edu.ufcg.msn.facade.Facade;
  */
 public class MenuSpline extends JMenu{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JMenuItem menuItemLinear, menuItemQuadratica,
 	menuItemCubica, menuItemCubicaHermite, menuItemCubicaAkima, menuItemBilinear,
 	menuItemBicubica = null;

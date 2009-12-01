@@ -4,12 +4,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import org.apache.commons.math.MathException;
-
 import br.edu.ufcg.msn.facade.Facade;
 
 public class MenuInterpolacaoMinimosQuadrados extends JMenu{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JMenuItem ajusteExponencial, ajusteHiperbolico, ajusteLinear,
 	ajusteLogaritmico, ajustePotencial, ajustePolinomial = null;
 	
