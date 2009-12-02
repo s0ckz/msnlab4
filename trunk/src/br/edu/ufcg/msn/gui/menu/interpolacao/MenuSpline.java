@@ -126,8 +126,7 @@ public class MenuSpline extends JMenu{
 			menuItemBilinear = new JMenuItem("Spline Bilinear");
 			menuItemBilinear.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					PopUpTest popUp = new PopUpTest();
-					System.out.println("PopUp instanciado"); // TODO Auto-generated Event stub actionPerformed()
+					PopUpTest popUpBil = new PopUpTest("bilinear");
 				}
 			});
 		}
@@ -139,7 +138,7 @@ public class MenuSpline extends JMenu{
 			menuItemBicubica = new JMenuItem("Spline Bicúbica");
 			menuItemBicubica.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					PopUpTest popUpBic = new PopUpTest("bicubico");
 				}
 			});
 		}

@@ -22,6 +22,7 @@ import br.edu.ufcg.msn.facade.Facade;
 
 public class PopUpTest extends JFrame {
 	
+	private String flag;
 	private JLabel labelX = null;
 	private JLabel labelY = null;
 	private JLabel labelPeso = null;
@@ -35,7 +36,8 @@ public class PopUpTest extends JFrame {
 	private double[] ys;
 	private double[][] zs;
 	
-	public PopUpTest() {	
+	public PopUpTest(String flag) {	
+		this.flag = flag;
 		this.setLayout(null);
 		this.setSize(new Dimension(400, 400));
 		this.setResizable(false);
@@ -94,7 +96,10 @@ public class PopUpTest extends JFrame {
 			}
 		}
 		try {
-			Facade.getInstance().getMetodoSplineBilinear(xs, ys, zs);
+			if (flag.equals("bilinear")) {
+				Facade.getInstance().getMetodoSplineBilinear(xs, ys, zs);
+			}
+			else Facade.getInstance().getMetodoSplineBicubica(xs, ys, zs);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (MathException e) {

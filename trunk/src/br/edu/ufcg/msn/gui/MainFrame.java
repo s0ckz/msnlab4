@@ -26,6 +26,7 @@ public class MainFrame extends JFrame{
 	private JTabbedPane painelAbas = null;
 	private MenuLimpar menuLimpar = null;
 	private MenuHelp menuHelp = null;
+	private JPanel panelDens = null;
 	
 	private static MainFrame instance = null;
 	
@@ -53,6 +54,7 @@ public class MainFrame extends JFrame{
 			painelAbas = new JTabbedPane();
 			chartPanelInput = facade.getChart();
 			painelAbas.addTab("Grafico", chartPanelInput);
+			painelAbas.addTab("Grafico de Densidade", panelDens);
 			painelAbas.addTab("Configuracoes", ConfiguracoesPanel.getInstance());
 			
 		}
@@ -98,35 +100,18 @@ public class MainFrame extends JFrame{
 		getInstance().chartPanelInput.setVisible(false);
 		getInstance().chartPanelInput.setEnabled(false);
 		getInstance().painelAbas.setComponentAt(0,getInstance().facade.getChart());
-		//getInstance().chartPanelInput = getInstance().facade.getChart();
-		//getInstance().painelAbas.add("Grafico",getInstance().chartPanelInput);
-		//Object o = getInstance().painelAbas.getComponent(0);
-		//getInstance().painelAbas.setComponentAt(0, getInstance().chartPanelInput);
-		//getInstance().painelAbas.add((ConfiguracoesPanel)o);
-
 	}
 	
 	public static void newConfigAvailable() {
 		getInstance().chartPanelInput.setVisible(false);
 		getInstance().chartPanelInput.setEnabled(false);
 		getInstance().painelAbas.setComponentAt(0,getInstance().facade.getChart());
-		getInstance().painelAbas.setSelectedIndex(1);
-		//getInstance().painelAbas.add("Grafico",getInstance().chartPanelInput);
-		//Object o = getInstance().painelAbas.getComponent(0);
-		//getInstance().painelAbas.setComponentAt(0, getInstance().chartPanelInput);
-		//getInstance().painelAbas.add((ConfiguracoesPanel)o);
-
+		getInstance().painelAbas.setSelectedIndex(2);
 	}
 	
 	public static void newChart3DAvailable(JPanel panel) {
-		if (getInstance().painelAbas.getTabCount() <= 2) {
-			getInstance().painelAbas.add("Grafico de Densidade", panel);
-		}else {
-			getInstance().painelAbas.setComponentAt(2, panel);
-			getInstance().painelAbas.setTitleAt(2, "Grafico de Densidade");
-		}
-			
-		
+		getInstance().painelAbas.setComponentAt(1, panel);
+		getInstance().painelAbas.setSelectedIndex(1);
 	}
 	
 	public void setToolTipText(String toolTipText) {
