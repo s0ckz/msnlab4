@@ -50,6 +50,7 @@ public class PopUpTest extends JFrame {
 		setLabels();
 		initPoints();
 		setButtons();
+		this.setTitle("Digite os pesos dos pontos");
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
 	
@@ -62,6 +63,7 @@ public class PopUpTest extends JFrame {
 		interpolar.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				interpolar();
+				dispose();
 			}
 		});		
 		
