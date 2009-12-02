@@ -115,7 +115,7 @@ public class MainFrame extends JFrame{
 	}
 	
 	public void setToolTipText(String toolTipText) {
-		System.out.println(toolTipText);		
+		//System.out.println(toolTipText);		
 	}
 	
 
