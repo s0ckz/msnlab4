@@ -120,13 +120,14 @@ public class MenuSpline extends JMenu{
 		}
 		return menuItemCubicaAkima;
 	}
-
+	
 	private JMenuItem getMenuItemBilinear() {
 		if (menuItemBilinear == null) {
 			menuItemBilinear = new JMenuItem("Spline Bilinear");
 			menuItemBilinear.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					PopUpTest popUp = new PopUpTest();
+					System.out.println("PopUp instanciado"); // TODO Auto-generated Event stub actionPerformed()
 				}
 			});
 		}
