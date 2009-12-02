@@ -15,16 +15,18 @@ public class ContourDemo {
 			
 			public double value(double[] arg0) throws FunctionEvaluationException,
 					IllegalArgumentException {
-				return Math.sin(arg0[0]*arg0[1]);
+				double y = arg0[1];
+				double x = arg0[0];
+				return y*Math.sin(x)*Math.sin(x)+x*Math.cos(y)*Math.cos(y);
 			}
 			
 			@Override
 			public String toString() {
-				return "f(x,y) = sen(x*y)";
+				return "f(x,y) = y*sen^2(x) + x*sen^2(y)";
 			}
 		};
 
-		JPanel contourChart = Utils.createContourChart(f, 0, 100, 0, 100, 0.1, "Contour");
+		JPanel contourChart = Utils.createContourChart(f, 0, 100, 0, 100, 0.07, "Contour");
 		
 		JDialog dialog = new JDialog();
 		dialog.setContentPane(contourChart);

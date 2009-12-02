@@ -291,14 +291,58 @@ public class Utils {
 	 * @param chartPanel
 	 * @param x
 	 * @param y
+	 * @return 
 	 */
-	public static void addPoint(ChartPanel chartPanel, double x, double y) {
+	public static XYDataItem addPoint(ChartPanel chartPanel, double x, double y) {
 		XYSeriesCollection dataset = (XYSeriesCollection) chartPanel.getChart().getXYPlot().getDataset();
 		XYSeries pointSeries = dataset.getSeries(0);
 
-		pointSeries.add(x, y);
+		XYDataItem dataItem = new XYDataItem(x, y);
+		pointSeries.add(dataItem);
+		
+		return dataItem;
 	}
 
+	public static XYDataItem addPoint(ChartPanel chartPanel, double x, double y, String seriesKey) {
+		XYSeriesCollection dataset = (XYSeriesCollection) chartPanel.getChart().getXYPlot().getDataset();
+		XYSeries pointSeries = dataset.getSeries(seriesKey);
+
+		XYDataItem dataItem = new XYDataItem(x, y);
+		pointSeries.add(dataItem);
+		
+		return dataItem;
+	}
+	
+	public static boolean removePoint(ChartPanel chartPanel, XYDataItem pointToRemove) {
+		XYSeriesCollection dataset = (XYSeriesCollection) chartPanel.getChart().getXYPlot().getDataset();
+		XYSeries pointSeries = dataset.getSeries(0);
+		
+		for (int i = 0; i < pointSeries.getItemCount(); i++) {
+			XYDataItem dataItem = pointSeries.getDataItem(i);
+			if (dataItem == pointToRemove) {
+				pointSeries.remove(i);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public static boolean removePoint(ChartPanel chartPanel, XYDataItem pointToRemove, String seriesKey) {
+		XYSeriesCollection dataset = (XYSeriesCollection) chartPanel.getChart().getXYPlot().getDataset();
+		XYSeries pointSeries = dataset.getSeries(seriesKey);
+		
+		for (int i = 0; i < pointSeries.getItemCount(); i++) {
+			XYDataItem dataItem = pointSeries.getDataItem(i);
+			if (dataItem == pointToRemove) {
+				pointSeries.remove(i);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	/**
 	 * Returns the point series of a chart
 	 * 
