@@ -38,7 +38,7 @@ public class MenuNovo extends JMenu{
 					Facade.getInstance().addMetodoTrasformadaRapidaFourier(grau);
 					
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(menuItemTrasRapFourier, "O valor digitado não corresponde a um numero, tente novamente");
+					JOptionPane.showMessageDialog(menuItemTrasRapFourier, "Nao foi digitado nenhum valor ou o valor digitado não corresponde a um numero, tente novamente");
 				}
 			}
 		});

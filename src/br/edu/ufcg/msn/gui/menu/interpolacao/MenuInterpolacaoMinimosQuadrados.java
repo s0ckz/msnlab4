@@ -120,7 +120,7 @@ public class MenuInterpolacaoMinimosQuadrados extends JMenu{
 						Facade.getInstance().addMetodoIntMinQuadAjustePolinomial(grau);
 						
 					}catch (NumberFormatException e1){
-						JOptionPane.showMessageDialog(ajustePolinomial, "O valor digitado nao corresponte a um numero");						
+						JOptionPane.showMessageDialog(ajustePolinomial, "Não foi digitado um valor ou o valor digitado nao corresponte a um numero");						
 					} catch (Exception e2) {
 						JOptionPane.showMessageDialog(ajustePolinomial, e2.getMessage());
 					}
