@@ -158,7 +158,7 @@ public class PopUpTest extends JFrame {
 				yval.setEditable(false);
 				point.add(yval);
 
-				JTextField zval = new JTextField("");
+				JTextField zval = new JTextField("0.0");
 				zval.setEditable(true);
 				zsText.add(zval);
 				point.add(zval);
