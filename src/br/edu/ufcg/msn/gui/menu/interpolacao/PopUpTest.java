@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 
+import org.apache.commons.math.MathException;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
 import com.sun.corba.se.impl.naming.cosnaming.InterOperableNamingImpl;
@@ -34,6 +35,8 @@ public class PopUpTest extends JFrame {
 	private JPanel panel = null;
 	private ArrayList<JTextField> zsText;
 	private JButton interpolar, cancel = null;
+	private double[] xs;
+	private double[] ys;
 	
 	public PopUpTest() {	
 		this.setLayout(null);
@@ -60,6 +63,11 @@ public class PopUpTest extends JFrame {
 		interpolar = new JButton("Interpolar");
 		interpolar.setSize(new Dimension(104, 27));
 		interpolar.setLocation(new Point(162, 335));
+		interpolar.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				interpolar();
+			}
+		});		
 		
 		cancel = new JButton("Cancelar");
 		cancel.setSize(new Dimension(104, 27));
@@ -72,6 +80,31 @@ public class PopUpTest extends JFrame {
 		this.add(interpolar);
 		this.add(cancel);
 	}
+	
+	private void interpolar() {
+		int size = (int)Math.sqrt(zsText.size()+1);
+		double[][] zs = new double[size][size];
+		int index = 0;
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				try{
+					zs[i][j] = Double.parseDouble(zsText.get(index).getText());
+				} catch (Exception e) {
+					zs[i][j] = 0.0;
+				}
+				index++;
+			}
+		}
+		try {
+			Facade.getInstance().getMetodoSplineBicubica(xs, ys, zs);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (MathException e) {
+			e.printStackTrace();
+		}
+	}
+
+	
 	private void setLabels() {
 		labelPeso = new JLabel();
 		labelPeso.setLocation(initPeso, initCoordY);
@@ -119,8 +152,8 @@ public class PopUpTest extends JFrame {
 		int space = 10;
 
 		JPanel p = new JPanel();
-		double[] xs = facade.getXsArray();
-		double[] ys = facade.getYsArray();
+		xs = facade.getXsArray();
+		ys = facade.getYsArray();
 		Arrays.sort(xs);
 		Arrays.sort(ys);
 		
