@@ -97,21 +97,34 @@ public class MainFrame extends JFrame{
 	public static void newChartAvailable() {
 		getInstance().chartPanelInput.setVisible(false);
 		getInstance().chartPanelInput.setEnabled(false);
-		getInstance().painelAbas.remove(getInstance().chartPanelInput);
-		getInstance().chartPanelInput = getInstance().facade.getChart();
-		getInstance().painelAbas.add("Grafico",getInstance().chartPanelInput);
-		Object o = getInstance().painelAbas.getComponent(0);
-		getInstance().painelAbas.setComponentAt(0, getInstance().chartPanelInput);
-		getInstance().painelAbas.add((ConfiguracoesPanel)o);
+		getInstance().painelAbas.setComponentAt(0,getInstance().facade.getChart());
+		//getInstance().chartPanelInput = getInstance().facade.getChart();
+		//getInstance().painelAbas.add("Grafico",getInstance().chartPanelInput);
+		//Object o = getInstance().painelAbas.getComponent(0);
+		//getInstance().painelAbas.setComponentAt(0, getInstance().chartPanelInput);
+		//getInstance().painelAbas.add((ConfiguracoesPanel)o);
+
+	}
+	
+	public static void newConfigAvailable() {
+		getInstance().chartPanelInput.setVisible(false);
+		getInstance().chartPanelInput.setEnabled(false);
+		getInstance().painelAbas.setComponentAt(0,getInstance().facade.getChart());
+		getInstance().painelAbas.setSelectedIndex(1);
+		//getInstance().painelAbas.add("Grafico",getInstance().chartPanelInput);
+		//Object o = getInstance().painelAbas.getComponent(0);
+		//getInstance().painelAbas.setComponentAt(0, getInstance().chartPanelInput);
+		//getInstance().painelAbas.add((ConfiguracoesPanel)o);
 
 	}
 	
 	public static void newChart3DAvailable(JPanel panel) {
 		if (getInstance().painelAbas.getTabCount() <= 2) {
 			getInstance().painelAbas.add("Grafico de Densidade", panel);
-		}else {getInstance().painelAbas.remove(3);
-		      getInstance().painelAbas.add(panel, 3);
-		      getInstance().painelAbas.setTitleAt(3, "Grafico de Densidade");}
+		}else {
+			getInstance().painelAbas.setComponentAt(2, panel);
+			getInstance().painelAbas.setTitleAt(2, "Grafico de Densidade");
+		}
 			
 		
 	}

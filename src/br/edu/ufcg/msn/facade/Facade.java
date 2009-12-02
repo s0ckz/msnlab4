@@ -333,7 +333,7 @@ public class Facade {
 		maxX = mx>Mx?mx:Mx;
 		minY = my<My?my:My;
 		maxY = my>My?my:My;
-		MainFrame.newChartAvailable();		
+		MainFrame.newConfigAvailable();		
 	}
 
 	private List<Point> createList(List<Double> xsList, List<Double> ysList) {
