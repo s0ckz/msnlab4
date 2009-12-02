@@ -37,6 +37,7 @@ public class PopUpTest extends JFrame {
 	private JButton interpolar, cancel = null;
 	private double[] xs;
 	private double[] ys;
+	private double[][] zs;
 	
 	public PopUpTest() {	
 		this.setLayout(null);
@@ -83,7 +84,7 @@ public class PopUpTest extends JFrame {
 	
 	private void interpolar() {
 		int size = (int)Math.sqrt(zsText.size()+1);
-		double[][] zs = new double[size][size];
+		zs = new double[size][size];
 		int index = 0;
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
