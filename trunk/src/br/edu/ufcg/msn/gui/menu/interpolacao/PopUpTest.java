@@ -1,10 +1,12 @@
 package br.edu.ufcg.msn.gui.menu.interpolacao;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,6 +17,8 @@ import javax.swing.WindowConstants;
 
 import org.jfree.ui.tabbedui.VerticalLayout;
 
+import com.sun.corba.se.impl.naming.cosnaming.InterOperableNamingImpl;
+
 import br.edu.ufcg.msn.facade.Facade;
 
 
@@ -24,14 +28,14 @@ public class PopUpTest extends JFrame {
 	private JLabel labelY = null;
 	private JLabel labelPeso = null;
 	private int initCoordY = 10;
-	private int initX = 12;
-	private int initY = 120;
-	private int initPeso = 232; 
+	private int initX = 10;
+	private int initY = 140;
+	private int initPeso = 250; 
 	private JPanel panel = null;
 	private ArrayList<JTextField> zsText;
+	private JButton interpolar, cancel = null;
 	
-	public PopUpTest() {
-		
+	public PopUpTest() {	
 		this.setLayout(null);
 		this.setSize(new Dimension(400, 400));
 		this.setResizable(false);
@@ -43,18 +47,31 @@ public class PopUpTest extends JFrame {
 	 * 
 	 */
 	private void initialize() {
-		panel = new JPanel();
-		panel.setLayout(null);
-		panel.setSize(400, 300);
-		add(panel);
-		JScrollPane sp = new JScrollPane();
-		add(sp);
 		setLabels();
 		//setTextFields();
 		initPoints();
+		setButtons();
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
 	
+	private void setButtons() {
+		
+		
+		interpolar = new JButton("Interpolar");
+		interpolar.setSize(new Dimension(104, 27));
+		interpolar.setLocation(new Point(162, 335));
+		
+		cancel = new JButton("Cancelar");
+		cancel.setSize(new Dimension(104, 27));
+		cancel.setLocation(new Point(274, 335));
+		cancel.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				dispose();
+			}
+		});		
+		this.add(interpolar);
+		this.add(cancel);
+	}
 	private void setLabels() {
 		labelPeso = new JLabel();
 		labelPeso.setLocation(initPeso, initCoordY);
@@ -70,9 +87,9 @@ public class PopUpTest extends JFrame {
         labelY.setText("Coordenada Y");
         labelY.setSize(new Dimension(80, 16));
         labelY.setLocation(initY, initCoordY);
-        panel.add(labelX, null);
-        panel.add(labelY, null);
-        panel.add(labelPeso, null);
+        add(labelX, null);
+        add(labelY, null);
+        add(labelPeso, null);
 	}
 	
 	private void setTextFields(){
