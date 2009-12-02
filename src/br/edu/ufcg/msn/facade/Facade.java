@@ -122,14 +122,14 @@ public class Facade {
 	}
 	//Splines bilinear e bicubica
 
-	public JPanel getMetodoSplineBicubica(double[] x, double[] y, double[][] z) throws IllegalArgumentException, MathException{	
+	public void getMetodoSplineBicubica(double[] x, double[] y, double[][] z) throws IllegalArgumentException, MathException{	
 		MultivariateRealFunction function = new BicubicSplineInterpolator().interpolate(x, y, z);
-		return Utils.createContourChart(function, minX, maxX, minY, maxY, discreteness, "Spline Bicubica");
+		MainFrame.newChart3DAvailable(Utils.createContourChart(function, minX, maxX, minY, maxY, discreteness, "Spline Bicubica"));
 	}
 
-	public JPanel getMetodoSplineBilinear(double[] x, double[] y, double[][] z) throws IllegalArgumentException, MathException{	
+	public void getMetodoSplineBilinear(double[] x, double[] y, double[][] z) throws IllegalArgumentException, MathException{	
 		MultivariateRealFunction function = new BilinearSplineInterpolator().interpolate(x, y, z);
-		return Utils.createContourChart(function, minX, maxX, minY, maxY, discreteness, "Spline Bilinear");
+		MainFrame.newChart3DAvailable(Utils.createContourChart(function, minX, maxX, minY, maxY, discreteness, "Spline Bilinear"));
 	}
 	
 	//Interpolacao por Minimos Quadrados por Ajuste exponencial, 
@@ -305,7 +305,7 @@ public class Facade {
 		minY = -5;
 		maxX = 5;
 		maxY = 5;
-		discreteness = 0.001;
+		discreteness = 0.01;
 		xs = new TreeMap<String, List<Double>>();
 		ys = new TreeMap<String, List<Double>>();
 		functions = new ArrayList<UnivariateRealFunction>();
