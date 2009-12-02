@@ -4,6 +4,7 @@ import java.awt.Component;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
@@ -102,8 +103,19 @@ public class MainFrame extends JFrame{
 		Object o = getInstance().painelAbas.getComponent(0);
 		getInstance().painelAbas.setComponentAt(0, getInstance().chartPanelInput);
 		getInstance().painelAbas.add((ConfiguracoesPanel)o);
-	}
 
+	}
+	
+	public static void newChart3DAvailable(JPanel panel) {
+		if (getInstance().painelAbas.getTabCount() <= 2) {
+			getInstance().painelAbas.add("Grafico de Densidade", panel);
+		}else {getInstance().painelAbas.remove(3);
+		      getInstance().painelAbas.add(panel, 3);
+		      getInstance().painelAbas.setTitleAt(3, "Grafico de Densidade");}
+			
+		
+	}
+	
 	public void setToolTipText(String toolTipText) {
 		System.out.println(toolTipText);		
 	}
