@@ -2,6 +2,7 @@ package br.edu.ufcg.msn.gui.menu.interpolacao;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.JFrame;
@@ -26,7 +27,8 @@ public class PopUpTest extends JFrame {
 	private int initX = 12;
 	private int initY = 120;
 	private int initPeso = 232; 
-	private JPanel panel = null; 
+	private JPanel panel = null;
+	private ArrayList<JTextField> zsText;
 	
 	public PopUpTest() {
 		
@@ -92,9 +94,7 @@ public class PopUpTest extends JFrame {
 	}
 	private void initPoints() {
 		Facade facade = Facade.getInstance();
-//		xsText;
-//		ysText = new ArrayList<JTextField>();
-//		pointSetText = new ArrayList<JTextField>();
+		zsText = new ArrayList<JTextField>();
 		int height = 20;
 		int width = 160;
 		int xoffset = 10;
@@ -104,12 +104,10 @@ public class PopUpTest extends JFrame {
 		JPanel p = new JPanel();
 		double[] xs = facade.getXsArray();
 		double[] ys = facade.getYsArray();
-		double[][] zs = new double[xs.length][xs.length];
 		Arrays.sort(xs);
 		Arrays.sort(ys);
 		
 		p.setLayout(new VerticalLayout());
-		int list = 0;
 		JPanel point;
 		for (double x : xs) {
 			for (double y : ys) {
@@ -118,17 +116,15 @@ public class PopUpTest extends JFrame {
 
 				JTextField xval = new JTextField(x+"");
 				xval.setEditable(false);
-//				xsText.add(x);
 				point.add(xval);
 
 				JTextField yval = new JTextField(y+"");
 				yval.setEditable(false);
-//				ysText.add(y);
 				point.add(yval);
 
 				JTextField zval = new JTextField("");
 				zval.setEditable(true);
-//				ysText.add(y);
+				zsText.add(zval);
 				point.add(zval);
 
 				point.setSize(2*width, height);
@@ -142,7 +138,7 @@ public class PopUpTest extends JFrame {
 
 		sp.setSize(2*width+2*xoffset+space+20, 300);
 		sp.setLocation(5, 25);
-		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(sp);
 
