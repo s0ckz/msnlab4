@@ -240,7 +240,7 @@ public class ConfiguracoesPanel extends JPanel{
 
 		sp.setSize(2*width+2*xoffset+space+20, 450);
 		sp.setLocation(5, 25);
-		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(sp);
 
