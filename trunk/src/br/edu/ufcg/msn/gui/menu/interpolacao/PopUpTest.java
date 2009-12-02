@@ -2,7 +2,6 @@ package br.edu.ufcg.msn.gui.menu.interpolacao;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -18,8 +17,6 @@ import javax.swing.WindowConstants;
 import org.apache.commons.math.MathException;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
-import com.sun.corba.se.impl.naming.cosnaming.InterOperableNamingImpl;
-
 import br.edu.ufcg.msn.facade.Facade;
 
 
@@ -32,7 +29,6 @@ public class PopUpTest extends JFrame {
 	private int initX = 10;
 	private int initY = 140;
 	private int initPeso = 250; 
-	private JPanel panel = null;
 	private ArrayList<JTextField> zsText;
 	private JButton interpolar, cancel = null;
 	private double[] xs;
@@ -52,7 +48,6 @@ public class PopUpTest extends JFrame {
 	 */
 	private void initialize() {
 		setLabels();
-		//setTextFields();
 		initPoints();
 		setButtons();
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -97,7 +92,7 @@ public class PopUpTest extends JFrame {
 			}
 		}
 		try {
-			Facade.getInstance().getMetodoSplineBicubica(xs, ys, zs);
+			Facade.getInstance().getMetodoSplineBilinear(xs, ys, zs);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (MathException e) {
@@ -126,23 +121,6 @@ public class PopUpTest extends JFrame {
         add(labelPeso, null);
 	}
 	
-	private void setTextFields(){
-		//int aux = Facade.getInstance().getPointSetXs().size();
-		for (int i = 0; i <= 6; i++) {
-			initCoordY += 30;
-			JTextField xField = new JTextField();
-			xField.setBounds(new Rectangle(initX, initCoordY, 100, 20));
-			JTextField yField = new JTextField();
-			yField.setBounds(new Rectangle(initY, initCoordY, 100, 20));
-			JTextField pesoField = new JTextField();
-			pesoField.setBounds(new Rectangle(initPeso, initCoordY, 100, 20));
-			panel.add(xField);
-			panel.add(yField);
-			panel.add(pesoField);
-		}
-		
-		
-	}
 	private void initPoints() {
 		Facade facade = Facade.getInstance();
 		zsText = new ArrayList<JTextField>();
@@ -192,7 +170,5 @@ public class PopUpTest extends JFrame {
 		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(sp);
-
 	}
-
 } 
