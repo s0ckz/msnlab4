@@ -22,6 +22,10 @@ import br.edu.ufcg.msn.facade.Facade;
 
 public class PopUpTest extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String flag;
 	private JLabel labelX = null;
 	private JLabel labelY = null;
