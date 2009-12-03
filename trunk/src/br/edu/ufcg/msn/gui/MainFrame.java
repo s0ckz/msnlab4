@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -27,6 +28,7 @@ public class MainFrame extends JFrame{
 	private MenuLimpar menuLimpar = null;
 	private MenuHelp menuHelp = null;
 	private JPanel panelDens = null;
+	private JLabel tooltipField;
 	
 	private static MainFrame instance = null;
 	
@@ -44,9 +46,17 @@ public class MainFrame extends JFrame{
 		this.setSize(750, 600);
 		this.setJMenuBar(getBarra());
 		this.setTitle("MSN LAB");
-		//chartPanelInput = facade.getChart();
-		this.getContentPane().add(getAba());
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		
+		JPanel footer = new JPanel();
+		tooltipField = new JLabel();
+		footer.add(tooltipField);
+		
+		JPanel content = new JPanel(new BorderLayout());
+		content.add(getAba(), BorderLayout.CENTER);
+		content.add(footer, BorderLayout.SOUTH);
+		
+        this.getContentPane().add(content);
 	}
 	
 	private JTabbedPane getAba(){
@@ -115,7 +125,8 @@ public class MainFrame extends JFrame{
 	}
 	
 	public void setToolTipText(String toolTipText) {
-		//System.out.println(toolTipText);		
+		tooltipField.setText(toolTipText);
+		tooltipField.doLayout();
 	}
 	
 
