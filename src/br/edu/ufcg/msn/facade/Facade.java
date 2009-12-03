@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.swing.JPanel;
-
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.MultivariateRealFunction;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
@@ -248,7 +246,7 @@ public class Facade {
 				}
 
 				public void mouseOver(double x, double y, ChartPanel chartPanel) {
-					MainFrame.getInstance().setToolTipText("(" + x + ", "  + y + ")");
+					MainFrame.getInstance().setToolTipText("( x = " + x + ", y = "  + y + " )");
 				}
 			});
 			return createChart;
