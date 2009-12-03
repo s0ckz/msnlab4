@@ -5,16 +5,12 @@ import org.apache.commons.math.analysis.polynomials.PolynomialFunction;
 
 
 
-public class SchneiderWerner implements UnivariateRealInterpolator{
+public class BerrutBaltenspergerMittelmann implements UnivariateRealInterpolator{
 	
 	public double[] pesos(double[] x){
 		double[] result = new double[x.length];
 		for (int i = 0; i < x.length; i++) {
-			if(i==0||i==x.length-1){
-				result[i] = Math.pow(-1, i)*0.5;
-			}else{
-				result[i] = Math.pow(-1, i)*1;
-			}
+				result[i] = Math.pow(-1, i);
 		}
 		return result;
 	}
@@ -37,7 +33,6 @@ public class SchneiderWerner implements UnivariateRealInterpolator{
 			}
 			s1 = s1.add(p1);
 		}
-		
 		PolynomialFunction s2 = new PolynomialFunction(init);
 		for (int i = 0; i < x.length; i++) {
 			double[] aux = {w[i]};
@@ -106,9 +101,9 @@ public class SchneiderWerner implements UnivariateRealInterpolator{
 	}
 
 	public static void main(String[] args) {
-		SchneiderWerner b = new SchneiderWerner();
-		double[] x = {-2,-1,1,2,3};
-		double[] y = {4,1,1,4,9};
+		BerrutBaltenspergerMittelmann b = new BerrutBaltenspergerMittelmann();
+		double[] x = {-2,-1,1,2};
+		double[] y = {4,1,1,4};
 
 		PolynomialFunction p = b.interpolate(x, y);
 		System.out.println(p);
