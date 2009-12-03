@@ -67,7 +67,7 @@ public class PolynomialFunctionBulirschStoer implements UnivariateRealFunction {
      * @return the degree of the polynomial
      */
     public int degree() {
-        return x.length/2;
+        return (x.length-1);
     }
 
     /**
