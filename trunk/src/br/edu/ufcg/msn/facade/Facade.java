@@ -28,6 +28,9 @@ import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjusteLinear;
 import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjusteLogaritmo;
 import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjustePolinomial;
 import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjustePotencial;
+import br.edu.ufcg.msn.interpolacao.racional.BerrutBaltenspergerMittelmann;
+import br.edu.ufcg.msn.interpolacao.racional.BulirschStoer;
+import br.edu.ufcg.msn.interpolacao.racional.SchneiderWerner;
 import br.edu.ufcg.msn.interpolacao.spline.AkimaCubicSplineInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.HermiteCubicSplineInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineCubicInterpolator;
@@ -90,6 +93,26 @@ public class Facade {
 
 	public void addMetodoInterpolacaoNewton( ) throws MathException {
 		functions.add(new InterpoladorNewton().interpolate(getXsArray(), getYsArray()));
+		MainFrame.newChartAvailable();
+	}
+	//racional
+	public void addMetodoBulirschStoer() throws MathException {
+		functions.add(new BulirschStoer().interpolate(getXsArray(), getYsArray()));
+		MainFrame.newChartAvailable();
+	}
+	
+	public void addMetodoSchneiderWerner() {
+		functions.add(new SchneiderWerner().interpolate(getXsArray(), getYsArray()));
+		MainFrame.newChartAvailable();
+	}
+	
+	public void addMetodoBerrutBaltenspergerMittelmann() {
+		functions.add(new BerrutBaltenspergerMittelmann().interpolate(getXsArray(), getYsArray()));
+		MainFrame.newChartAvailable();
+	}
+
+	public void addMetodoFloaterHormann(double d) {
+//		functions.add(new FloaterHormann().interpolate(getXsArray(), getYsArray(), d));
 		MainFrame.newChartAvailable();
 	}
 
