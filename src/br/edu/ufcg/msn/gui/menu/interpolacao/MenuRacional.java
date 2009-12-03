@@ -2,6 +2,7 @@ package br.edu.ufcg.msn.gui.menu.interpolacao;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import org.apache.commons.math.MathException;
 
@@ -57,7 +58,7 @@ public class MenuRacional extends JMenu{
 			menuItemWerner.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
-						Facade.getInstance().addSchneiderWerner();
+						Facade.getInstance().addMetodoSchneiderWerner();
 					} catch (MathException e1) {
 						e1.printStackTrace();
 					}
@@ -73,7 +74,7 @@ public class MenuRacional extends JMenu{
 			menuItemBerrut.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
-						Facade.getInstance().addBerrutBaltenspergerMittelmann();
+						Facade.getInstance().addMetodoBerrutBaltenspergerMittelmann();
 					} catch (MathException e1) {
 						e1.printStackTrace();
 					}
@@ -88,18 +89,15 @@ public class MenuRacional extends JMenu{
 			menuItemFloater = new JMenuItem("Método de Floater-Hormann");
 			menuItemFloater.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-//					try {
-//						Facade.getInstance().addFloaterHormann();
-//					} catch (MathException e1) {
-//						e1.printStackTrace();
-//					}
+					try {
+						double d = Double.parseDouble(JOptionPane.showInputDialog(menuItemFloater, "Digite o o grau da interpolacao."));
+						Facade.getInstance().addMetodoFloaterHormann(d);
+					} catch (MathException e1) {
+						e1.printStackTrace();
+					}
 				}
 			});
 		}
 		return menuItemFloater;
-	}
-	
-	
-	
-	
+	}	
 }
