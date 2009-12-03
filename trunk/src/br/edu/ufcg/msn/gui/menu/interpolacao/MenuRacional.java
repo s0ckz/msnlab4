@@ -3,6 +3,10 @@ package br.edu.ufcg.msn.gui.menu.interpolacao;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import org.apache.commons.math.MathException;
+
+import br.edu.ufcg.msn.facade.Facade;
+
 /**
  * Esta classe implementa um menu para a escolha de uma 
  * interpolaçao pelos metodos racionais, sao eles
@@ -36,7 +40,11 @@ public class MenuRacional extends JMenu{
 			menuItemStoer = new JMenuItem("Método de Bulirsch-Stoer");
 			menuItemStoer.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					try {
+						Facade.getInstance().addMetodoBulirschStoer();
+					} catch (MathException e1) {
+						e1.printStackTrace();
+					}
 				}
 			});
 		}
@@ -48,7 +56,11 @@ public class MenuRacional extends JMenu{
 			menuItemWerner = new JMenuItem("Método de Schneider-Werner");
 			menuItemWerner.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					try {
+						Facade.getInstance().addSchneiderWerner();
+					} catch (MathException e1) {
+						e1.printStackTrace();
+					}
 				}
 			});
 		}
@@ -60,7 +72,11 @@ public class MenuRacional extends JMenu{
 			menuItemBerrut = new JMenuItem("Método de Berrut-Baltensperger-Mittelmann");
 			menuItemBerrut.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					try {
+						Facade.getInstance().addBerrutBaltenspergerMittelmann();
+					} catch (MathException e1) {
+						e1.printStackTrace();
+					}
 				}
 			});
 		}
@@ -72,7 +88,11 @@ public class MenuRacional extends JMenu{
 			menuItemFloater = new JMenuItem("Método de Floater-Hormann");
 			menuItemFloater.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+//					try {
+//						Facade.getInstance().addFloaterHormann();
+//					} catch (MathException e1) {
+//						e1.printStackTrace();
+//					}
 				}
 			});
 		}
