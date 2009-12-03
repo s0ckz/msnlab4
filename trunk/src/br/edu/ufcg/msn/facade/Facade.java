@@ -101,17 +101,17 @@ public class Facade {
 		MainFrame.newChartAvailable();
 	}
 	
-	public void addMetodoSchneiderWerner() {
+	public void addMetodoSchneiderWerner() throws MathException {
 		functions.add(new SchneiderWerner().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
 	
-	public void addMetodoBerrutBaltenspergerMittelmann() {
+	public void addMetodoBerrutBaltenspergerMittelmann() throws MathException {
 		functions.add(new BerrutBaltenspergerMittelmann().interpolate(getXsArray(), getYsArray()));
 		MainFrame.newChartAvailable();
 	}
 
-	public void addMetodoFloaterHormann(double d) {
+	public void addMetodoFloaterHormann(double d) throws MathException {
 //		functions.add(new FloaterHormann().interpolate(getXsArray(), getYsArray(), d));
 		MainFrame.newChartAvailable();
 	}
