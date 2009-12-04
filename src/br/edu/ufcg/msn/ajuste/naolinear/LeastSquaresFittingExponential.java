@@ -1,5 +1,7 @@
 package br.edu.ufcg.msn.ajuste.naolinear;
 
+import java.util.List;
+
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
@@ -29,12 +31,15 @@ public class LeastSquaresFittingExponential extends NonLinearFitting implements 
 	 */
 	public UnivariateRealFunction interpolate(double[] xVal, double[] yVal)
 	throws MathException {
-
+		
+		//Normalizes y values
+		List<double[]> values = normalizeY(xVal, yVal);
+		
 		//A coefficient
-		this.a = Math.exp(solveA(xVal, yVal));
+		this.a = Math.exp(solveA(values.get(0), values.get(1)));
 
 		//B coefficient
-		this.b = solveB(xVal, yVal);
+		this.b = solveB(values.get(0), values.get(1));
 
 		//First a, then b
 		double[] aAndB = {this.a, this.b};
@@ -172,8 +177,8 @@ public class LeastSquaresFittingExponential extends NonLinearFitting implements 
 	 */
 	public static void main(String[] args) throws MathException {
 
-		final double[] xVal = {30., 21., 35., 42., 37., 20., 8., 17., 35., 25.};
-		final double[] yVal = {430., 335., 520., 490., 470., 210., 195., 270., 400., 480.};
+		final double[] xVal = {-30., 21., -35., 42., 37., 20., 8., 17., 35., 25.};
+		final double[] yVal = {-430., 335., -520., 490., 470., 210., 195., 270., 400., 480.};
 
 		UnivariateRealInterpolator exp = new LeastSquaresFittingExponential();
 
@@ -182,6 +187,5 @@ public class LeastSquaresFittingExponential extends NonLinearFitting implements 
 		System.out.println("Function: " + function);
 
 	}
-
 
 }
