@@ -1,5 +1,7 @@
 package br.edu.ufcg.msn.ajuste.naolinear;
 
+import java.util.List;
+
 import org.apache.commons.math.FunctionEvaluationException;
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
@@ -29,12 +31,15 @@ public class LeastSquaresFittingPowerLaw extends NonLinearFitting implements Uni
 	 */
 	public UnivariateRealFunction interpolate(double[] xVal, double[] yVal)
 	throws MathException {
+		
+		//Normalizes y values
+		List<double[]> values = normalizeXY(xVal, yVal);
 
 		//B coefficient
-		this.b = solveB(xVal, yVal);
+		this.b = solveB(values.get(0), values.get(1));
 
 		//A coefficient
-		this.a = Math.exp(solveA(xVal, yVal));
+		this.a = Math.exp(solveA(values.get(0), values.get(1)));
 
 		//First a, then b
 		double[] aAndB = {this.a, this.b};
