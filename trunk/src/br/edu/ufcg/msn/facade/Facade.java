@@ -30,6 +30,7 @@ import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjustePolinomial;
 import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjustePotencial;
 import br.edu.ufcg.msn.interpolacao.racional.BerrutBaltenspergerMittelmann;
 import br.edu.ufcg.msn.interpolacao.racional.BulirschStoer;
+import br.edu.ufcg.msn.interpolacao.racional.FloaterHormann;
 import br.edu.ufcg.msn.interpolacao.racional.SchneiderWerner;
 import br.edu.ufcg.msn.interpolacao.spline.AkimaCubicSplineInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.HermiteCubicSplineInterpolator;
@@ -112,7 +113,7 @@ public class Facade {
 	}
 
 	public void addMetodoFloaterHormann(double d) throws MathException {
-//		functions.add(new FloaterHormann().interpolate(getXsArray(), getYsArray(), d));
+		functions.add(new FloaterHormann().interpolate(getXsArray(), getYsArray(), d));
 		MainFrame.newChartAvailable();
 	}
 
