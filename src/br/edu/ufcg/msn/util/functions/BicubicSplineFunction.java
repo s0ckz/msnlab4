@@ -7,6 +7,12 @@ import org.apache.commons.math.analysis.UnivariateRealFunction;
 
 import br.edu.ufcg.msn.interpolacao.spline.SplineCubicInterpolator;
 
+/**
+ * Função que representa uma interpolação por Spline Bicúbica
+ * 
+ * @author Anderson Ledo
+ * @author Diego Cavalcanti
+ */
 public class BicubicSplineFunction implements MultivariateRealFunction {
 
 	private int nPoints;
@@ -16,6 +22,13 @@ public class BicubicSplineFunction implements MultivariateRealFunction {
 	private double[][] y;
 	private UnivariateRealFunction[] functions;
 	
+	/**
+	 * Constrói uma função que representa uma interpolação por Spline Bicúbica
+	 * 
+	 * @param x1 array com pontos do eixo das coordenadas
+	 * @param x2 array com pontos do eixo das abscissas
+	 * @param yval matriz indicando os pesos do produto cartesiano dos pontos
+	 */
 	public BicubicSplineFunction(double[] x1, double[] x2, double[][] yval) {
 		this.nPoints = x1.length;
 		this.mPoints = x2.length;
@@ -37,6 +50,9 @@ public class BicubicSplineFunction implements MultivariateRealFunction {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.apache.commons.math.analysis.MultivariateRealFunction#value(double[])
+	 */
 	public double value(double[] points) throws FunctionEvaluationException, IllegalArgumentException {
 		if (points.length < 2) {
 			throw new IllegalArgumentException(
@@ -58,5 +74,9 @@ public class BicubicSplineFunction implements MultivariateRealFunction {
 			e.printStackTrace();
 		}
 		return urf.value(xx1);
+	}
+	
+	public String toString() {
+		return "Interpolação por Spline Bicúbica";
 	}
 }
