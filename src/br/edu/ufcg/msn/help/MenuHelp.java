@@ -95,7 +95,7 @@ public class MenuHelp extends JMenu {
 	
 	protected void jMenuItemTips_actionPerformed(ActionEvent e) {
 		jTipsDialog = new JTipsDialog(new File(prefix + "tips.txt"), new Frame());		
-		jTipsDialog.setTitle("Tips");
+		jTipsDialog.setTitle("Dicas");
 		jTipsDialog.setSize(400, 250);
 		jTipsDialog.setPreviousIcon(backIcon);
 		jTipsDialog.setNextIcon(forwardIcon);

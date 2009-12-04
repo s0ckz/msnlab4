@@ -1,3 +1,3 @@
-Tip #1  ?=src/br/edu/ufcg/msn/help/offline/tips/tip1.html
-Tip #2  ?=src/br/edu/ufcg/msn/help/offline/tips/tip2.html
-Tip #3  ?=src/br/edu/ufcg/msn/help/offline/tips/tip3.html
+Tip #1  ?=helpfiles/offline/tips/tip1.html
+Tip #2  ?=helpfiles/offline/tips/tip2.html
+Tip #3  ?=helpfiles/offline/tips/tip3.html
