@@ -38,7 +38,8 @@ public class MenuInterpolacaoMinimosQuadrados extends JMenu{
 					try {
 						Facade.getInstance().addMetodoIntMinQuadAjusteExponencial();
 					} catch (Exception e1) {
-						
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(ajusteExponencial, msg);
 					}
 				}
 			});
@@ -54,7 +55,8 @@ public class MenuInterpolacaoMinimosQuadrados extends JMenu{
 					try {
 						Facade.getInstance().addMetodoIntMinQuadAjusteHiperbolico();
 					} catch (Exception e1) {
-						
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(ajusteHiperbolico, msg);
 					}
 				}
 			});
@@ -70,7 +72,8 @@ public class MenuInterpolacaoMinimosQuadrados extends JMenu{
 					try {
 						Facade.getInstance().addMetodoIntMinQuadAjusteLinear();
 					} catch (Exception e1) {
-						
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(ajusteLinear, msg);
 					}
 				}
 			});
@@ -86,7 +89,8 @@ public class MenuInterpolacaoMinimosQuadrados extends JMenu{
 					try {
 						Facade.getInstance().addMetodoIntMinQuadAjusteLogaritmico();
 					} catch (Exception e1) {
-						
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(ajusteLogaritmico, msg);
 					}
 				}
 			});
@@ -102,7 +106,8 @@ public class MenuInterpolacaoMinimosQuadrados extends JMenu{
 					try {
 						Facade.getInstance().addMetodoIntMinQuadAjustePotencial();
 					} catch (Exception e1) {
-						
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(ajustePotencial, msg);
 					}
 				}
 			});
@@ -122,7 +127,8 @@ public class MenuInterpolacaoMinimosQuadrados extends JMenu{
 					}catch (NumberFormatException e1){
 						JOptionPane.showMessageDialog(ajustePolinomial, "Não foi digitado um valor ou o valor digitado nao corresponte a um numero");						
 					} catch (Exception e2) {
-						JOptionPane.showMessageDialog(ajustePolinomial, e2.getMessage());
+						String msg = "Exception Message: "+e2.getMessage();
+						JOptionPane.showMessageDialog(ajustePolinomial, msg);
 					}
 				}
 			});

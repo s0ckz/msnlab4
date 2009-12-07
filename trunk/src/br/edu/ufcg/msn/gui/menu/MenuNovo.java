@@ -35,10 +35,10 @@ public class MenuNovo extends JMenu{
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				try {
 					int grau =  Integer.parseInt(JOptionPane.showInputDialog(menuItemTrasRapFourier, "Digite o o grau do polinomio."));
-					Facade.getInstance().addMetodoTrasformadaRapidaFourier(grau);
-					
+					Facade.getInstance().addMetodoTrasformadaRapidaFourier(grau);					
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(menuItemTrasRapFourier, "Nao foi digitado nenhum valor ou o valor digitado não corresponde a um numero, tente novamente");
+					String msg = "Nao foi digitado nenhum valor ou o valor digitado não corresponde a um numero, tente novamente\nException Message: "+e1.getMessage();
+					JOptionPane.showMessageDialog(menuItemTrasRapFourier, msg);
 				}
 			}
 		});

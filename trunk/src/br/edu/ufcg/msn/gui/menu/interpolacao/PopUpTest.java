@@ -8,6 +8,7 @@ import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -86,11 +87,10 @@ public class PopUpTest extends JFrame {
 	}
 	
 	private void interpolar() {
-		int size = (int)Math.sqrt(zsText.size()+1);
-		zs = new double[size][size];
+		zs = new double[xs.length][ys.length];
 		int index = 0;
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
+		for (int i = 0; i < xs.length; i++) {
+			for (int j = 0; j < ys.length; j++) {
 				try{
 					zs[i][j] = Double.parseDouble(zsText.get(index).getText());
 				} catch (Exception e) {
@@ -104,10 +104,10 @@ public class PopUpTest extends JFrame {
 				Facade.getInstance().getMetodoSplineBilinear(xs, ys, zs);
 			}
 			else Facade.getInstance().getMetodoSplineBicubica(xs, ys, zs);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (MathException e) {
-			e.printStackTrace();
+		} catch (Exception e1) {
+			String msg = "Exception Message: "+e1.getMessage();
+			JOptionPane.showMessageDialog(this, msg);
+			e1.printStackTrace();
 		}
 	}
 
@@ -144,8 +144,7 @@ public class PopUpTest extends JFrame {
 		JPanel p = new JPanel();
 		xs = facade.getXsArray();
 		ys = facade.getYsArray();
-		Arrays.sort(xs);
-		Arrays.sort(ys);
+		eraseDuplicates();
 		
 		p.setLayout(new VerticalLayout());
 		JPanel point;
@@ -181,5 +180,33 @@ public class PopUpTest extends JFrame {
 		sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(sp);
+	}
+	private void eraseDuplicates() {
+		ArrayList<Double> tempx = new ArrayList<Double>();
+		ArrayList<Double> tempy = new ArrayList<Double>();
+		Arrays.sort(xs);
+		Arrays.sort(ys);		
+
+		tempx.add(xs[0]);
+		for (int i = 1; i < xs.length; i++) {
+			if (xs[i] != xs[i-1]) {
+				tempx.add(xs[i]);
+			}
+		}
+		xs = new double[tempx.size()];
+		for (int i = 0; i < tempx.size(); i++) {
+			xs[i] = tempx.get(i);
+		}
+
+		tempy.add(ys[0]);
+		for (int i = 1; i < ys.length; i++) {
+			if (ys[i] != ys[i-1]) {
+				tempy.add(ys[i]);
+			}
+		}
+		ys = new double[tempy.size()];
+		for (int i = 0; i < tempy.size(); i++) {
+			ys[i] = tempy.get(i);
+		}
 	}
 } 

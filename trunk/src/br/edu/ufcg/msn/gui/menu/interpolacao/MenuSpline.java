@@ -47,8 +47,9 @@ public class MenuSpline extends JMenu{
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
 						Facade.getInstance().addMetodoSplineLinar();
-					} catch (MathException e1) {
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemLinear, msg);
 					}
 				}
 			});
@@ -63,8 +64,9 @@ public class MenuSpline extends JMenu{
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
 						Facade.getInstance().addMetodoSplineQuadratica();
-					} catch (MathException e1) {
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemQuadratica, msg);
 					}
 				}
 			});
@@ -79,8 +81,9 @@ public class MenuSpline extends JMenu{
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
 						Facade.getInstance().addMetodoSplineCubica();
-					} catch (MathException e1) {
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemCubica, msg);
 					}
 				}
 			});
@@ -95,8 +98,9 @@ public class MenuSpline extends JMenu{
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
 						Facade.getInstance().addMetodoSplineCubicaHermite();
-					} catch (MathException e1) {
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemCubicaHermite, msg);
 					}
 				}
 			});
@@ -112,8 +116,9 @@ public class MenuSpline extends JMenu{
 					try {
 						Facade.getInstance().addMetodoSplineCubicaAkima();
 					} catch (Exception e1) {
+						String msg = "Para usar interpolacao por spline pelo método de Akima é necessário no mínimo 5 pontos\nException Message: "+e1.getMessage();
 						JOptionPane.showMessageDialog(menuItemCubicaAkima, 
-								"Para usar interpolacao por spline pelo método de Akima é necessário no mínimo 5 pontos", "Atenção", JOptionPane.WARNING_MESSAGE);
+								msg, "Atenção", JOptionPane.WARNING_MESSAGE);
 					}
 				}
 			});
