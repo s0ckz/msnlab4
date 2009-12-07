@@ -144,12 +144,12 @@ public class Facade {
 	}
 	//Splines bilinear e bicubica
 
-	public void getMetodoSplineBicubica(double[] x, double[] y, double[][] z) throws IllegalArgumentException, MathException{	
+	public void getMetodoSplineBicubica(double[] x, double[] y, double[][] z) throws Exception{	
 		MultivariateRealFunction function = new BicubicSplineInterpolator().interpolate(x, y, z);
 		MainFrame.newChart3DAvailable(Utils.createContourChart(function, minX, maxX, minY, maxY, discreteness, "Spline Bicubica"));
 	}
 
-	public void getMetodoSplineBilinear(double[] x, double[] y, double[][] z) throws IllegalArgumentException, MathException{	
+	public void getMetodoSplineBilinear(double[] x, double[] y, double[][] z) throws Exception{	
 		MultivariateRealFunction function = new BilinearSplineInterpolator().interpolate(x, y, z);
 		MainFrame.newChart3DAvailable(Utils.createContourChart(function, minX, maxX, minY, maxY, discreteness, "Spline Bilinear"));
 	}
@@ -216,10 +216,8 @@ public class Facade {
 			xs.put(listKey, new ArrayList<Double>());
 			ys.put(listKey, new ArrayList<Double>());
 		}
-		if (!xs.get(listKey).contains(x)){
 			xs.get(listKey).add(x);
 			ys.get(listKey).add(y);
-		}
 		sortPoints();
 		ConfiguracoesPanel.getInstance().refresh();
 		MenuLimpar.getInstance().initialize();
@@ -372,10 +370,8 @@ public class Facade {
 		List<Double> xsList = new ArrayList<Double>();
 		List<Double> ysList = new ArrayList<Double>();
 		for (Point p : lp) {
-			if (!xsList.contains(p.x)){
 				xsList.add(p.x);
 				ysList.add(p.y);
-			}
 		}
 		xs.put(key, xsList);
 		ys.put(key, ysList);
