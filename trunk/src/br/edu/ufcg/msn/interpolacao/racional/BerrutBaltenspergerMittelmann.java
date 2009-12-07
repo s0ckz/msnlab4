@@ -24,7 +24,6 @@ public class BerrutBaltenspergerMittelmann implements UnivariateRealInterpolator
 		return result;
 	}
 	
-	@Override
 	public UnivariateRealFunction interpolate(double[] x, double[] y){
 		double[] init = {0};
 		PolynomialFunction s1 = new PolynomialFunction(init);
