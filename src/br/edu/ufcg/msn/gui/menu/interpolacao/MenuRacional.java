@@ -43,8 +43,9 @@ public class MenuRacional extends JMenu{
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
 						Facade.getInstance().addMetodoBulirschStoer();
-					} catch (MathException e1) {
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemStoer, msg);
 					}
 				}
 			});
@@ -59,8 +60,9 @@ public class MenuRacional extends JMenu{
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
 						Facade.getInstance().addMetodoSchneiderWerner();
-					} catch (MathException e1) {
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemWerner, msg);
 					}
 				}
 			});
@@ -75,8 +77,9 @@ public class MenuRacional extends JMenu{
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
 						Facade.getInstance().addMetodoBerrutBaltenspergerMittelmann();
-					} catch (MathException e1) {
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemBerrut, msg);
 					}
 				}
 			});
@@ -92,8 +95,9 @@ public class MenuRacional extends JMenu{
 					try {
 						double d = Double.parseDouble(JOptionPane.showInputDialog(menuItemFloater, "Digite o o grau da interpolacao."));
 						Facade.getInstance().addMetodoFloaterHormann(d);
-					} catch (MathException e1) {
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemFloater, msg);
 					}
 				}
 			});

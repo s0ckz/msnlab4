@@ -2,6 +2,7 @@ package br.edu.ufcg.msn.gui.menu.ajustecurvas;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import org.apache.commons.math.MathException;
 
@@ -38,7 +39,7 @@ public class MenuAjusteCurva extends JMenu{
 					try {
 						Facade.getInstance().addMetodoAjusteLinear();
 					} catch (MathException e1) {
-						e1.printStackTrace();
+						e1.getMessage();
 					}
 				}
 			});
@@ -62,10 +63,10 @@ public class MenuAjusteCurva extends JMenu{
 			menuItemNaoLinearExp.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
-						System.out.println("exponencial");
 						Facade.getInstance().addMetodoAjusteNaoLinearExponencial();
 					} catch (Exception e1) {
-						
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemNaoLinearExp, msg);
 					}
 				}
 			});
@@ -81,7 +82,8 @@ public class MenuAjusteCurva extends JMenu{
 					try {
 						Facade.getInstance().addMetodoAjusteNaoLinearLogaritmico();
 					} catch (Exception e1) {
-						
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemNaoLinearLog, msg);
 					}
 				}
 			});
@@ -97,7 +99,8 @@ public class MenuAjusteCurva extends JMenu{
 					try {
 						Facade.getInstance().addMetodoAjusteNaoLinearPotencia();
 					} catch (Exception e1) {
-						
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemNaoLinearPot, msg);
 					}
 				}
 			});

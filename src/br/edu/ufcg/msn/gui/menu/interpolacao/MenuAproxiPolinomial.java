@@ -2,6 +2,7 @@ package br.edu.ufcg.msn.gui.menu.interpolacao;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import org.apache.commons.math.MathException;
 
@@ -35,8 +36,8 @@ public class MenuAproxiPolinomial extends JMenu{
 		this.add(getMenuItemLagrange());
 		this.add(getMenuItemNewton());
 		this.add(getMenuItemNeville());
-		this.add(getMenuItemHermite());
-		this.add(getMenuItemAitken());
+//		this.add(getMenuItemHermite());
+//		this.add(getMenuItemAitken());
 	}
 
 	private JMenuItem getMenuItemLagrange() {
@@ -47,7 +48,8 @@ public class MenuAproxiPolinomial extends JMenu{
 					try {
 						Facade.getInstance().addMetodoInterpolacaoLagrange();
 					} catch (Exception e1) {
-						
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemLagrange, msg);
 					}
 				}
 			});
@@ -62,8 +64,9 @@ public class MenuAproxiPolinomial extends JMenu{
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
 						Facade.getInstance().addMetodoInterpolacaoNewton();
-					} catch (MathException e1) {
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemNewton, msg);
 					}
 
 				}
@@ -79,8 +82,9 @@ public class MenuAproxiPolinomial extends JMenu{
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
 						Facade.getInstance().addMetodoInterpolacaoNeville();
-					} catch (MathException e1) {
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						String msg = "Exception Message: "+e1.getMessage();
+						JOptionPane.showMessageDialog(menuItemNeville, msg);
 					}
 
 				}
