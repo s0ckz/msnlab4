@@ -26,19 +26,27 @@ public class FourierFunction implements UnivariateRealFunction {
 	}
 	
 	public double value(double arg0) throws FunctionEvaluationException {
+		if(arg0 < this.x[0] || arg0 > this.x[n]) {
+			return Double.NaN;
+		}
+		
+		if(arg0 == this.x[0] || arg0 == this.x[n]) {
+			return 0.0;
+		}
+		
 		double sum = 0;
 		
-		for(int j = 1; j < m; j++) {
+		for(int j = 1; j <= m; j++) {
 			sum += calcA(j) * Math.cos(j * (Math.PI / this.L) * arg0);
 			sum += calcB(j) * Math.sin(j * (Math.PI / this.L) * arg0);
 		}
 		
-		return (this.x[0] / 2) + sum;
+		return calcA(0) + sum;
 	}
-
+	
 	private double calcA(int j) {
 		double sum = 0;
-		for(int k = 0; k < this.n - 1; k++) {
+		for(int k = 0; k <= this.n - 1; k++) {
 			double aux = j * (Math.PI / this.L) * this.x[k];
 			sum += Math.cos(aux) * this.y[k];
 		}
@@ -48,7 +56,7 @@ public class FourierFunction implements UnivariateRealFunction {
 	
 	private double calcB(int j) {
 		double sum = 0;
-		for(int k = 0; k < this.n - 1; k++) {
+		for(int k = 0; k <= this.n - 1; k++) {
 			double aux = j * (Math.PI / this.L) * this.x[k];
 			sum += Math.sin(aux) * this.y[k];
 		}
