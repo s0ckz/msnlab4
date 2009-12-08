@@ -6,6 +6,7 @@ import java.util.Arrays;
 import org.apache.commons.math.MathException;
 import org.apache.commons.math.analysis.UnivariateRealFunction;
 import org.apache.commons.math.analysis.interpolation.UnivariateRealInterpolator;
+import org.apache.commons.math.analysis.polynomials.PolynomialFunction;
 
 import br.edu.ufcg.msn.ajuste.linear.LeastSquareLinesFitting;
 import br.edu.ufcg.msn.ajuste.naolinear.LeastSquaresFittingExponential;
@@ -22,10 +23,9 @@ import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjustePolinomial;
 import br.edu.ufcg.msn.interpolacao.minimosQuadrados.AjustePotencial;
 import br.edu.ufcg.msn.interpolacao.racional.BerrutBaltenspergerMittelmann;
 import br.edu.ufcg.msn.interpolacao.racional.BulirschStoer;
-import br.edu.ufcg.msn.interpolacao.racional.FloaterHormann;
 import br.edu.ufcg.msn.interpolacao.racional.SchneiderWerner;
-import br.edu.ufcg.msn.interpolacao.spline.HermiteCubicSplineInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.AkimaCubicSplineInterpolator;
+import br.edu.ufcg.msn.interpolacao.spline.HermiteCubicSplineInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineCubicInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineLinearInterpolator;
 import br.edu.ufcg.msn.interpolacao.spline.SplineQuadraticInterpolator;
@@ -92,6 +92,18 @@ public class Analisador {
 	 */
 	public double[] calculaFuncao(UnivariateRealInterpolator interpolador, double[] xval, double[] yval) throws MathException{
 		UnivariateRealFunction function = interpolador.interpolate(xval, yval);
+		try{
+			PolynomialFunction p = (PolynomialFunction) function;
+			System.out.println("Grau: " + p.degree());
+		}catch(Exception e){
+			
+		}
+		try{
+			PolynomialFunction p = (PolynomialFunction) function;
+			System.out.println("Grau: " + p.degree());
+		}catch(Exception e){
+			
+		}
 		double[] values = new double[xval.length];
 		for (int i = 0; i < values.length; i++){
 			values[i] = function.value(xval[i]);
@@ -112,16 +124,14 @@ public class Analisador {
 	public void analisaMetodo(UnivariateRealInterpolator interpolador, int numPontos, int numConjuntos) throws MathException{
 		System.out.println(interpolador.getClass().getSimpleName());
 		for (int j = 0; j < numConjuntos; j++){
-			System.out.println("Conjunto " + (j+1) + ":");
 			double[] xval = gerarArrayCrescente(numPontos);
-			System.out.println("X: " + Arrays.toString(xval));
+			System.out.println("X = " + Arrays.toString(xval));
 			double[] yval = gerarArraySemOrdem(numPontos);
-			System.out.println("Y: " + Arrays.toString(yval));
+			System.out.println("Y = " + Arrays.toString(yval));
 			double[] saidas = calculaFuncao(interpolador, xval, yval);
 			for (int i = 0; i < numPontos; i++){
-				System.out.println(df.format(yval[i]) + "   " + df.format(saidas[i]));
+				System.out.println("Esperado: " + yval[i] + " - Encontrado: " + saidas[i]);
 			}
-			System.out.println();
 		}
 		System.out.println();
 	}
@@ -132,30 +142,34 @@ public class Analisador {
 	 */
 	public static void main(String[] args) throws MathException {
 		Analisador a = new Analisador();
-		int numPontos = 10;
-		int numConjuntos = 5;
-		a.analisaMetodo(new LeastSquareLinesFitting(), numPontos, numConjuntos);
+		int numPontos = 4;
+		int numConjuntos = 1;
+	//	a.analisaMetodo(new LeastSquareLinesFitting(), numPontos, numConjuntos);
 		a.analisaMetodo(new LeastSquaresFittingExponential(), numPontos, numConjuntos);
 		a.analisaMetodo(new LeastSquaresFittingLogarithmic(), numPontos, numConjuntos);
 		a.analisaMetodo(new LeastSquaresFittingPowerLaw(), numPontos, numConjuntos);
-		a.analisaMetodo(new InterpoladorLagrange(), numPontos, numConjuntos);
-		a.analisaMetodo(new InterpoladorNeville(), numPontos, numConjuntos);
-		a.analisaMetodo(new InterpoladorNewton(), numPontos, numConjuntos);
-		a.analisaMetodo(new AjusteExponencial(), numPontos, numConjuntos);
-		a.analisaMetodo(new AjusteHiperbolico(), numPontos, numConjuntos);
-		a.analisaMetodo(new AjusteLinear(), numPontos, numConjuntos);
-		a.analisaMetodo(new AjusteLogaritmo(), numPontos, numConjuntos);
-		a.analisaMetodo(new AjustePolinomial(), numPontos, numConjuntos);
-		a.analisaMetodo(new AjustePotencial(), numPontos, numConjuntos);
-		a.analisaMetodo(new BerrutBaltenspergerMittelmann(), numPontos, numConjuntos);
-		a.analisaMetodo(new BulirschStoer(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new InterpoladorLagrange(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new InterpoladorNeville(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new InterpoladorNewton(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new AjusteExponencial(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new AjusteHiperbolico(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new AjusteLinear(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new AjusteLogaritmo(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new AjustePolinomial(), numPontos, numConjuntos);
+		try{
+	//		a.analisaMetodo(new AjustePotencial(), numPontos, numConjuntos);
+		}catch(Exception e){
+			
+		}
+	//	a.analisaMetodo(new BerrutBaltenspergerMittelmann(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new BulirschStoer(), numPontos, numConjuntos);
 	//	a.analisaMetodo(new FloaterHormann(), numPontos, numConjuntos);
-		a.analisaMetodo(new SchneiderWerner(), numPontos, numConjuntos);
-		a.analisaMetodo(new AkimaCubicSplineInterpolator(), numPontos, numConjuntos);
-		a.analisaMetodo(new HermiteCubicSplineInterpolator(), numPontos, numConjuntos);
-		a.analisaMetodo(new SplineCubicInterpolator(), numPontos, numConjuntos);
-		a.analisaMetodo(new SplineLinearInterpolator(), numPontos, numConjuntos);
-		a.analisaMetodo(new SplineQuadraticInterpolator(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new SchneiderWerner(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new AkimaCubicSplineInterpolator(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new HermiteCubicSplineInterpolator(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new SplineCubicInterpolator(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new SplineLinearInterpolator(), numPontos, numConjuntos);
+	//	a.analisaMetodo(new SplineQuadraticInterpolator(), numPontos, numConjuntos);
 		
 	}
 
